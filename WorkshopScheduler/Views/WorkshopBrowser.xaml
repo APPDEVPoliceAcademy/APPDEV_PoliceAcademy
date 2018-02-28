@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="WorkshopScheduler.WorkshopBrowser">
+   
+    <ListView x:Name="WorkshopsList">
+
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout HorizontalOptions="CenterAndExpand " Orientation="Horizontal">
+                        <Label Text="{Binding Title}" FontAttributes="Bold"/>
+                        <Label Text="{Binding Description}"  TextColor="Gray"/>
+                    </StackLayout>
+                        <Button Text="Sign in" />
+                </ViewCell>
+             </DataTemplate>
+        </ListView.ItemTemplate>
+       
+    </ListView>
+
+
+</ContentPage>
