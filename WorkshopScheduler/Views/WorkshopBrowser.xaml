@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="WorkshopScheduler.WorkshopBrowser">
-   
-    <ListView x:Name="workshopsList" >
-
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <ViewCell>
-                    <StackLayout HorizontalOptions="CenterAndExpand " Orientation="Horizontal">
-                        <Label Text="{Binding Title}" FontAttributes="Bold"/>
-                        <Label Text="{Binding Description}"  TextColor="Gray"/>
-                    </StackLayout>
-                        <Button Text="Sign in" />
-                </ViewCell>
-             </DataTemplate>
-            
-        </ListView.ItemTemplate>
-      
-    </ListView>
-
-
+<ContentPage Padding="20,20,20,20" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="WorkshopScheduler.WorkshopBrowser">
+    <ContentPage.Content>
+        <ListView x:Name="workshopsList" HasUnevenRows="true
+            " >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <StackLayout Padding="20" HorizontalOptions="CenterAndExpand"  Orientation="Vertical">
+                                <Label Text="{Binding Title}" FontAttributes="Bold" />
+                                <Label Text="{Binding ShortDescription}" TextColor="Gray" />
+                         
+                            </StackLayout>
+                             <Button Text="Sign in" Clicked="onSignIn"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage.Content>
 </ContentPage>
