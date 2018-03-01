@@ -8,7 +8,7 @@ namespace WorkshopScheduler
         {
             InitializeComponent();
 
-            MainPage = new WorkshopSchedulerPage();
+            MainPage = new WorkshopBrowser();
         }
 
         protected override void OnStart()
