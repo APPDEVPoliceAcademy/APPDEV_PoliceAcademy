@@ -1,4 +1,5 @@
 ﻿using Xamarin.Forms;
+using WorkshopScheduler.Views;
 
 namespace WorkshopScheduler
 {
@@ -8,11 +9,12 @@ namespace WorkshopScheduler
         {
             InitializeComponent();
 
-            MainPage = new WorkshopBrowser();
+            MainPage = new NavigationPage(new MainPage());
         }
 
         protected override void OnStart()
         {
+            
             // Handle when your app starts
         }
 

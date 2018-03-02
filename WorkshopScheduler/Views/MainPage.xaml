@@ -1,5 +1,13 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="WorkshopScheduler.Views.MainPage">
 	<ContentPage.Content>
+        <StackLayout Orientation="Vertical">
+            <Button Text="Browser" Clicked="browserChosen" />
+            <Button Text="Reservations"  />
+             <Button Text="Your Profile"  />
+             <Button Text="Settings"  />
+             <BoxView Color="Black" HeightRequest="1" HorizontalOptions="FillAndExpand"/>
+            <Label Text="Your next events:" HorizontalTextAlignment="Center"/>
+        </StackLayout>
 	</ContentPage.Content>
 </ContentPage>

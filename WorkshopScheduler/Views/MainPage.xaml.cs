@@ -11,5 +11,10 @@ namespace WorkshopScheduler.Views
         {
             InitializeComponent();
         }
+
+        void browserChosen(object sender, System.EventArgs e)
+        {
+            Navigation.PushAsync(new WorkshopBrowser());
+        }
     }
 }
