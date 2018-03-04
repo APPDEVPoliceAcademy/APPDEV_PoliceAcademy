@@ -5,9 +5,9 @@ using Xamarin.Forms;
 
 namespace WorkshopScheduler.Views
 {
-    public partial class MainPage : ContentPage
+    public partial class HomePage : MasterDetailPage
     {
-        public MainPage()
+        public HomePage()
         {
             InitializeComponent();
         }
