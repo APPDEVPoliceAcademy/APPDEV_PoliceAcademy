@@ -6,8 +6,10 @@
     </MasterDetailPage.Master>
 
     <MasterDetailPage.Detail>
-        <NavigationPage>
-            
+            <NavigationPage>
+            <x:Arguments>
+                <local:WorkshopBrowser />
+            </x:Arguments>
         </NavigationPage>
     </MasterDetailPage.Detail>
 </MasterDetailPage>

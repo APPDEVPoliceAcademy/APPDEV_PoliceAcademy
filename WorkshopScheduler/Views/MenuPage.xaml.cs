@@ -16,23 +16,32 @@ namespace WorkshopScheduler.Views
 
             masterPageItems.Add(new MenuItem
             {
-                Title = "Contacts",
+                Title = "Browser",
                 IconSource = "contacts.png",
                 TargetType = typeof(WorkshopBrowser)
             });
+
             masterPageItems.Add(new MenuItem
             {
-                Title = "TodoList",
+                Title = "Reservations",
+                IconSource = "todo.png",
+                TargetType = typeof(WorkshopBrowser)
+            });
+
+            masterPageItems.Add(new MenuItem
+            {
+                Title = "My profile",
                 IconSource = "todo.png",
                 TargetType = typeof(WorkshopBrowser)
             });
             masterPageItems.Add(new MenuItem
             {
-                Title = "Reminders",
+                Title = "Settings",
                 IconSource = "reminders.png",
                 TargetType = typeof(WorkshopBrowser)
             });
 
+            menuListView.SeparatorVisibility = SeparatorVisibility.None;
             menuListView.ItemsSource = masterPageItems;
         }
 
