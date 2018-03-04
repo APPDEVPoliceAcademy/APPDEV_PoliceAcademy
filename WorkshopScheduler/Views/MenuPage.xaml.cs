@@ -17,27 +17,27 @@ namespace WorkshopScheduler.Views
             masterPageItems.Add(new MenuItem
             {
                 Title = "Browser",
-                IconSource = "contacts.png",
+                IconSource = "search.png",
                 TargetType = typeof(WorkshopBrowser)
             });
 
             masterPageItems.Add(new MenuItem
             {
                 Title = "Reservations",
-                IconSource = "todo.png",
+                IconSource = "calendar.png",
                 TargetType = typeof(WorkshopBrowser)
             });
 
             masterPageItems.Add(new MenuItem
             {
                 Title = "My profile",
-                IconSource = "todo.png",
+                IconSource = "user.png",
                 TargetType = typeof(WorkshopBrowser)
             });
             masterPageItems.Add(new MenuItem
             {
                 Title = "Settings",
-                IconSource = "reminders.png",
+                IconSource = "settings.png",
                 TargetType = typeof(WorkshopBrowser)
             });
 
