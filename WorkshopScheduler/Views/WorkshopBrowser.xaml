@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage Padding="20,20,20,20" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="WorkshopScheduler.WorkshopBrowser">
+
+<ContentPage Padding="20,20,20,20"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WorkshopScheduler.Views.WorkshopBrowser">
     <ContentPage.Content>
         <StackLayout>
-            <SearchBar x:Name="searchWorkshop" Placeholder="Search workshops"  BackgroundColor="White" PropertyChanged="searchboxChanged"/>
+            <SearchBar x:Name="searchWorkshop" Placeholder="Search workshops" BackgroundColor="White"
+                       PropertyChanged="searchboxChanged" />
             <Label x:Name="toTest" />
             <ListView x:Name="workshopsListView" HasUnevenRows="true">
                 <ListView.ItemTemplate>
