@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage  xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="WorkshopScheduler.Views.WorkshopBrowser" Icon="calendar.png" Title="Browser">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="WorkshopScheduler.Views.ReservedBrowser" Icon="calendar.png" Title="Reservations">
     <ContentPage.Content>
         <StackLayout>
             <SearchBar x:Name="searchWorkshop" Placeholder="Search workshops" BackgroundColor="White" PropertyChanged="searchboxChanged" />
-            <Label x:Name="toTest"/>
+            <Label x:Name="toTest" />
             <ListView x:Name="workshopsListView" HasUnevenRows="true">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -13,7 +13,7 @@
                                     <Label Text="{Binding Title}" FontAttributes="Bold" />
                                     <Label Text="{Binding ShortDescription}" TextColor="Gray" />
                                 </StackLayout>
-                                <Button Text="Sign in" Clicked="onSignIn" />
+                                    <Button Text="Evaluate" IsEnabled="false"/>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

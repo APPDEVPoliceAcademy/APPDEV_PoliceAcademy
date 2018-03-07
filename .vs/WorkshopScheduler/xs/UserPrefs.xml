@@ -1,0 +1,34 @@
+﻿<Properties StartupConfiguration="{2A6571B8-EE8F-45CC-84A3-1F40EE53153F}|Default">
+  <MonoDevelop.Ide.ItemProperties.WorkshopScheduler.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.3A81CAC8-3FC2-4AC5-9A5E-A14CF9DF0BA3" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="WorkshopScheduler/Views/MenuPage.xaml">
+    <Files>
+      <File FileName="WorkshopScheduler/Views/WorkshopBrowser.xaml" Line="2" Column="200" />
+      <File FileName="WorkshopScheduler/App.xaml.cs" Line="1" Column="1" />
+      <File FileName="WorkshopScheduler/Models/Workshop.cs" Line="16" Column="1" />
+      <File FileName="WorkshopScheduler/Views/WorkshopBrowser.xaml.cs" Line="9" Column="55" />
+      <File FileName="WorkshopScheduler/Views/HomePage.xaml" Line="8" Column="4" />
+      <File FileName="WorkshopScheduler/Views/HomePage.xaml.cs" Line="17" Column="50" />
+      <File FileName="WorkshopScheduler/App.xaml" Line="7" Column="1" />
+      <File FileName="WorkshopScheduler/Views/MenuPage.xaml.cs" Line="45" Column="55" />
+      <File FileName="WorkshopScheduler/obj/Debug/WorkshopScheduler.Views.HomePage.xaml.g.cs" Line="1" Column="1" />
+      <File FileName="iOS/Main.cs" Line="20" Column="2" />
+      <File FileName="WorkshopScheduler/Views/MenuPage.xaml" Line="25" Column="1" />
+      <File FileName="Droid/WorkshopScheduler.Droid.csproj" Line="1" Column="1" />
+      <File FileName="WorkshopScheduler/Views/MainView.xaml" Line="3" Column="6" />
+      <File FileName="WorkshopScheduler/Views/MainView.xaml.cs" Line="14" Column="45" />
+      <File FileName="WorkshopScheduler/obj/Debug/WorkshopScheduler.Views.MainView.xaml.g.cs" Line="1" Column="1" />
+      <File FileName="WorkshopScheduler/Views/ReservedBrowser.xaml" Line="2" Column="204" />
+      <File FileName="WorkshopScheduler/Views/ReservedBrowser.cs" Line="55" Column="2" />
+      <File FileName="WorkshopScheduler/packages.config" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/jakubkrymarys/xProjects/APPDEV_PoliceAcademy/WorkshopScheduler/Views/MenuPage.xaml" relfile="WorkshopScheduler/Views/MenuPage.xaml" line="27" column="23" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.WorkshopScheduler.Droid PreferredExecutionTarget="Android.Android_ARMv7a_Nougat" />
+  <MultiItemStartupConfigurations />
+</Properties>

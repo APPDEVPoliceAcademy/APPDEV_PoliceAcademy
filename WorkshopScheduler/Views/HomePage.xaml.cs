@@ -14,7 +14,7 @@ namespace WorkshopScheduler.Views
 
         void browserChosen(object sender, System.EventArgs e)
         {
-            Navigation.PushAsync(new WorkshopBrowser());
+            Navigation.PushAsync(new MainView());
         }
     }
 }

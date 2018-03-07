@@ -16,16 +16,9 @@ namespace WorkshopScheduler.Views
 
             masterPageItems.Add(new MenuItem
             {
-                Title = "Browser",
+                Title = "Main",
                 IconSource = "search.png",
-                TargetType = typeof(WorkshopBrowser)
-            });
-
-            masterPageItems.Add(new MenuItem
-            {
-                Title = "Reservations",
-                IconSource = "calendar.png",
-                TargetType = typeof(WorkshopBrowser)
+                TargetType = typeof(MainView)
             });
 
             masterPageItems.Add(new MenuItem
