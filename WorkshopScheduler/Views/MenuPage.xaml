@@ -5,7 +5,7 @@
              Title="Menu">
 
    <ContentPage.Content>
-        <ListView x:Name="menuListView" ItemSelected="ItemSelected">
+        <ListView x:Name="MenuListView" ItemSelected="ItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
                         <ViewCell>

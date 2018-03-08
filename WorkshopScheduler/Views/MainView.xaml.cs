@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using WorkshopScheduler.Views;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace WorkshopScheduler.Views
 {

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿using System.Collections.Generic;
 using Xamarin.Forms;
 
 namespace WorkshopScheduler.Views
@@ -12,34 +10,33 @@ namespace WorkshopScheduler.Views
         {
             InitializeComponent();
 
-            var masterPageItems = new List<MenuItem>();
-
-            masterPageItems.Add(new MenuItem
+            var masterPageItems = new List<MenuItem>()
             {
-                Title = "Main",
-                IconSource = "search.png",
-                TargetType = typeof(MainView)
-            });
-
-            masterPageItems.Add(new MenuItem
-            {
-                Title = "My profile",
-                IconSource = "user.png",
-                TargetType = typeof(WorkshopBrowser)
-            });
-            masterPageItems.Add(new MenuItem
-            {
-                Title = "Settings",
-                IconSource = "settings.png",
-                TargetType = typeof(WorkshopBrowser)
-            });
-
-            menuListView.SeparatorVisibility = SeparatorVisibility.None;
-            menuListView.ItemsSource = masterPageItems;
+                new MenuItem
+                {
+                    Title = "Main",
+                    IconSource = "search.png",
+                    TargetType = typeof(MainView)
+                },
+                new MenuItem
+                {
+                    Title = "My profile",
+                    IconSource = "user.png",
+                    TargetType = typeof(WorkshopBrowser)
+                },
+                new MenuItem
+                {
+                    Title = "Settings",
+                    IconSource = "settings.png",
+                    TargetType = typeof(WorkshopBrowser)
+                }
+            };
+            MenuListView.SeparatorVisibility = SeparatorVisibility.None;
+            MenuListView.ItemsSource = masterPageItems;
         }
 
 
-        void ItemSelected(object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
+        private void ItemSelected(object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
         {
             var item = e.SelectedItem as MenuItem;
             if (item != null)

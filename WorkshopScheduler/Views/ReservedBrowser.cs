@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using Xamarin.Forms;
 
@@ -15,48 +16,46 @@ namespace WorkshopScheduler.Views
         {
             InitializeComponent();
             //lorem ipsum is to test longer strings, but I dont want to deal with them normally ;) 
-            String loremipsum = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.";
+            const string loremipsum = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.";
 
-            reservedList = new List<Workshop>();
-
-            reservedList.Add(new Workshop() {
-               Title =  "Leadership in practise",
-                ShortDescription = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit",
-                Description =  loremipsum,
-                Date = new DateTime(2018,06,17),
-                Coach = "Andrzej Nowak",
-                Place = "Windesheim"});
-
-            reservedList.Add(new Workshop()
+            reservedList = new List<Workshop>()
             {
-                Title = "Motivation",
-                ShortDescription = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit",
-                Description = loremipsum,
-                Date = new DateTime(2018, 06, 21), 
-                Coach = "Andrzej Norek",
-                Place = "Łódź"
-            });
-
-            workshopsListView.ItemsSource = reservedList; 
+                new Workshop()
+                {
+                    Title = "Leadership in practise",
+                    ShortDescription = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit",
+                    Description = loremipsum,
+                    Date = new DateTime(2018, 06, 17),
+                    Coach = "Andrzej Nowak",
+                    Place = "Windesheim"
+                },
+                new Workshop()
+                {
+                    Title = "Motivation",
+                    ShortDescription = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit",
+                    Description = loremipsum,
+                    Date = new DateTime(2018, 06, 21),
+                    Coach = "Andrzej Norek",
+                    Place = "Łódź"
+                }
+            };
+            WorkshopsListView.ItemsSource = reservedList; 
         }
 
  
-        void searchboxChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        
+
+        private void SearchWorkshop_OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-                List<Workshop> displayList;
-                toTest.Text = searchWorkshop.Text;
-
-            if(searchWorkshop.Text != null)
+            if (SearchWorkshop.Text != null)
             {
-                displayList = reservedList.Where(x => x.Title.Contains(searchWorkshop.Text)).ToList();
-                workshopsListView.ItemsSource = displayList; 
-            }else
-            {
-                workshopsListView.ItemsSource = reservedList;
+                var displayList = reservedList.Where(x => x.Title.Contains(SearchWorkshop.Text)).ToList();
+                WorkshopsListView.ItemsSource = displayList;
             }
-           
-           
-
+            else
+            {
+                WorkshopsListView.ItemsSource = reservedList;
+            }
         }
     }
 }
