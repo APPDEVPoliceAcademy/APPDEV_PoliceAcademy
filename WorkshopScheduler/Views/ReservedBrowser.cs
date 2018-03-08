@@ -20,7 +20,7 @@ namespace WorkshopScheduler.Views
             reservedList = new List<Workshop>();
 
             reservedList.Add(new Workshop() {
-               Title =  "Project Management",
+               Title =  "Leadership in practise",
                 ShortDescription = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit",
                 Description =  loremipsum,
                 Date = new DateTime(2018,06,17),
@@ -29,20 +29,8 @@ namespace WorkshopScheduler.Views
 
             reservedList.Add(new Workshop()
             {
-                Title = "Test 2",
+                Title = "Motivation",
                 ShortDescription = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit",
-                Description = loremipsum,
-                Date = new DateTime(2018, 06, 19),
-                Coach = "Tadeusz Sznuk",
-                Place = "on-line"
-            });
-
-            reservedList.Add(new Workshop()
-            {
-                Title = "Halina,Zygfryd Harry i dziewczyna bez szpary",
-                ShortDescription = "Wyszukajna youtube.... ale na własne ryzyko Ptysiu ;* \n @Melvin sorry, in Enlish this not funny :<" +
-                    "" +
-                    "",
                 Description = loremipsum,
                 Date = new DateTime(2018, 06, 21), 
                 Coach = "Andrzej Norek",

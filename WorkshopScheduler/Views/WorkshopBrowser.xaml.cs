@@ -18,18 +18,20 @@ namespace WorkshopScheduler.Views
             String loremipsum = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.";
 
             workshopsList = new List<Workshop>();
-
-            workshopsList.Add(new Workshop() {
-               Title =  "Project Management",
+          
+            workshopsList.Add(new Workshop()
+            {
+                Title = "Project Management",
                 ShortDescription = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit",
-                Description =  loremipsum,
-                Date = new DateTime(2018,06,17),
+                Description = loremipsum,
+                Date = new DateTime(2018, 06, 17),
                 Coach = "Andrzej Nowak",
-                Place = "Windesheim"});
+                Place = "Windesheim"
+            });
 
             workshopsList.Add(new Workshop()
             {
-                Title = "Test 2",
+                Title = "PR for beginners",
                 ShortDescription = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit",
                 Description = loremipsum,
                 Date = new DateTime(2018, 06, 19),
@@ -39,12 +41,10 @@ namespace WorkshopScheduler.Views
 
             workshopsList.Add(new Workshop()
             {
-                Title = "Halina,Zygfryd Harry i dziewczyna bez szpary",
-                ShortDescription = "Wyszukajna youtube.... ale na własne ryzyko Ptysiu ;* \n @Melvin sorry, in Enlish this not funny :<" +
-                    "" +
-                    "",
+                Title = "Team Building",
+                ShortDescription = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit",
                 Description = loremipsum,
-                Date = new DateTime(2018, 06, 21), 
+                Date = new DateTime(2018, 06, 21),
                 Coach = "Andrzej Norek",
                 Place = "Łódź"
             });

@@ -3,9 +3,9 @@
     <MasterDetailPage.Master>
         <local:MenuPage x:Name="MenuPage" />
     </MasterDetailPage.Master>
-    <MasterDetailPage.Detail> 
-        <NavigationPage >
-            <x:Arguments>
+    <MasterDetailPage.Detail>
+     <NavigationPage>
+        <x:Arguments>
                 <local:MainView />
             </x:Arguments>
         </NavigationPage>
