@@ -9,11 +9,7 @@ namespace WorkshopScheduler
         {
             InitializeComponent();
 
-            var navigationPage = new NavigationPage(new MainView());
-            navigationPage.ToolbarItems.Add(new ToolbarItem(){ Icon= "user.png", });
-            navigationPage.ToolbarItems.Add(new ToolbarItem() { Icon = "settings.png" });
-
-            MainPage = navigationPage;
+            MainPage = new ToolbarView();
         }
 
         protected override void OnStart()
