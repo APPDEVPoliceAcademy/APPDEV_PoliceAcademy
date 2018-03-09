@@ -222,3 +222,6 @@ FakesAssemblies/
 *.userprefs
 
 .DS_Store
+
+.vs/
+.idea/
