@@ -11,5 +11,10 @@ namespace WorkshopScheduler.Views
             InitializeComponent();
             PushAsync(new MainView());
         }
+
+        private void ToolbarItem_Clicked(object sender, System.EventArgs e)
+        {
+            DisplayAlert("Elo", "siema", "czesc");
+        }
     }
 }

@@ -4,10 +4,13 @@
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
             xmlns:local="clr-namespace:WorkshopScheduler.Views;assembly=WorkshopScheduler" 
             x:Class="WorkshopScheduler.Views.MainView"
-            Title="Workshops"
             BarBackgroundColor="#ebebeb"
             BarTextColor="#444444"
-           >
+            Title="WorkshopScheduler"
+               >
+    <TabbedPage.ToolbarItems>
+        
+    </TabbedPage.ToolbarItems>
     <local:WorkshopBrowser Title="All"  Icon="calendar.png" />
     <local:ReservedBrowser Title="Reserved" Icon="calendar_checked.png"/>
     
