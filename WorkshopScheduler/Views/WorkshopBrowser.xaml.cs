@@ -25,7 +25,9 @@ namespace WorkshopScheduler.Views
         {
             if (SearchWorkshop.Text != null)
             {
-                var displayList = workshopsList.Where(x => x.Title.Contains(SearchWorkshop.Text)).ToList();
+                var displayList = workshopsList.Where(x =>
+                    x.Title.IndexOf(SearchWorkshop.Text.Trim(' '), 0, StringComparison.CurrentCultureIgnoreCase) != -1).ToList();
+
                 WorkshopsListView.ItemsSource = displayList;
             }
             else

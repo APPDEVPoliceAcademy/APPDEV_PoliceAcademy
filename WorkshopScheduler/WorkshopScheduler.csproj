@@ -64,9 +64,6 @@
     <Compile Include="Views\ReservedBrowser.cs">
       <DependentUpon>ReservedBrowser.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ToolbarView.xaml.cs">
-      <DependentUpon>ToolbarView.xaml</DependentUpon>
-    </Compile>
       <Compile Include="Logic\Sorting.cs"/>
   </ItemGroup>
   <ItemGroup>
