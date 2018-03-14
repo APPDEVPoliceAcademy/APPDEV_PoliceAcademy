@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace WorkshopScheduler.Views
 {
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ToolbarView : NavigationPage
     {
         public ToolbarView()
         {
             InitializeComponent();
-
-            this.ToolbarItems.Add(new ToolbarItem() { Icon = "user.png", });
-            this.ToolbarItems.Add(new ToolbarItem() { Icon = "settings.png" });
-            this.PushAsync(new MainView());
+            PushAsync(new MainView());
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Xamarin.Forms;
+using Plugin.Iconize;
 
 namespace WorkshopScheduler.Views
 {
@@ -7,9 +8,7 @@ namespace WorkshopScheduler.Views
         public MainView()
         {
             InitializeComponent();
-
-            Children.Add(new WorkshopBrowser());
-            Children.Add(new ReservedBrowser());
+            
         }
     }
 }

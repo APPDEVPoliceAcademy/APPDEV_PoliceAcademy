@@ -8,7 +8,6 @@ namespace WorkshopScheduler
         public App()
         {
             InitializeComponent();
-
             MainPage = new ToolbarView();
         }
 
