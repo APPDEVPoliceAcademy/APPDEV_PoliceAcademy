@@ -5,9 +5,9 @@
              xmlns:local="clr-namespace:WorkshopScheduler.Views;assembly=WorkshopScheduler" 
              BarBackgroundColor="#f7f6f6"
              BarTextColor="Black">
-
+    
     <NavigationPage.ToolbarItems>
-        <ToolbarItem Icon="user.png" />
+        <ToolbarItem Icon="user.png" Clicked="ToolbarItem_Clicked" />
         <ToolbarItem Icon="settings.png"/>
     </NavigationPage.ToolbarItems>
 </NavigationPage>
