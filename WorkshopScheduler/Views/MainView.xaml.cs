@@ -1,5 +1,4 @@
 ﻿using Xamarin.Forms;
-using Plugin.Iconize;
 
 namespace WorkshopScheduler.Views
 {
