@@ -7,9 +7,7 @@ namespace WorkshopScheduler.Views
         public MainView()
         {
             InitializeComponent();
-
-            Children.Add(new WorkshopBrowser());
-            Children.Add(new ReservedBrowser());
+            
         }
     }
 }

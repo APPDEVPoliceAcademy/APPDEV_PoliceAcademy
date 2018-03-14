@@ -6,6 +6,7 @@ using System.Linq;
 using Xamarin.Forms;
 using WorkshopScheduler.Models;
 
+
 namespace WorkshopScheduler.Views
 {
     public partial class WorkshopBrowser : ContentPage
