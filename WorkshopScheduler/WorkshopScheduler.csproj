@@ -49,7 +49,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+      <Compile Include="Logic\Filters.cs"/>
     <Compile Include="Properties\AssemblyInfo.cs" />
+      <Compile Include="TestData.cs"/>
     <Compile Include="Views\WorkshopBrowser.xaml.cs">
       <DependentUpon>WorkshopBrowser.xaml</DependentUpon>
     </Compile>
@@ -64,6 +66,7 @@
     <Compile Include="Views\ToolbarView.xaml.cs">
       <DependentUpon>ToolbarView.xaml</DependentUpon>
     </Compile>
+      <Compile Include="Logic\Sorting.cs"/>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">
