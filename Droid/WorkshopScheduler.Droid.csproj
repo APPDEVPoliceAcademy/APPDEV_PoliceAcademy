@@ -43,12 +43,6 @@
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Plugin.Iconize, Version=2.0.0.37, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Xam.Plugin.Iconize.2.0.0.37-beta\lib\MonoAndroid10\Plugin.Iconize.dll</HintPath>
-    </Reference>
-    <Reference Include="Plugin.Iconize.FontAwesome, Version=2.0.0.37, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Xam.Plugin.Iconize.FontAwesome.2.0.0.37-beta\lib\MonoAndroid10\Plugin.Iconize.FontAwesome.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
