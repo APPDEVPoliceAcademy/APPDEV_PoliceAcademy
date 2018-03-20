@@ -6,8 +6,6 @@ using System.Linq;
 using Xamarin.Forms;
 using WorkshopScheduler.Models;
 
-
-
 namespace WorkshopScheduler.Views
 {
     public partial class WorkshopBrowser : ContentPage
@@ -35,6 +33,11 @@ namespace WorkshopScheduler.Views
             {
                 WorkshopsListView.ItemsSource = workshopsList;
             }
+        }
+
+        async void SortingsButton_OnClicked(object sender, System.EventArgs e)
+        {
+            await Navigation.PushModalAsync(new FiltersModalView());
         }
     }
 }
