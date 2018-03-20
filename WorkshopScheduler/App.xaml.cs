@@ -14,6 +14,7 @@ namespace WorkshopScheduler
         {
             InitializeComponent();
             MainPage = new MainView();
+
         }
 
         protected override void OnStart()

@@ -15,4 +15,5 @@
     <local:ReservedBrowser Title="Reserved" Icon="calendar_checked.png"/>
     <local:SettingsPage Title="Setting" Icon="settings.png"/>
     <local:ProfilePage Title="Profile" Icon="user.png"/>
+
 </TabbedPage>
