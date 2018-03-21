@@ -1,20 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage Padding="20" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="WorkshopScheduler.Views.FiltersModalView">
+    <ContentPage.Padding>
+         <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="0, 20, 0, 0" />
+         </OnPlatform>
+    </ContentPage.Padding>
+
     <ContentPage.Content>
         <TableView Intent="Settings">
             <TableRoot>
+                 <TableSection>
+                       <ViewCell>
+                            <Button Text="Done" Clicked="BackButton_OnClicked"/>
+                        </ViewCell>
+                    </TableSection>
                 <TableSection Title="Sort by:">
                     <ViewCell>
                         <StackLayout>
-                            <Picker x:Name="sortingPicker" PropertyChanged="SortingPicker_OnPropertyChanged" />
+                            <Picker x:Name="sortingPicker"  PropertyChanged="SortingPicker_OnPropertyChanged" />
                             <Label x:Name="testlabel" />
                         </StackLayout>
                     </ViewCell>
                 </TableSection>
-                <TableSection Title="Second Section">
-                    <TextCell Text="TextCell" Detail="TextCell Detail" />
-                    <EntryCell Label="Entry Label" Text="EntryCell Text" />
-                    <SwitchCell Text="SwitchCell Text" />
+                <TableSection Title="Filter by:">
+                    <SwitchCell x:Name="dateSwitch" Text="By date" />
+                    <ViewCell>
+                        <StackLayout  BindingContext="{x:Reference dateSwitch}" Orientation="Horizontal">
+                            <DatePicker IsEnabled="{Binding On}" x:Name="startDate"  />
+                            <DatePicker  IsEnabled="{Binding On}" x:Name="endDate"/>
+                            <Label Text="{Binding Value}"/>
+                        </StackLayout>
+                        
+                    </ViewCell>
                 </TableSection>
             </TableRoot>
         </TableView>
