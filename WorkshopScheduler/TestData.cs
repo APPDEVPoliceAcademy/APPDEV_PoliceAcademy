@@ -47,7 +47,7 @@ namespace WorkshopScheduler
                 Title = "Leadership in practise",
                 ShortDescription = "lastAlphabeticalPlace",
                 Description = loremipsum,
-                Date = new DateTime(2018, 06, 17),
+                Date = new DateTime(2018, 06, 10),
                 Coach = "Andrzej Nowak",
                 Place = "Zwolle"
             },
@@ -56,7 +56,7 @@ namespace WorkshopScheduler
                 Title = "Motivation",
                 ShortDescription = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit",
                 Description = loremipsum,
-                Date = new DateTime(2018, 06, 11),
+                Date = new DateTime(2018, 09, 21),
                 Coach = "Andrzej Norek",
                 Place = "on-line"
             },
