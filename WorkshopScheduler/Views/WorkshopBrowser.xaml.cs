@@ -106,5 +106,12 @@ namespace WorkshopScheduler.Views
 
         }
 
+        private async void WorkshopsListView_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            if (e.SelectedItem == null) return;
+            var currentItem = e.SelectedItem as Workshop;
+            await Navigation.PushModalAsync(new WorkshopDetail(currentItem));
+            WorkshopsListView.SelectedItem = null;
+        }
     }
 }
