@@ -6,8 +6,8 @@
     <ContentPage.Content>
         <StackLayout>
             <SearchBar x:Name="SearchWorkshop" Placeholder="Search workshops" BackgroundColor="White"
-                       PropertyChanged="SearchWorkshop_OnPropertyChanged" />
-            <ListView x:Name="WorkshopsListView" HasUnevenRows="true">
+                       PropertyChanged="SearchWorkshop_OnPropertyChanged"/>
+            <ListView x:Name="WorkshopsListView" HasUnevenRows="true" ItemSelected="WorkshopsListView_OnItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
