@@ -2,46 +2,44 @@
 using System.Linq;
 using System.Collections.Generic;
 using WorkshopScheduler.Models;
+using WorkshopScheduler.Views;
+using System.Collections.ObjectModel;
 
 namespace WorkshopScheduler.Logic
 {
-    public static class Sorting
+    public  class Sorting
     {
-        //TODO: check if it shouldn't be on the oposite way XD
-        public static List<Workshop> ByDateAscending(List<Workshop> input)
+
+        public  ObservableCollection<Workshop> ByDateAscending(ObservableCollection<Workshop> input)
         {
-            input.Sort((a, b) => (a.Date.CompareTo(b.Date)));
-            return input;
+            return new ObservableCollection<Workshop>( input.OrderBy(x => x.Date).ToList());
+           
         }
 
-        public static List<Workshop> ByDateDescending(List<Workshop> input)
+        public  ObservableCollection<Workshop> ByDateDescending(ObservableCollection<Workshop> input)
         {
-            input.Sort((a, b) => (a.Date.CompareTo(b.Date)*(-1)));
-            return input;
+            return new ObservableCollection<Workshop>(input.OrderByDescending(x => x.Date).ToList());
+           
         }
     
-        public static List<Workshop> ByTitleAscending(List<Workshop> input)
+        public  ObservableCollection<Workshop> ByTitleAscending(ObservableCollection<Workshop> input)
         {
-            input.Sort((a, b) => (string.Compare(a.Title, b.Title, StringComparison.CurrentCulture)));
-            return input;
+            return new ObservableCollection<Workshop>(input.OrderBy(x => x.Title).ToList());
         }
 
-        public static List<Workshop> ByTitleDescending(List<Workshop> input)
+        public  ObservableCollection<Workshop> ByTitleDescending(ObservableCollection<Workshop> input)
         {
-            input.Sort((a, b) => (string.Compare(a.Title, b.Title, StringComparison.CurrentCulture)*(-1)));
-            return input;
+            return new ObservableCollection<Workshop>(input.OrderByDescending(x => x.Title).ToList());
         }
 
-        public static List<Workshop> ByPlaceAlphabeticalAscending(List<Workshop> input)
+        public  ObservableCollection<Workshop> ByPlaceAlphabeticalAscending(ObservableCollection<Workshop> input)
         {
-            input.Sort((a, b) => (string.Compare(a.Place, b.Place, StringComparison.CurrentCulture)));
-            return input;
+            return new ObservableCollection<Workshop>(input.OrderBy(x => x.Place).ToList());
         }
 
-        public static List<Workshop> ByPlaceAlphabeticalDescending(List<Workshop> input)
+        public  ObservableCollection<Workshop> ByPlaceAlphabeticalDescending(ObservableCollection<Workshop> input)
         {
-            input.Sort((a, b) => (string.Compare(a.Place, b.Place, StringComparison.CurrentCulture) * (-1)));
-            return input;
+            return new ObservableCollection<Workshop>(input.OrderByDescending(x => x.Place).ToList());
         }
 
     }

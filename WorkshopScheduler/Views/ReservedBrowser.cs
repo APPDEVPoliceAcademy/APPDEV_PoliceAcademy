@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using Xamarin.Forms;
 using WorkshopScheduler.Models;
+using System.Collections.ObjectModel;
 
 
 
@@ -12,14 +13,14 @@ namespace WorkshopScheduler.Views
 {
     public partial class ReservedBrowser : ContentPage
     {
-        List<Workshop> reservedList;
+        ObservableCollection<Workshop> reservedList;
 
         public ReservedBrowser()
         {
             InitializeComponent();
             //lorem ipsum is to test longer strings, but I dont want to deal with them normally ;) 
 
-            reservedList = TestData.LoremIpsumData.GetRange(0, 2); // provide the test
+            reservedList = TestData.LoremIpsumData; // provide the test
 
             WorkshopsListView.ItemsSource = reservedList;
         }
