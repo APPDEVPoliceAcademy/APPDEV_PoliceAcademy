@@ -5,6 +5,7 @@ using WorkshopScheduler.Models;
 
 namespace WorkshopScheduler.Logic
 {
+    
     public class Filters
     {
         List<Workshop> FilterByDate(List<Workshop> input, DateTime startDate, DateTime endDate)

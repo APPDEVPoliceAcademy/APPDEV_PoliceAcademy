@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using WorkshopScheduler.Models;
+using System.Collections.ObjectModel;
+
 
 namespace WorkshopScheduler
 {
@@ -9,7 +11,7 @@ namespace WorkshopScheduler
         const string loremipsum =
             "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.";
 
-        private static List<Workshop> loremIpsumData = new List<Workshop>()
+        private static ObservableCollection<Workshop> loremIpsumData = new ObservableCollection<Workshop>()
         {
             new Workshop()
             {
@@ -54,7 +56,7 @@ namespace WorkshopScheduler
                 Title = "Motivation",
                 ShortDescription = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit",
                 Description = loremipsum,
-                Date = new DateTime(2018, 06, 21),
+                Date = new DateTime(2018, 06, 11),
                 Coach = "Andrzej Norek",
                 Place = "on-line"
             },
@@ -80,7 +82,7 @@ namespace WorkshopScheduler
             }
         };
 
-        public static List<Workshop> LoremIpsumData
+        public static ObservableCollection<Workshop> LoremIpsumData
         {
             get => loremIpsumData;
             set => loremIpsumData = value;

@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 namespace WorkshopScheduler.Views
 {
-    enum Sortings { None, ByDateAscending, ByDateDescending, ByTitleAscending, ByTitleDescending };
-
-    public partial class FiltersModalView : ContentPage
+  
+    public partial class FiltersModalView : ContentPage 
     {
 
-        List<string> source = Enum.GetNames(typeof(Sortings)).ToList();
+        public event EventHandler<SortingsEnum> SortingChanged;
+
+
+        List<SortingsEnum> source = Enum.GetValues(typeof(SortingsEnum)).Cast<SortingsEnum>().ToList();
 
         public FiltersModalView()
         {
@@ -30,9 +31,10 @@ namespace WorkshopScheduler.Views
         {
             if (e.PropertyName == "SelectedItem")
             {
-                testlabel.Text = sortingPicker.Items[sortingPicker.SelectedIndex];
+                //string choice = sortingPicker.Items[sortingPicker.SelectedIndex];
 
-
+                var choice =(SortingsEnum)Enum.Parse(typeof(SortingsEnum), sortingPicker.Items[sortingPicker.SelectedIndex]);
+                SortingChanged.Invoke(this, choice);
             } 
         }
 
