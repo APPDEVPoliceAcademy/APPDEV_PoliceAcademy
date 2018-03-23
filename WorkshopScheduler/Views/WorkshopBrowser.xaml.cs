@@ -6,7 +6,6 @@ using System.Linq;
 using Xamarin.Forms;
 using WorkshopScheduler.Models;
 using WorkshopScheduler.Logic;
-using System.Collections.ObjectModel;
 
 namespace WorkshopScheduler.Views
 {
@@ -41,7 +40,6 @@ namespace WorkshopScheduler.Views
                         break;
                     case SortingsEnum.ByDateDescending:
                         displayList = null;
-
                         break;
                     case SortingsEnum.ByTitleAscending:
                         displayList = sortings.ByTitleAscending(workshopsList);

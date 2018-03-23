@@ -1,36 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage Padding="20" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="WorkshopScheduler.Views.FiltersModalView">
     <ContentPage.Padding>
-         <OnPlatform x:TypeArguments="Thickness">
-            <On Platform="iOS" Value="0, 20, 0, 0" />
-         </OnPlatform>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="20, 40, 20, 20" />
+        </OnPlatform>
     </ContentPage.Padding>
-
     <ContentPage.Content>
         <TableView Intent="Settings">
             <TableRoot>
-                 <TableSection>
-                       <ViewCell>
-                            <Button Text="Done" Clicked="BackButton_OnClicked"/>
-                        </ViewCell>
-                    </TableSection>
+                <TableSection>
+                    <ViewCell>
+                        <Button Text="Done" Clicked="BackButton_OnClicked" />
+                    </ViewCell>
+                </TableSection>
                 <TableSection Title="Sort by:">
                     <ViewCell>
                         <StackLayout>
-                            <Picker x:Name="sortingPicker"  PropertyChanged="SortingPicker_OnPropertyChanged" />
+                            <Picker x:Name="sortingPicker" PropertyChanged="SortingPicker_OnPropertyChanged" />
                             <Label x:Name="testlabel" />
                         </StackLayout>
                     </ViewCell>
                 </TableSection>
-                <TableSection Title="Filter by:">
-                    <SwitchCell x:Name="dateSwitch" Text="By date" />
+                <TableSection Title="Filters:">
                     <ViewCell>
-                        <StackLayout  BindingContext="{x:Reference dateSwitch}" Orientation="Horizontal">
-                            <DatePicker IsEnabled="{Binding On}" x:Name="startDate"  />
-                            <DatePicker  IsEnabled="{Binding On}" x:Name="endDate"/>
-                            <Label Text="{Binding Value}"/>
+                        <StackLayout Orientation="Horizontal">
+                            <DatePicker IsEnabled="{Binding On}" x:Name="startDate" />
+                            <DatePicker IsEnabled="{Binding On}" x:Name="endDate" />
+                            <Switch HorizontalOptions="EndAndExpand" x:Name="datePickerSwitch" />
                         </StackLayout>
-                        
+                    </ViewCell>
+
+                   <!-- ViewCell made on purpous, to achieve conisistent padding-->
+                    <ViewCell>
+                        <StackLayout>
+                               <Label Text="Less then 12 weeks" />
+                               <Switch x:Name="weeksSwitch" />
+                        </StackLayout>
                     </ViewCell>
                 </TableSection>
             </TableRoot>

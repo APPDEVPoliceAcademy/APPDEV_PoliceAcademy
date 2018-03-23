@@ -4,8 +4,8 @@ using System.Linq;
 using Xamarin.Forms;
 namespace WorkshopScheduler.Views
 {
-  
-    public partial class FiltersModalView : ContentPage 
+
+    public partial class FiltersModalView : ContentPage
     {
 
         public event EventHandler<SortingsEnum> SortingChanged;
@@ -33,10 +33,21 @@ namespace WorkshopScheduler.Views
             {
                 //string choice = sortingPicker.Items[sortingPicker.SelectedIndex];
 
-                var choice =(SortingsEnum)Enum.Parse(typeof(SortingsEnum), sortingPicker.Items[sortingPicker.SelectedIndex]);
+                var choice = (SortingsEnum)Enum.Parse(typeof(SortingsEnum), sortingPicker.Items[sortingPicker.SelectedIndex]);
                 SortingChanged.Invoke(this, choice);
-            } 
+            }
         }
 
+        void UnitPicker_OnPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+
+            if (e.PropertyName == "SelectedItem")
+            {
+                //string choice = sortingPicker.Items[sortingPicker.SelectedIndex];
+
+                var choice = (SortingsEnum)Enum.Parse(typeof(SortingsEnum), sortingPicker.Items[sortingPicker.SelectedIndex]);
+                SortingChanged.Invoke(this, choice);
+            }
+        }
     }
 }

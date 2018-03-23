@@ -5,8 +5,6 @@ using System.ComponentModel;
 using System.Linq;
 using Xamarin.Forms;
 using WorkshopScheduler.Models;
-using System.Collections.ObjectModel;
-
 
 
 namespace WorkshopScheduler.Views
