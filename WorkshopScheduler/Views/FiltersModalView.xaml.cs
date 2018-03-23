@@ -7,18 +7,24 @@ namespace WorkshopScheduler.Views
 
     public partial class FiltersModalView : ContentPage
     {
+     
 
         public event EventHandler<SortingsEnum> SortingChanged;
+        public event EventHandler<bool> WeeksFilterChanged;
+        public event EventHandler<DateTime[]> DatesFilterChanged;
+        public event EventHandler<PlacesEnum> PlaceFilterChanged;
+        public event EventHandler ResetSettings;
 
-
-        List<SortingsEnum> source = Enum.GetValues(typeof(SortingsEnum)).Cast<SortingsEnum>().ToList();
+        List<SortingsEnum> sourceSortings = Enum.GetValues(typeof(SortingsEnum)).Cast<SortingsEnum>().ToList();
+        List<PlacesEnum> placesSortings = Enum.GetValues(typeof(PlacesEnum)).Cast<PlacesEnum>().ToList();
 
         public FiltersModalView()
         {
             InitializeComponent();
 
 
-            sortingPicker.ItemsSource = source;
+            sortingPicker.ItemsSource = sourceSortings;
+            PlacesPicker.ItemsSource = placesSortings;
         }
 
         async void BackButton_OnClicked(object sender, System.EventArgs e)
@@ -48,6 +54,23 @@ namespace WorkshopScheduler.Views
                 var choice = (SortingsEnum)Enum.Parse(typeof(SortingsEnum), sortingPicker.Items[sortingPicker.SelectedIndex]);
                 SortingChanged.Invoke(this, choice);
             }
+        }
+
+        void OnWeeksSwitchToggled(object sender, Xamarin.Forms.ToggledEventArgs e)
+        {
+            WeeksFilterChanged(this, weeksSwitch.IsToggled);
+        }
+
+        void OnDateSwitchToggled(object sender, Xamarin.Forms.ToggledEventArgs e)
+        {
+            DateTime[] dates = {startDate.Date, endDate.Date };
+            DatesFilterChanged(this, dates);
+        }
+
+        async void OnResetButtonClicked(object sender, System.EventArgs e)
+        {
+            ResetSettings(this, e);
+            await Navigation.PopModalAsync();
         }
     }
 }
