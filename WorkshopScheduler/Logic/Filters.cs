@@ -12,20 +12,24 @@ namespace WorkshopScheduler.Logic
     {
 
 
-        ObservableCollection<Workshop> FilterByDate(ObservableCollection<Workshop> input, DateTime startDate, DateTime endDate)
+        public ObservableCollection<Workshop> FilterByDate(ObservableCollection<Workshop> input, DateTime[] dates)
         {
-
-        
-            return new ObservableCollection<Workshop>(input.Where(a => (a.Date >= startDate && a.Date <= endDate)));
-          
+            return new ObservableCollection<Workshop>(input.Where(a => (a.Date >= dates[0].Date && a.Date <= dates[1].Date)));
         }
-        
-        ObservableCollection<Workshop> FilterByPlace(ObservableCollection<Workshop> input, String desiredPlace)
+
+        public ObservableCollection<Workshop> FilterByPlace(ObservableCollection<Workshop> input, String desiredPlace)
         {
             return new ObservableCollection<Workshop>(input.Where(a => (a.Place == desiredPlace)));
-          
+        }
+
+        public ObservableCollection<Workshop> FilterBy12weeks(ObservableCollection<Workshop> input, bool flag)
+        {
+            if (flag)
+                return null;
+            else
+                return input;
         }
     }
 
- 
+
 }

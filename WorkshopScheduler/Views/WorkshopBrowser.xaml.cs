@@ -14,15 +14,18 @@ namespace WorkshopScheduler.Views
 
         //public event EventHandler ChangeSorting;
 
-       
+
         ObservableCollection<Workshop> workshopsList;
         ObservableCollection<Workshop> displayList;
         FiltersModalView filtersView;
+
+
         public WorkshopBrowser()
         {
             InitializeComponent();
 
             Sorting sortings = new Sorting();
+            Filters filters = new Filters();
 
             workshopsList = TestData.LoremIpsumData; // provide the test data
             WorkshopsListView.ItemsSource = workshopsList;
@@ -39,7 +42,7 @@ namespace WorkshopScheduler.Views
                         displayList = sortings.ByDateAscending(workshopsList);
                         break;
                     case SortingsEnum.ByDateDescending:
-                        displayList = null;
+                        displayList = sortings.ByDateDescending(workshopsList);
                         break;
                     case SortingsEnum.ByTitleAscending:
                         displayList = sortings.ByTitleAscending(workshopsList);
@@ -53,12 +56,34 @@ namespace WorkshopScheduler.Views
                     default:
                         DisplayAlert("couldn't match any", "shit", "ok");
                         break;
-                }
+                };
+
 
                 WorkshopsListView.ItemsSource = displayList;
-              
+
             };
 
+            filtersView.DatesFilterChanged += (o, dates) =>
+            {
+                displayList = filters.FilterByDate(workshopsList, dates);
+                WorkshopsListView.ItemsSource = displayList;
+            };
+
+            filtersView.WeeksFilterChanged += (o, flag) =>
+            {
+                displayList = filters.FilterBy12weeks(workshopsList, flag);
+                WorkshopsListView.ItemsSource = displayList;
+            };
+
+            filtersView.PlaceFilterChanged += (o, place) =>
+            {
+                displayList = filters.FilterByPlace(workshopsList, place.ToString());
+                WorkshopsListView.ItemsSource = displayList;
+            };
+
+            filtersView.ResetSettings += (o, s) => {
+                WorkshopsListView.ItemsSource = workshopsList;
+            };
         }
 
         private void SearchWorkshop_OnPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -77,7 +102,7 @@ namespace WorkshopScheduler.Views
 
         async void SortingsButton_OnClicked(object sender, System.EventArgs e)
         {
-               // DisplayAlert("refreshed",sortingChosen.ToString(),"ok");
+            // DisplayAlert("refreshed",sortingChosen.ToString(),"ok");
 
             await Navigation.PushModalAsync(filtersView);
 

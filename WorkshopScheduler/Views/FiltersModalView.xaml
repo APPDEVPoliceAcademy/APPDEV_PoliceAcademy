@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage Padding="20" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="WorkshopScheduler.Views.FiltersModalView">
+<ContentPage  Padding="20" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="WorkshopScheduler.Views.FiltersModalView">
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness">
             <On Platform="iOS" Value="20, 40, 20, 20" />
         </OnPlatform>
     </ContentPage.Padding>
     <ContentPage.Content>
-        <TableView Intent="Settings">
+        <TableView BackgroundColor="White" Intent="Settings">
             <TableRoot>
                 <TableSection>
                     <ViewCell>
@@ -24,19 +24,29 @@
                 <TableSection Title="Filters:">
                     <ViewCell>
                         <StackLayout Orientation="Horizontal">
-                            <DatePicker IsEnabled="{Binding On}" x:Name="startDate" />
+                            <DatePicker Style="Border:none" IsEnabled="{Binding On}" x:Name="startDate" />
                             <DatePicker IsEnabled="{Binding On}" x:Name="endDate" />
-                            <Switch HorizontalOptions="EndAndExpand" x:Name="datePickerSwitch" />
+                            <Switch HorizontalOptions="EndAndExpand" x:Name="datePickerSwitch" Toggled="OnDateSwitchToggled" />
                         </StackLayout>
                     </ViewCell>
 
                    <!-- ViewCell made on purpous, to achieve conisistent padding-->
                     <ViewCell>
-                        <StackLayout>
-                               <Label Text="Less then 12 weeks" />
-                               <Switch x:Name="weeksSwitch" />
+                        <StackLayout Orientation="Horizontal">
+                               <Label VerticalOptions="Center" Text="Less then 12 weeks" />
+                               <Switch HorizontalOptions="EndAndExpand" x:Name="weeksSwitch" Toggled="OnWeeksSwitchToggled" />
                         </StackLayout>
-                    </ViewCell>
+                     </ViewCell>
+                        <ViewCell>
+                          <StackLayout Orientation="Horizontal">
+                               <Label VerticalOptions="Center" Text="Region"/>
+                               <Picker x:Name="PlacesPicker" HorizontalOptions="FillAndExpand" />
+                              <Switch HorizontalOptions="End"/>
+                        </StackLayout>
+                  </ViewCell>
+                    <ViewCell>
+                        <Button Text ="Reset" Clicked="OnResetButtonClicked"/>
+                     </ViewCell>
                 </TableSection>
             </TableRoot>
         </TableView>
