@@ -3,13 +3,20 @@ namespace WorkshopScheduler.Models
 {
     public class Workshop
     {
-
+        public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public string ShortDescription { get; set; }
         public DateTime Date { get; set; }
         public string Coach { get; set; }
         public string Place { get; set; }
+
+        public bool IsWithin12Weeks
+        {
+            //
+            get { return Date.CompareTo(DateTime.Now.AddDays(12 * 7)) < 0; }
+        }
+
 
         public override bool Equals(object obj)
         {

@@ -1,6 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using WorkshopScheduler.Views;
+using WorkshopScheduler.Views.UserAccountViews;
 
 namespace WorkshopScheduler
 {
@@ -10,10 +11,13 @@ namespace WorkshopScheduler
         private const string UserSurnameKey = "UserSurname";
         private const string UserUnitKey = "UserUnit";
 
+        public static string AppName => "WorkshopApp";
+
+
         public App()
         {
             InitializeComponent();
-            MainPage = new MainView();
+            MainPage = new LoginView();
 
         }
 

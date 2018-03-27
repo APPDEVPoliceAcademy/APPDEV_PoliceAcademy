@@ -5,25 +5,28 @@ using System.ComponentModel;
 using System.Linq;
 using Xamarin.Forms;
 using WorkshopScheduler.Models;
-
+using WorkshopScheduler.RestLogic;
 
 
 namespace WorkshopScheduler.Views
 {
     public partial class ReservedBrowser : ContentPage
     {
-        List<Workshop> reservedList;
+        List<WorkshopDTO> reservedList;
+        private IRestService _restService;
 
         public ReservedBrowser()
         {
             InitializeComponent();
-            //lorem ipsum is to test longer strings, but I dont want to deal with them normally ;) 
+            _restService = new RestService();
 
-            reservedList = TestData.LoremIpsumData.GetRange(0, 2); // provide the test
-
-            WorkshopsListView.ItemsSource = reservedList;
         }
 
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            reservedList = await _restService.GetUserWorkshopAsynch();
+        }
 
         private void SearchWorkshop_OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
