@@ -6,6 +6,8 @@ using System.Linq;
 using Xamarin.Forms;
 using WorkshopScheduler.Models;
 using WorkshopScheduler.Logic;
+using WorkshopScheduler.RestLogic;
+
 
 namespace WorkshopScheduler.Views
 {
@@ -13,9 +15,10 @@ namespace WorkshopScheduler.Views
     {
 
   
-        ObservableCollection<Workshop> workshopsList;
-        ObservableCollection<Workshop> displayList;
+        ObservableCollection<WorkshopDTO> workshopsList;
+        ObservableCollection<WorkshopDTO> displayList;
         FiltersModalView filtersView;
+        private RestService _restService;
 
 
         public WorkshopBrowser()
@@ -24,9 +27,6 @@ namespace WorkshopScheduler.Views
 
             Sorting sortings = new Sorting();
             Filters filters = new Filters();
-
-            workshopsList = TestData.LoremIpsumData; // provide the test data
-            WorkshopsListView.ItemsSource = workshopsList;
 
             filtersView = new FiltersModalView();
 
@@ -82,6 +82,15 @@ namespace WorkshopScheduler.Views
             filtersView.ResetSettings += (o, s) => {
                 WorkshopsListView.ItemsSource = workshopsList;
             };
+            _restService = new RestService();
+        }
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            workshopsList = await _restService.GetAllWorkshopsAsync();
+            WorkshopsListView.ItemsSource = workshopsList;
+
         }
 
         private void SearchWorkshop_OnPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -109,8 +118,8 @@ namespace WorkshopScheduler.Views
         private async void WorkshopsListView_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem == null) return;
-            var currentItem = e.SelectedItem as Workshop;
-            await Navigation.PushModalAsync(new WorkshopDetail(currentItem));
+            var currentItem = e.SelectedItem as WorkshopDTO;
+            await Navigation.PushModalAsync(new WorkshopDetail(currentItem.Id));
             WorkshopsListView.SelectedItem = null;
         }
     }

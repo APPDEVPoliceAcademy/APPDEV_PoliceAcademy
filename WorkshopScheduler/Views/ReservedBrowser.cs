@@ -5,16 +5,15 @@ using System.ComponentModel;
 using System.Linq;
 using Xamarin.Forms;
 using WorkshopScheduler.Models;
-using WorkshopScheduler.Logic;
+using WorkshopScheduler.RestLogic;
 
-
-namespace WorkshopScheduler.Views
 {
     public partial class ReservedBrowser : ContentPage
     {
-        ObservableCollection<Workshop> reservedList;
-        ObservableCollection<Workshop> displayList;
+        ObservableCollection<WorkshopDTO> reservedList;
+        ObservableCollection<WorkshopDTO> displayList;
         FiltersModalView filtersView;
+        private IRestService _restService;
 
 
         public ReservedBrowser()
@@ -22,8 +21,6 @@ namespace WorkshopScheduler.Views
             InitializeComponent();
             //lorem ipsum is to test longer strings, but I dont want to deal with them normally ;) 
 
-            reservedList = TestData.LoremIpsumData; // provide the test
-            WorkshopsListView.ItemsSource = reservedList;
             Sorting sortings = new Sorting();
             Filters filters = new Filters();
 
@@ -81,8 +78,17 @@ namespace WorkshopScheduler.Views
             filtersView.ResetSettings += (o, s) => {
                 WorkshopsListView.ItemsSource = reservedList;
             };
+            _restService = new RestService();
+
         }
 
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            reservedList = await _restService.GetUserWorkshopAsynch();
+            WorkshopsListView.ItemsSource = reservedList;
+
+        }
 
          void SearchWorkshop_OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
