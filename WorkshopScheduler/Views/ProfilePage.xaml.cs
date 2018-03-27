@@ -12,10 +12,14 @@ namespace WorkshopScheduler.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProfilePage : ContentPage
     {
+
+        private App _currentApp = Application.Current as App;
         public ProfilePage()
         {
             InitializeComponent();
-            BindingContext = Application.Current as App;
+            NameCell.Text = _currentApp.UserName;
+            SurnameCell.Text = _currentApp.UserSurname;
+            UnitPicker.SelectedItem = _currentApp.UserUnit;
         }
     }
-}
+}   

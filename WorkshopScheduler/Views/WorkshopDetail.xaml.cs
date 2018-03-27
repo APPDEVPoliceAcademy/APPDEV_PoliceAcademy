@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WorkshopScheduler.Models;
+using WorkshopScheduler.RestLogic;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,13 +13,24 @@ namespace WorkshopScheduler.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class WorkshopDetail : ContentPage
 	{
-		public WorkshopDetail (Workshop currentWorkshop)
+
+        private IRestService _restService = new RestService();
+	    private int _currentWorkshopID;
+		public WorkshopDetail (int currentWorkshopID)
 		{
+		    _currentWorkshopID = currentWorkshopID;
 			InitializeComponent ();
-		    BindingContext = currentWorkshop;
+		    
 		}
 
-	    private void BackButton_OnClicked(object sender, EventArgs e)
+        protected override async void OnAppearing()
+        {
+            BindingContext = await _restService.GetSingleWorkshop(_currentWorkshopID); 
+            base.OnAppearing();
+        }
+
+
+        private void BackButton_OnClicked(object sender, EventArgs e)
 	    {
 	        Navigation.PopModalAsync();
 	    }
