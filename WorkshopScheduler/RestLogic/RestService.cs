@@ -83,11 +83,13 @@ namespace WorkshopScheduler.RestLogic
                     var responseContent = await response.Content.ReadAsStringAsync();
                     return JsonConvert.DeserializeObject<List<WorkshopDTO>>(responseContent);
                 }
+                else if (response.StatusCode == HttpStatusCode.NotFound)
+                {
+                    return new List<WorkshopDTO>();
+                }
                 else
                 {
-                    var content = await response.Content.ReadAsStringAsync();
-                    Debug.WriteLine(@"ERROR {0}", content);
-
+                    Debug.WriteLine(@"ERROR {0}", "Unknown error");
                     return null;
                 }
             }
