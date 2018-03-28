@@ -58,7 +58,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RestLogic\IRestService.cs" />
     <Compile Include="RestLogic\RestService.cs" />
-    <Compile Include="TestData.cs" />
     <Compile Include="Views\UserAccountViews\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>

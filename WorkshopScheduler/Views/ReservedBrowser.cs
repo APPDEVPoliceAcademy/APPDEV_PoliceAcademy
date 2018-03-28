@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using WorkshopScheduler;
+using WorkshopScheduler.Logic;
 using Xamarin.Forms;
 using WorkshopScheduler.Models;
 using WorkshopScheduler.RestLogic;
+using WorkshopScheduler.Views;
 
+namespace WorkshopScheduler.Views
 {
     public partial class ReservedBrowser : ContentPage
     {
@@ -85,7 +89,7 @@ using WorkshopScheduler.RestLogic;
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            reservedList = await _restService.GetUserWorkshopAsynch();
+            reservedList = new ObservableCollection<WorkshopDTO>(await _restService.GetUserWorkshopAsynch());
             WorkshopsListView.ItemsSource = reservedList;
 
         }

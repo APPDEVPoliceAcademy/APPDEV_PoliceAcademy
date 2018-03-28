@@ -65,6 +65,7 @@ namespace WorkshopScheduler.Views
             {
                 displayList = filters.FilterByDate(workshopsList, dates);
                 WorkshopsListView.ItemsSource = displayList;
+                
             };
 
             filtersView.WeeksFilterChanged += (o, flag) =>
@@ -88,8 +89,12 @@ namespace WorkshopScheduler.Views
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            workshopsList = await _restService.GetAllWorkshopsAsync();
-            WorkshopsListView.ItemsSource = workshopsList;
+            if (workshopsList == null)
+            {
+                workshopsList = new ObservableCollection<WorkshopDTO>(await _restService.GetAllWorkshopsAsync());
+                WorkshopsListView.ItemsSource = workshopsList;
+            }
+            
 
         }
 

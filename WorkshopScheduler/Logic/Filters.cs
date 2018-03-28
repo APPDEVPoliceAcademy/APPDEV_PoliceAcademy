@@ -12,20 +12,20 @@ namespace WorkshopScheduler.Logic
     {
 
 
-        public ObservableCollection<Workshop> FilterByDate(ObservableCollection<Workshop> input, DateTime[] dates)
+        public ObservableCollection<WorkshopDTO> FilterByDate(ObservableCollection<WorkshopDTO> input, DateTime[] dates)
         {
-            return new ObservableCollection<Workshop>(input.Where(a => (a.Date >= dates[0].Date && a.Date <= dates[1].Date)));
+            return new ObservableCollection<WorkshopDTO>(input.Where(a => (a.Date >= dates[0].Date && a.Date <= dates[1].Date)));
         }
 
-        public ObservableCollection<Workshop> FilterByPlace(ObservableCollection<Workshop> input, String desiredPlace)
+        public ObservableCollection<WorkshopDTO> FilterByPlace(ObservableCollection<WorkshopDTO> input, String desiredPlace)
         {
-            return new ObservableCollection<Workshop>(input.Where(a => (a.Place == desiredPlace)));
+            return new ObservableCollection<WorkshopDTO>(input.Where(a => (a.Place == desiredPlace)));
         }
 
-        public ObservableCollection<Workshop> FilterBy12weeks(ObservableCollection<Workshop> input, bool flag)
+        public ObservableCollection<WorkshopDTO> FilterBy12weeks(ObservableCollection<WorkshopDTO> input, bool flag)
         {
             if (flag)
-                return new ObservableCollection<Workshop>(input.Where(a => (a.Date <= DateTime.Now.AddDays(84)) && a.Date >= DateTime.Now));
+                return new ObservableCollection<WorkshopDTO>(input.Where(a => (a.Date <= DateTime.Now.AddDays(84)) && a.Date >= DateTime.Now));
             
                 return input;
         }
