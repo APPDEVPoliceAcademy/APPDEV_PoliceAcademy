@@ -12,9 +12,7 @@ namespace WorkshopScheduler.Views
     public partial class WorkshopBrowser : ContentPage
     {
 
-        //public event EventHandler ChangeSorting;
-
-
+  
         ObservableCollection<Workshop> workshopsList;
         ObservableCollection<Workshop> displayList;
         FiltersModalView filtersView;

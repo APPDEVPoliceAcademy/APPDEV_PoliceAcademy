@@ -25,8 +25,8 @@ namespace WorkshopScheduler.Logic
         public ObservableCollection<Workshop> FilterBy12weeks(ObservableCollection<Workshop> input, bool flag)
         {
             if (flag)
-                return null;
-            else
+                return new ObservableCollection<Workshop>(input.Where(a => (a.Date <= DateTime.Now.AddDays(84)) && a.Date >= DateTime.Now));
+            
                 return input;
         }
     }
