@@ -13,7 +13,8 @@
     </TabbedPage.ToolbarItems>
     <local:WorkshopBrowser Title="All"  Icon="ic_tab_event_free.png" />
     <local:ReservedBrowser Title="Reserved" Icon="ic_tab_event_checked.png"/>
-    <local:SettingsPage Title="Setting" Icon="ic_tab_settings.png"/>
     <local:ProfilePage Title="Profile" Icon="ic_tab_person.png"/>
+    <local:SettingsPage Title="Setting" Icon="ic_tab_settings.png"/>
+
 
 </TabbedPage>

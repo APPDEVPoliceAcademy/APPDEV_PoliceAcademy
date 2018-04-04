@@ -1,21 +1,34 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="WorkshopScheduler.Views.ProfilePage"
-             BackgroundColor="White">
-    <TableView Intent="Form">
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="WorkshopScheduler.Views.ProfilePage" BackgroundColor="White">
+    <TableView Intent="Form" BackgroundColor="White">
         <TableRoot>
-            <TableSection Title="Information">
-                <EntryCell x:Name="NameCell" Label="Name" Text="{Binding UserName}"></EntryCell>
-                <EntryCell x:Name="SurnameCell"  Label="Surname" Text="{Binding UserSurname}"></EntryCell>
+            <TableSection Title="Personal Data">
                 <ViewCell>
                     <StackLayout Orientation="Horizontal" Padding="20, 0, 20, 0">
-                        <Label Text="Unit" VerticalOptions="Center" HorizontalOptions="StartAndExpand"></Label>
-                        <Picker x:Name="UnitPicker"/>
+                        <Label Text="Name" VerticalOptions="Center" HorizontalOptions="Start" WidthRequest="80" />
+                        <Entry x:Name="NameCell" Text="{Binding UserName}" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
                     </StackLayout>
                 </ViewCell>
-                
-                
+                <ViewCell>
+                    <StackLayout Orientation="Horizontal" Padding="20, 0, 20, 0">
+                        <Label Text="Surname" VerticalOptions="Center" HorizontalOptions="Start" WidthRequest="80" />
+                        <Entry x:Name="SurnameCell" VerticalOptions="Center" Text="{Binding UserSurname}" HorizontalOptions="FillAndExpand" />
+                    </StackLayout>
+                </ViewCell>
+                <ViewCell>
+                    <StackLayout Orientation="Horizontal" Padding="20, 0, 20, 0">
+                        <Label Text="Birthday" VerticalOptions="Center" HorizontalOptions="Start" WidthRequest="80" />
+                        <DatePicker x:Name="BirthdayCell" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
+                    </StackLayout>
+                </ViewCell>
+            </TableSection>
+            <TableSection Title="Professional Data">
+                <ViewCell>
+                    <StackLayout Orientation="Horizontal" Padding="20, 0, 20, 0">
+                        <Label Text="Unit" VerticalOptions="Center" HorizontalOptions="Start" WidthRequest="80" />
+                        <Picker x:Name="UnitPicker" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
+                    </StackLayout>
+                </ViewCell>
             </TableSection>
         </TableRoot>
     </TableView>
