@@ -29,12 +29,11 @@ namespace WorkshopScheduler.Views
 
             Sorting sortings = new Sorting();
             Filters filters = new Filters();
-
             filtersView = new FiltersModalView();
 
             filtersView.SortingChanged += (o, sortingChosen) =>
             {
-                displayList = null;
+               // displayList = null;
 
                 switch (sortingChosen)
                 {
@@ -54,7 +53,7 @@ namespace WorkshopScheduler.Views
                         displayList = workshopsList;
                         break;
                     default:
-                        DisplayAlert("couldn't match any", "shit", "ok");
+                        //DisplayAlert("couldn't match any", "", "ok");
                         break;
                 };
 
@@ -83,12 +82,14 @@ namespace WorkshopScheduler.Views
             };
 
             filtersView.ResetSettings += (o, s) => {
-                WorkshopsListView.ItemsSource = workshopsList;
+                displayList = workshopsList;
+                WorkshopsListView.ItemsSource = displayList;
             };
             _restService = new RestService();
         }
 
-        protected override async void OnAppearing()
+
+        protected override void OnAppearing()
         {
             base.OnAppearing();
             if (workshopsList == null)

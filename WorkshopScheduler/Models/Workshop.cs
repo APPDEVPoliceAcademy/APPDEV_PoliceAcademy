@@ -20,7 +20,7 @@ namespace WorkshopScheduler.Models
 
         public override bool Equals(object obj)
         {
-            Workshop workshopObj = obj as Workshop; 
+            WorkshopDTO workshopObj = obj as WorkshopDTO; 
             if (workshopObj == null)
                 return false;
             else
@@ -29,7 +29,7 @@ namespace WorkshopScheduler.Models
                 return (this.Title.Equals(workshopObj.Title) &&
                                this.Date.Equals(workshopObj.Date) &&
                                this.Coach.Equals(workshopObj.Coach) &&
-                               this.Description.Equals(workshopObj.Description) &&
+                               //this.Description.Equals(workshopObj.Description) &&
                                this.Place.Equals(workshopObj.Place) &&
                                this.ShortDescription.Equals(workshopObj.ShortDescription));
                 
