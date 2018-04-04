@@ -18,8 +18,8 @@ namespace WorkshopScheduler
         public App()
         {
             InitializeComponent();
-            //MainPage = new LoginView();
-            MainPage = new MainView();
+            MainPage = new LoginView();
+            //MainPage = new MainView();
 
         }
 

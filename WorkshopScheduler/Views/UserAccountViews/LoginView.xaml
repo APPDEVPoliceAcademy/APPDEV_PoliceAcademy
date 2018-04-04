@@ -1,18 +1,21 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="WorkshopScheduler.Views.UserAccountViews.LoginView">
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" BackgroundColor="{StaticResource backgroundColor}" x:Class="WorkshopScheduler.Views.UserAccountViews.LoginView">
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="20, 40, 20, 20" />
+        </OnPlatform>
+    </ContentPage.Padding>
     <ContentPage.Content>
-       <StackLayout>
-           <Label Text="Welcome to InspiratiePunt" TextColor="Red" />
-            <Label Text="Login"/>
-           <Entry x:Name="Login" />
-            <Label Text="Password"/>
-            <Entry x:Name="Password" IsPassword="True"/>
+        <StackLayout >
+            <Label Text="Welcome to InspiratiePunt"  TextColor="{StaticResource primaryText}"/>
+            <Label Text="Login" TextColor="{StaticResource primaryText}"/>
+            <Entry x:Name="Login"/>
+            <Label Text="Password" TextColor="{StaticResource primaryText}"/>
+            <Entry x:Name="Password" IsPassword="True" />
             <StackLayout Orientation="Horizontal">
-                <Button x:Name="CreateAccountButton" Text="Create Account" Clicked="CreateAccountButton_OnClicked"/>
-                <Button x:Name="LogInButton" Text="Log In" Clicked="LogInButton_OnClicked"/>
+                <Button x:Name="CreateAccountButton" Text="Create Account" Clicked="CreateAccountButton_OnClicked" TextColor="{StaticResource buttonText}"/>
+                <Button x:Name="LogInButton" Text="Log In" Clicked="LogInButton_OnClicked" TextColor="{StaticResource buttonText}"/>
             </StackLayout>
-       </StackLayout>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

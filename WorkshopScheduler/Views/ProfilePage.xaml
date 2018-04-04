@@ -30,6 +30,16 @@
                     </StackLayout>
                 </ViewCell>
             </TableSection>
+
+                <TableSection >
+                <ViewCell>
+                    <StackLayout Orientation="Horizontal" Padding="20, 0, 20, 0">
+                        <Button TextColor="{StaticResource buttonText}" Text="Done" Clicked="DoneButton_OnClicked"/>
+                        
+                    </StackLayout>
+                </ViewCell>
+            </TableSection>
+            
         </TableRoot>
     </TableView>
 </ContentPage>
