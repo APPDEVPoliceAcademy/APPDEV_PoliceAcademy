@@ -1,17 +1,23 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="WorkshopScheduler.Views.UserAccountViews.RegisterView">
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="WorkshopScheduler.Views.UserAccountViews.RegisterView"
+             BackgroundColor="{StaticResource backgroundColor}">
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="20, 40, 20, 20" />
+        </OnPlatform>
+    </ContentPage.Padding>
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Create Account" TextColor="Red" />
-            <Label x:Name="Login"  Text="Login"/>
+            <Label Text="Create Account" TextColor="{StaticResource primaryText}" />
+            <Label x:Name="Login" Text="Login" />
             <Entry />
-            <Label Text="Password"/>
-            <Entry x:Name="FirstPassword" IsPassword="True"/>
-            <Label Text="Repeat Password"/>
-            <Entry x:Name="RepeatPassword"  IsPassword="True"/>
-            <Button x:Name="RegisterButton" Text="Register" Clicked="RegisterButton_OnClicked"/>
+            <Label Text="Password" TextColor="{StaticResource primaryText}"/>
+            <Entry x:Name="FirstPassword" IsPassword="True" />
+            <Label Text="Repeat Password" TextColor="{StaticResource primaryText}"/>
+            <Entry x:Name="RepeatPassword" IsPassword="True" />
+            <Button x:Name="RegisterButton" Text="Register" Clicked="RegisterButton_OnClicked" TextColor="{StaticResource buttonText}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

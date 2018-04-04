@@ -27,5 +27,13 @@ namespace WorkshopScheduler.Views
             UnitPicker.ItemsSource = _pickerUnitsOptions;
             UnitPicker.SelectedItem = _currentApp.UserUnit;
         }
+
+        async void DoneButton_OnClicked(object sender, System.EventArgs e)
+        {
+            
+            Application.Current.MainPage = new MainView(); //so far it's gonna break the app
+            await Navigation.PopModalAsync();
+
+        }
     }
-}   
+}

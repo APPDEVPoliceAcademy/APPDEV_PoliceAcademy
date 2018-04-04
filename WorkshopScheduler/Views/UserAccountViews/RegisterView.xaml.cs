@@ -15,6 +15,7 @@ namespace WorkshopScheduler.Views.UserAccountViews
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class RegisterView : ContentPage
 	{
+
 		public RegisterView ()
 		{
 			InitializeComponent ();
@@ -26,6 +27,7 @@ namespace WorkshopScheduler.Views.UserAccountViews
 
 	        if (FirstPassword.Text == null || RepeatPassword.Text == null || Login.Text == null)
 	        {
+                await DisplayAlert("Error", "You must fill all fields", "Ok");
 	            return;
 	        }
 
@@ -55,7 +57,7 @@ namespace WorkshopScheduler.Views.UserAccountViews
 	        }
 
 
-            IRestService restService = new RestService();
+         //   IRestService restService = new RestService();
 
 	        var restResponse = await restService.CreateUser(Login.Text, FirstPassword.Text);
 
