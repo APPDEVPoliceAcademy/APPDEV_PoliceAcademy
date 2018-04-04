@@ -5,7 +5,7 @@
             xmlns:local="clr-namespace:WorkshopScheduler.Views;assembly=WorkshopScheduler" 
             x:Class="WorkshopScheduler.Views.MainView"
             BarBackgroundColor="#ebebeb"
-           
+            BackgroundColor="{StaticResource backgroundColor}"
             Title="WorkshopScheduler"
                >
     <TabbedPage.ToolbarItems>
