@@ -11,14 +11,14 @@ namespace Tests
     [TestFixture]
     public class SortingTest
     {
-        private List<Workshop> _input;
+        private List<WorkshopDTO> _input;
 
-        Workshop firstByDate = TestData.LoremIpsumData.Find(workshop => workshop.ShortDescription.Equals("earliestTest"));
-        Workshop lastByDate = TestData.LoremIpsumData.Find(workshop => workshop.ShortDescription.Equals("latestTest"));
-        Workshop firstByTitle = TestData.LoremIpsumData.Find(workshop => workshop.ShortDescription.Equals("firstAlphabeticalTitle"));
-        Workshop lastByTitle = TestData.LoremIpsumData.Find(workshop => workshop.ShortDescription.Equals("lastAlphabeticalTitle"));
-        Workshop firstByAlphabeticalPlace = TestData.LoremIpsumData.Find(workshop => workshop.ShortDescription.Equals("firstAlphabeticalPlace"));
-        Workshop lastByAlphabeticalPlace = TestData.LoremIpsumData.Find(workshop => workshop.ShortDescription.Equals("lastAlphabeticalPlace"));
+        WorkshopDTO firstByDate = TestData.LoremIpsumData.Find(workshop => workshop.ShortDescription.Equals("earliestTest"));
+        WorkshopDTO lastByDate = TestData.LoremIpsumData.Find(workshop => workshop.ShortDescription.Equals("latestTest"));
+        WorkshopDTO firstByTitle = TestData.LoremIpsumData.Find(workshop => workshop.ShortDescription.Equals("firstAlphabeticalTitle"));
+        WorkshopDTO lastByTitle = TestData.LoremIpsumData.Find(workshop => workshop.ShortDescription.Equals("lastAlphabeticalTitle"));
+        WorkshopDTO firstByAlphabeticalPlace = TestData.LoremIpsumData.Find(workshop => workshop.ShortDescription.Equals("firstAlphabeticalPlace"));
+        WorkshopDTO lastByAlphabeticalPlace = TestData.LoremIpsumData.Find(workshop => workshop.ShortDescription.Equals("lastAlphabeticalPlace"));
 
         
         [SetUp]

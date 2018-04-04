@@ -13,6 +13,9 @@ namespace WorkshopScheduler.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+            UITabBar.Appearance.SelectedImageTintColor = UIColor.Red;
+            UISwitch.Appearance.OnTintColor = UIColor.Red;
+            UIButton.Appearance.SetTitleColor(UIColor.Red,UIControlState.Normal);
 
             // Code for starting up the Xamarin Test Cloud Agent
 #if DEBUG
