@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage  Padding="20" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="WorkshopScheduler.Views.FiltersModalView">
+<ContentPage BackgroundColor="{StaticResource backgroundColor}"  Padding="20" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="WorkshopScheduler.Views.FiltersModalView">
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness">
             <On Platform="iOS" Value="20, 40, 20, 20" />
         </OnPlatform>
     </ContentPage.Padding>
     <ContentPage.Content>
-        <TableView BackgroundColor="White" Intent="Settings">
+        <TableView BackgroundColor="{StaticResource backgroundColor}" Intent="Settings">
             <TableRoot>
                 <TableSection>
                     <ViewCell>
@@ -45,7 +45,7 @@
                         </StackLayout>
                   </ViewCell>
                     <ViewCell>
-                        <Button Text ="Reset" Clicked="OnResetButtonClicked"/>
+                        <Button  Text ="Reset" Clicked="OnResetButtonClicked"/>
                      </ViewCell>
                 </TableSection>
             </TableRoot>

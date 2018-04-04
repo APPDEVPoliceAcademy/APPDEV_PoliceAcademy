@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="WorkshopScheduler.Views.WorkshopBrowser">
+<ContentPage  BackgroundColor="{StaticResource backgroundColor}" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="WorkshopScheduler.Views.WorkshopBrowser">
     <ContentPage.Padding>
          <OnPlatform x:TypeArguments="Thickness">
             <On Platform="iOS" Value="0, 30, 0, 0" />
@@ -9,13 +9,13 @@
     
     <ContentPage.Content>
         <StackLayout>
-            <SearchBar x:Name="SearchWorkshop" Placeholder="Search workshops" BackgroundColor="White" PropertyChanged="SearchWorkshop_OnPropertyChanged" />
+            <SearchBar x:Name="SearchWorkshop" Placeholder="Search workshops" BackgroundColor="{StaticResource backgroundColor}" PropertyChanged="SearchWorkshop_OnPropertyChanged" />
             <Button x:Name="sortingsButton" Text="sorting" Clicked="SortingsButton_OnClicked" />
             <ListView x:Name="WorkshopsListView" HasUnevenRows="true" ItemSelected="WorkshopsListView_OnItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Padding="20" Orientation="Vertical">
+                            <StackLayout Padding="20" Orientation="Vertical"  BackgroundColor="{StaticResource backgroundColor}">
                                 <StackLayout Orientation="Vertical">
                                     <Label Text="{Binding Title}" FontAttributes="Bold" />
                                     <Label Text="{Binding Coach}" FontSize="Small" />
