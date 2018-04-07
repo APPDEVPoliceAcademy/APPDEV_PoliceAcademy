@@ -85,6 +85,7 @@ namespace WorkshopScheduler.Views
                 displayList = workshopsList;
                 WorkshopsListView.ItemsSource = displayList;
             };
+
             _restService = new RestService();
         }
 

@@ -19,7 +19,7 @@ namespace WorkshopScheduler.Views
         ObservableCollection<WorkshopDTO> reservedList;
         ObservableCollection<WorkshopDTO> displayList;
         FiltersModalView filtersView;
-        private IRestService _restService;
+        private RestService _restService;
 
 
         public ReservedBrowser()
@@ -34,7 +34,7 @@ namespace WorkshopScheduler.Views
 
             filtersView.SortingChanged += (o, sortingChosen) =>
             {
-                displayList = null;
+                //displayList = null;
 
                 switch (sortingChosen)
                 {
@@ -54,7 +54,7 @@ namespace WorkshopScheduler.Views
                         displayList = reservedList;
                         break;
                     default:
-                        DisplayAlert("couldn't match any", "shit", "ok");
+                        //DisplayAlert("couldn't match any", "shit", "ok");
                         break;
                 };
 
