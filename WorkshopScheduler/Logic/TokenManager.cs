@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WorkshopScheduler.Models;
 using Xamarin.Auth;
 
 namespace WorkshopScheduler.Logic
@@ -12,14 +13,14 @@ namespace WorkshopScheduler.Logic
 
         private const string _userName = "Local";
 
-        public static bool SaveToken(string token)
+        public static bool SaveToken(TokenInfo token)
         {
-            if (String.IsNullOrEmpty(token)) return false;
+            if(token == null) return false;
             var account = new Account()
             {
                 Username = _userName
             };
-            account.Properties.Add("token", token);
+            account.Properties.Add("token", token.Access_token);
             AccountStore.Create().Save(account, App.AppName);
             return true;
 

@@ -10,7 +10,8 @@
     <AssemblyName>WorkshopScheduler</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
-    <NuGetPackageImportStamp></NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -56,6 +57,7 @@
     <Compile Include="Models\UserInfo.cs" />
     <Compile Include="Models\WorkshopDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RestLogic\RestResponse.cs" />
     <Compile Include="RestLogic\IRestService.cs" />
     <Compile Include="RestLogic\RestService.cs" />
     <Compile Include="Views\UserAccountViews\LoginView.xaml.cs">

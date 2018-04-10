@@ -1,4 +1,5 @@
 ﻿using System;
+using WorkshopScheduler.Models;
 using Xamarin.Forms;
 using WorkshopScheduler.Views;
 using WorkshopScheduler.Views.UserAccountViews;
@@ -49,9 +50,9 @@ namespace WorkshopScheduler
             set => Properties[UserSurnameKey] = value;
         }
 
-        public String UserUnit
+        public Unit UserUnit
         {
-            get => Properties.ContainsKey(UserUnitKey) ? Properties[UserUnitKey].ToString() : "";
+            get => Properties.ContainsKey(UserUnitKey) ? (Unit)Properties[UserUnitKey] : Unit.Noone;
             set => Properties[UserUnitKey] = value;
         }
 

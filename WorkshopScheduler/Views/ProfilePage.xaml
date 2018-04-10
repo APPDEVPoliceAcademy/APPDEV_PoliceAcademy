@@ -10,16 +10,7 @@
                 <ViewCell>
                     <StackLayout Orientation="Horizontal" Padding="20, 0, 20, 0">
                         <Label Text="Unit" VerticalOptions="Center" HorizontalOptions="StartAndExpand"></Label>
-                        <Picker x:Name="UnitPicker">
-                            <Picker.Items>
-                                <x:String>
-                                    Nord
-                                </x:String>
-                                <x:String>
-                                    Soud
-                                </x:String>
-                            </Picker.Items>
-                        </Picker>
+                        <Picker x:Name="UnitPicker"/>
                     </StackLayout>
                 </ViewCell>
                 

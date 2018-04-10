@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using WorkshopScheduler.Logic;
@@ -30,22 +31,33 @@ namespace WorkshopScheduler.Views.UserAccountViews
 
             IRestService rs = new RestService();
 
-	        var tokenInfo = await rs.AuthenticateUser(Login.Text, Password.Text);
-	        if (tokenInfo == null)
+	        var tokenResponse = await rs.AuthenticateUser(Login.Text, Password.Text);
+
+	        if (tokenResponse.ResponseCode == null)
 	        {
-	            await DisplayAlert("Error", "Authentication failed", "Ok");
+	            await DisplayAlert("Error", tokenResponse.ErrorMessage + "\nMake sure that you have internet connection", "Ok");
 	            return;
 	        }
 
-	        TokenManager.SaveToken(tokenInfo.Access_token);
+	        if (tokenResponse.ResponseCode == HttpStatusCode.BadRequest)
+	        {
+	            await DisplayAlert("Error", tokenResponse.ErrorMessage, "Ok");
+	        }
 
-	        var userInfo = await rs.GetUserDetail();
-	        var app = Application.Current as App;
-	        app.UserName = userInfo.Name;
-	        app.UserSurname = userInfo.Surname;
-	        app.UserUnit = userInfo.Unit;
+	        if (tokenResponse.ResponseCode == HttpStatusCode.OK)
+	        {
+	            TokenManager.SaveToken(tokenResponse.Value);
 
-            Application.Current.MainPage = new MainView();
+	            var userInfo = await rs.GetUserDetail();
+	            var app = Application.Current as App;
+	            app.UserName = userInfo.Value.Name;
+	            app.UserSurname = userInfo.Value.Surname;
+	            app.UserUnit = userInfo.Value.Unit;
+
+	            Application.Current.MainPage = new MainView();
+            }
+
+	        
 	    }
 	}
 }
