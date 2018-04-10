@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using WorkshopScheduler.Models;
 using Xamarin.Auth;
 
@@ -21,6 +22,8 @@ namespace WorkshopScheduler.Logic
                 Username = _userName
             };
             account.Properties.Add("token", token.Access_token);
+            var expirationDate = DateTime.Now.AddSeconds(Double.Parse(token.Expires_in));
+            account.Properties.Add("expires", JsonConvert.SerializeObject(expirationDate));
             AccountStore.Create().Save(account, App.AppName);
             return true;
 
@@ -39,6 +42,19 @@ namespace WorkshopScheduler.Logic
             {
                 AccountStore.Create().Delete(account, App.AppName);
             }
+        }
+
+        public static bool IsTokenValid()
+        {
+            var account = AccountStore.Create().FindAccountsForService(App.AppName).FirstOrDefault();
+            if (account != null)
+            {
+                var expiriationTime = JsonConvert.DeserializeObject<DateTime>(account.Properties["expires"]);
+                if (expiriationTime.CompareTo(DateTime.Now) < 0) return true;
+                
+            }
+
+            return false;
         }
     }
 }

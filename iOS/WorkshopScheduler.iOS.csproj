@@ -112,32 +112,84 @@
     <ImageAsset Include="Assets.xcassets\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\Assets.xcassets\.DS_Store" />
-    <ImageAsset Include="Assets.xcassets\ios\ic_calendar.png" />
-    <ImageAsset Include="Assets.xcassets\ios\ic_calendar%402x.png" />
-    <ImageAsset Include="Assets.xcassets\ios\ic_calendar%403x.png" />
-    <ImageAsset Include="Assets.xcassets\ios\ic_person.png" />
-    <ImageAsset Include="Assets.xcassets\ios\ic_person%402x.png" />
-    <ImageAsset Include="Assets.xcassets\ios\ic_person%403x.png" />
-    <ImageAsset Include="Assets.xcassets\ios\ic_place.png" />
-    <ImageAsset Include="Assets.xcassets\ios\ic_place%402x.png" />
-    <ImageAsset Include="Assets.xcassets\ios\ic_place%403x.png" />
-    <ImageAsset Include="Assets.xcassets\ios\ic_tab_event_checked.png" />
-    <ImageAsset Include="Assets.xcassets\ios\ic_tab_event_checked%402x.png" />
-    <ImageAsset Include="Assets.xcassets\ios\ic_tab_event_checked%403x.png" />
-    <ImageAsset Include="Assets.xcassets\ios\ic_tab_event_free.png" />
-    <ImageAsset Include="Assets.xcassets\ios\ic_tab_event_free%402x.png" />
-    <ImageAsset Include="Assets.xcassets\ios\ic_tab_event_free%403x.png" />
-    <ImageAsset Include="Assets.xcassets\ios\ic_tab_person.png" />
-    <ImageAsset Include="Assets.xcassets\ios\ic_tab_person%402x.png" />
-    <ImageAsset Include="Assets.xcassets\ios\ic_tab_person%403x.png" />
-    <ImageAsset Include="Assets.xcassets\ios\ic_tab_settings.png" />
-    <ImageAsset Include="Assets.xcassets\ios\ic_tab_settings%402x.png" />
-    <ImageAsset Include="Assets.xcassets\ios\ic_tab_settings%403x.png" />
-    <ImageAsset Include="Assets.xcassets\ios\ic_warning.png" />
-    <ImageAsset Include="Assets.xcassets\ios\ic_warning%402x.png" />
-    <ImageAsset Include="Assets.xcassets\ios\ic_warning%403x.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\Assets.xcassets\.DS_Store">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ios\ic_calendar.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ios\ic_calendar%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ios\ic_calendar%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ios\ic_person.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ios\ic_person%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ios\ic_person%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ios\ic_place.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ios\ic_place%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ios\ic_place%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ios\ic_tab_event_checked.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ios\ic_tab_event_checked%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ios\ic_tab_event_checked%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ios\ic_tab_event_free.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ios\ic_tab_event_free%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ios\ic_tab_event_free%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ios\ic_tab_person.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ios\ic_tab_person%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ios\ic_tab_person%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ios\ic_tab_settings.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ios\ic_tab_settings%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ios\ic_tab_settings%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ios\ic_warning.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ios\ic_warning%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ios\ic_warning%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />

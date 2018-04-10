@@ -1,4 +1,5 @@
 ﻿using System;
+using WorkshopScheduler.Logic;
 using WorkshopScheduler.Models;
 using Xamarin.Forms;
 using WorkshopScheduler.Views;
@@ -18,8 +19,15 @@ namespace WorkshopScheduler
         public App()
         {
             InitializeComponent();
-            //MainPage = new LoginView();
-            MainPage = new MainView();
+            if (TokenManager.IsTokenValid())
+            {
+                MainPage = new LoginView();
+            }
+            else
+            {
+                MainPage = new MainView();
+            }
+            //MainPage = new MainView();
 
         }
 
@@ -53,8 +61,8 @@ namespace WorkshopScheduler
 
         public Unit UserUnit
         {
-            get => Properties.ContainsKey(UserUnitKey) ? (Unit)Properties[UserUnitKey] : Unit.Noone;
-            set => Properties[UserUnitKey] = value;
+            get => Properties.ContainsKey(UserUnitKey) ? (Unit) Enum.Parse(typeof(Unit), Properties[UserUnitKey].ToString()) : Unit.Noone;
+            set => Properties[UserUnitKey] = value.ToString();
         }
 
     }
