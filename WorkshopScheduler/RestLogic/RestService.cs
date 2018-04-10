@@ -32,8 +32,9 @@ namespace WorkshopScheduler.RestLogic
             _client.MaxResponseContentBufferSize = 256000;
         }
 
-        public async Task<List<WorkshopDTO>> GetAllWorkshopsAsync()
+        public async Task<RestResponse<List<WorkshopDTO>>> GetAllWorkshopsAsync()
         {
+            var restResponse = new RestResponse<List<WorkshopDTO>>();
             var request = new HttpRequestMessage()
             {
                 RequestUri = new Uri(RestWorkshopAllUri),
@@ -43,30 +44,29 @@ namespace WorkshopScheduler.RestLogic
             try
             {
                 var response = await _client.SendAsync(request);
-
+                restResponse.ResponseCode = response.StatusCode;
                 if (response.IsSuccessStatusCode)
                 {
                     var responseContent = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<List<WorkshopDTO>>(responseContent);
+                    var workshops = JsonConvert.DeserializeObject<List<WorkshopDTO>>(responseContent);
+                    restResponse.Value = workshops;
                 }
                 else
                 {
                     var content = await response.Content.ReadAsStringAsync();
-                    Debug.WriteLine(@"ERROR {0}", content);
-
-                    return null;
+                    restResponse.ErrorMessage = content;
                 }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(@"ERROR {0}", ex.InnerException.Message);
-                return null;
+                restResponse.ErrorMessage = ex.Message;
             }
+            return restResponse;
         }
 
-
-        public async Task<List<WorkshopDTO>> GetUserWorkshopAsynch()
+        public async Task<RestResponse<List<WorkshopDTO>>> GetUserWorkshopAsynch()
         {
+            var restResponse = new RestResponse<List<WorkshopDTO>>();
             var request = new HttpRequestMessage()
             {
                 RequestUri = new Uri(RestWorkshopMeUri),
@@ -77,31 +77,30 @@ namespace WorkshopScheduler.RestLogic
             try
             {
                 var response = await _client.SendAsync(request);
-
+                restResponse.ResponseCode = response.StatusCode;
                 if (response.IsSuccessStatusCode)
                 {
                     var responseContent = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<List<WorkshopDTO>>(responseContent);
-                }
-                else if (response.StatusCode == HttpStatusCode.NotFound)
-                {
-                    return new List<WorkshopDTO>();
+                    var workshops = JsonConvert.DeserializeObject<List<WorkshopDTO>>(responseContent);
+                    restResponse.Value = workshops;
                 }
                 else
                 {
-                    Debug.WriteLine(@"ERROR {0}", "Unknown error");
-                    return null;
+                    var content = await response.Content.ReadAsStringAsync();
+                    restResponse.ErrorMessage = content;
                 }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(@"ERROR {0}", ex.InnerException.Message);
-                return null;
+                restResponse.ErrorMessage = ex.Message;
             }
+  
+            return restResponse;
         }
 
-        public async Task<Workshop> GetSingleWorkshop(int id)
+        public async Task<RestResponse<Workshop>> GetSingleWorkshop(int id)
         {
+            var restResponse = new RestResponse<Workshop>();
             var request = new HttpRequestMessage()
             {
                 RequestUri = new Uri(RestWorkshops + id.ToString()),
@@ -112,30 +111,29 @@ namespace WorkshopScheduler.RestLogic
             try
             {
                 var response = await _client.SendAsync(request);
-
+                restResponse.ResponseCode = response.StatusCode;
                 if (response.IsSuccessStatusCode)
                 {
                     var responseContent = await response.Content.ReadAsStringAsync();
-                    var workshop = JsonConvert.DeserializeObject<Workshop>(responseContent);
-                    return workshop;
+                    var workshop = JsonConvert.DeserializeObject<Workshop>(responseContent);  
+                    restResponse.Value = workshop;
                 }
                 else
                 {
                     var content = await response.Content.ReadAsStringAsync();
-                    Debug.WriteLine(@"ERROR {0}", content);
-
-                    return null;
+                    restResponse.ErrorMessage = content;
                 }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(@"ERROR {0}", ex.InnerException.Message);
-                return null;
+                restResponse.ErrorMessage = ex.Message;
             }
+            return restResponse;
         }
 
-        public async Task<bool> UpdateUserInfo(UserInfo userInfo)
+        public async Task<RestResponse<Boolean>> UpdateUserInfo(UserInfo userInfo)
         {
+            var restResponse = new RestResponse<Boolean>();
             var request = new HttpRequestMessage()
             {
                 RequestUri = new Uri(RestUserInfo),
@@ -146,25 +144,28 @@ namespace WorkshopScheduler.RestLogic
             try
             {
                 var response = await _client.SendAsync(request);
+                restResponse.ResponseCode = response.StatusCode;
                 if (response.IsSuccessStatusCode)
-                    return true;
+                {
+                    restResponse.Value = true;
+                }
                 else
                 {
                     var content = await response.Content.ReadAsStringAsync();
-                    Debug.WriteLine(@"ERROR {0}", content);
-                    return false;
+                    restResponse.ErrorMessage = content;
                 }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(@"ERROR {0}", ex.InnerException.Message);
-                return false;
+                restResponse.ErrorMessage = ex.Message;
             }
+
+            return restResponse;
         }
 
-        public async Task<UserInfo> GetUserDetail()
+        public async Task<RestResponse<UserInfo>> GetUserDetail()
         {
-            var userInfo = new UserInfo();
+            var restResponse = new RestResponse<UserInfo>();
             var request = new HttpRequestMessage()
             {
                 RequestUri = new Uri(RestUserInfo),
@@ -174,64 +175,65 @@ namespace WorkshopScheduler.RestLogic
             try
             {
                 var response = await _client.SendAsync(request);
+                restResponse.ResponseCode = response.StatusCode;
                 if (response.IsSuccessStatusCode)
                 {
                     var responseContet = await response.Content.ReadAsStringAsync();
-                    var app = Application.Current as App;
-                    return JsonConvert.DeserializeObject<UserInfo>(responseContet);
+                    restResponse.Value = JsonConvert.DeserializeObject<UserInfo>(responseContet);
                 }
                 else
                 {
-                    var content = await response.Content.ReadAsStringAsync();
-                    Debug.WriteLine(@"ERROR {0}", content);
-                    return null;
+                    restResponse.ErrorMessage = await response.Content.ReadAsStringAsync();
                 }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(@"ERROR {0}", ex.InnerException.Message);
-                return null;
+                restResponse.ErrorMessage = ex.Message;
             }
+
+            return restResponse;
         }
 
-        public async Task<TokenInfo> AuthenticateUser(string login, string password)
+        public async Task<RestResponse<TokenInfo>> AuthenticateUser(string login, string password)
         {
-            var tokenInfo = new TokenInfo();
-            var uri = new Uri(string.Format(RestAuthUri, string.Empty));
-            var requestContent = new FormUrlEncodedContent(new[]
+            var restResponse = new RestResponse<TokenInfo>();
+            var request = new HttpRequestMessage()
             {
-                new KeyValuePair<string, string>("UserName", login),
-                new KeyValuePair<string, string>("Password", password),
-                new KeyValuePair<string, string>("grant_type", "password"),
-            });
+                RequestUri = new Uri(RestAuthUri),
+                Method = HttpMethod.Post,
+                Content = new FormUrlEncodedContent(new[]
+                {
+                    new KeyValuePair<string, string>("UserName", login),
+                    new KeyValuePair<string, string>("Password", password),
+                    new KeyValuePair<string, string>("grant_type", "password"),
+                })
+            };
+
             try
             {
-                Debug.WriteLine(@"ERROR {0}", "Before response");
-                var response = await _client.PostAsync(uri, requestContent);
-                Debug.WriteLine(@"ERROR {0}", "After response");
+                var response = await _client.SendAsync(request);
+                restResponse.ResponseCode = response.StatusCode;
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
-                    tokenInfo = JsonConvert.DeserializeObject<TokenInfo>(content);
-                    return tokenInfo;
+                    restResponse.Value = JsonConvert.DeserializeObject<TokenInfo>(content);
                 }
                 else
                 {
-                    var content = await response.Content.ReadAsStringAsync();
-                    Debug.WriteLine(@"ERROR {0}", content);
-                    return null;
+                    restResponse.ErrorMessage = await response.Content.ReadAsStringAsync();
                 }
             }
-            catch (HttpRequestException ex)
+            catch (Exception ex)
             {
-                Debug.WriteLine(@"ERROR {0}", ex.InnerException.Message);
-                return null;
+                restResponse.ErrorMessage = ex.Message;
             }
+
+            return restResponse;
         }
 
-        public async Task<TokenInfo> CreateUser(string login, string password)
+        public async Task<RestResponse<TokenInfo>> CreateUser(string login, string password)
         {
-            var userInfo = new UserInfo();
+            var restResponse = new RestResponse<TokenInfo>();
             var request = new HttpRequestMessage()
             {
                 RequestUri = new Uri(RestAddUser),
@@ -245,23 +247,54 @@ namespace WorkshopScheduler.RestLogic
             try
             {
                 var response = await _client.SendAsync(request);
+                restResponse.ResponseCode = response.StatusCode;
                 if (response.IsSuccessStatusCode)
                 {
                     var responseContet = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<TokenInfo>(responseContet);
+                    restResponse.Value = JsonConvert.DeserializeObject<TokenInfo>(responseContet);
                 }
                 else
                 {
-                    var content = await response.Content.ReadAsStringAsync();
-                    Debug.WriteLine(@"ERROR {0}", content);
-                    return null;
+                    restResponse.ErrorMessage = await response.Content.ReadAsStringAsync();
                 }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(@"ERROR {0}", ex.InnerException.Message);
-                return null;
+                restResponse.ErrorMessage = ex.Message;
             }
+
+            return restResponse;
+        }
+
+        public async Task<RestResponse<bool>> EnrollUser(int workshopId)
+        {
+            var restResponse = new RestResponse<Boolean>();
+            var request = new HttpRequestMessage()
+            {
+                RequestUri = new Uri(RestWorkshops + workshopId),
+                Method = HttpMethod.Post,
+            };
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenManager.GetToken());
+            try
+            {
+                var response = await _client.SendAsync(request);
+                restResponse.ResponseCode = response.StatusCode;
+                if (response.IsSuccessStatusCode)
+                {
+                    restResponse.Value = true;
+                }
+                else
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    restResponse.ErrorMessage = content;
+                }
+            }
+            catch (Exception ex)
+            {
+                restResponse.ErrorMessage = ex.Message;
+            }
+
+            return restResponse;
         }
     }
 }

@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Net;
 using Xamarin.Forms;
 using WorkshopScheduler.Models;
 using WorkshopScheduler.Logic;
 using WorkshopScheduler.RestLogic;
+using WorkshopScheduler.Views.UserAccountViews;
 
 
 namespace WorkshopScheduler.Views
@@ -91,7 +93,26 @@ namespace WorkshopScheduler.Views
             base.OnAppearing();
             if (workshopsList == null)
             {
-                workshopsList = new ObservableCollection<WorkshopDTO>(await _restService.GetAllWorkshopsAsync());
+                var workshopsResponse = await _restService.GetAllWorkshopsAsync();
+
+                if (workshopsResponse.ResponseCode == null)
+                {
+                    await DisplayAlert("Error", workshopsResponse.ErrorMessage + "\nMake sure that you have internet connection", "Ok");
+                    WorkshopsListView.ItemsSource = new ObservableCollection<WorkshopDTO>();
+                }
+
+                if (workshopsResponse.ResponseCode == HttpStatusCode.Unauthorized)
+                {
+                    //Check token validation additionaly
+                    await DisplayAlert("Error", "Your session has expired. You will be redirected to log in", "Ok");
+                    WorkshopsListView.ItemsSource = new ObservableCollection<WorkshopDTO>();
+                    Application.Current.MainPage = new LoginView();
+                }
+
+                if (workshopsResponse.ResponseCode == HttpStatusCode.OK)
+                {
+                    workshopsList = new ObservableCollection<WorkshopDTO>(workshopsResponse.Value);
+                }
                 WorkshopsListView.ItemsSource = workshopsList;
             }
             

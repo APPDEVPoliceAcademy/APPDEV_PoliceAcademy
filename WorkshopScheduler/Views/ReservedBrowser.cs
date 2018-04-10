@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Net;
 using WorkshopScheduler;
 using WorkshopScheduler.Logic;
 using Xamarin.Forms;
 using WorkshopScheduler.Models;
 using WorkshopScheduler.RestLogic;
 using WorkshopScheduler.Views;
+using WorkshopScheduler.Views.UserAccountViews;
 
 namespace WorkshopScheduler.Views
 {
@@ -89,7 +91,27 @@ namespace WorkshopScheduler.Views
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            reservedList = new ObservableCollection<WorkshopDTO>(await _restService.GetUserWorkshopAsynch());
+
+            var workshopsResponse = await _restService.GetUserWorkshopAsynch();
+
+            if (workshopsResponse.ResponseCode == null)
+            {
+                await DisplayAlert("Error", workshopsResponse.ErrorMessage + "\nMake sure that you have internet connection", "Ok");
+                WorkshopsListView.ItemsSource = new ObservableCollection<WorkshopDTO>();
+            }
+
+            if (workshopsResponse.ResponseCode == HttpStatusCode.Unauthorized)
+            {
+                //Check token validation additionaly
+                await DisplayAlert("Error", "Your session has expired. You will be redirected to log in", "Ok");
+                WorkshopsListView.ItemsSource = new ObservableCollection<WorkshopDTO>();
+                Application.Current.MainPage = new LoginView();
+            }
+
+            if (workshopsResponse.ResponseCode == HttpStatusCode.OK)
+            {
+                reservedList = new ObservableCollection<WorkshopDTO>(workshopsResponse.Value);
+            }
             WorkshopsListView.ItemsSource = reservedList;
 
         }

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using WorkshopScheduler.Logic;
 using WorkshopScheduler.RestLogic;
@@ -20,6 +22,8 @@ namespace WorkshopScheduler.Views.UserAccountViews
 
 	    private async void RegisterButton_OnClicked(object sender, EventArgs e)
 	    {
+
+
 	        if (FirstPassword.Text == null || RepeatPassword.Text == null || Login.Text == null)
 	        {
 	            return;
@@ -31,6 +35,12 @@ namespace WorkshopScheduler.Views.UserAccountViews
 	            return;
 	        }
 
+            //Check if login is only letters and numbers
+            if (!Regex.IsMatch(Login.Text, @"^[\p{L}\p{N}]+$"))
+            {
+                await DisplayAlert("Error", "Login can contain only letters and numbers", "Ok");
+	            return;
+	        }
 
 	        if (FirstPassword.Text != RepeatPassword.Text)
 	        {
@@ -44,22 +54,28 @@ namespace WorkshopScheduler.Views.UserAccountViews
 	            return;
 	        }
 
-            // Validate that user account with this login does not exist
 
             IRestService restService = new RestService();
 
-	        var tokenInfo = await restService.CreateUser(Login.Text, FirstPassword.Text);
-	        if (tokenInfo == null)
+	        var restResponse = await restService.CreateUser(Login.Text, FirstPassword.Text);
+
+	        if (restResponse.ResponseCode == null)
 	        {
-	            await DisplayAlert("Error", "This login was already taken", "Goed");
+	            await DisplayAlert("Error", restResponse.ErrorMessage + "\nMake sure that you have internet connection", "Ok");
 	            return;
 	        }
 
-	        TokenManager.SaveToken(tokenInfo.Access_token);
+	        if (restResponse.ResponseCode == HttpStatusCode.BadRequest)
+	        {
+	            await DisplayAlert("Error", restResponse.ErrorMessage, "Ok");
+	        }
 
+	        if (restResponse.ResponseCode == HttpStatusCode.OK)
+	        {
+	            TokenManager.SaveToken(restResponse.Value);
+	            await Navigation.PushModalAsync(new ProfileDetailPage());
+            }
 
-
-	        Navigation.PushModalAsync(new ProfileDetailPage());
 	    }
 	}
 }
