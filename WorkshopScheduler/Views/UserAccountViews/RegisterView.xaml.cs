@@ -57,7 +57,7 @@ namespace WorkshopScheduler.Views.UserAccountViews
 	        }
 
 
-         //   IRestService restService = new RestService();
+            IRestService restService = new RestService();
 
 	        var restResponse = await restService.CreateUser(Login.Text, FirstPassword.Text);
 
