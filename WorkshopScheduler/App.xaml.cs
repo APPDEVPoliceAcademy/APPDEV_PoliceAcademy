@@ -12,8 +12,10 @@ namespace WorkshopScheduler
         private const string UserNameKey = "UserName";
         private const string UserSurnameKey = "UserSurname";
         private const string UserUnitKey = "UserUnit";
+        private const string UserBirthdayKey = "UserBirthday";
 
         public static string AppName => "WorkshopApp";
+
 
 
         public App()
@@ -63,6 +65,13 @@ namespace WorkshopScheduler
         {
             get => Properties.ContainsKey(UserUnitKey) ? (Unit) Enum.Parse(typeof(Unit), Properties[UserUnitKey].ToString()) : Unit.Nord;
             set => Properties[UserUnitKey] = value.ToString();
+        }
+
+        public DateTime UserBirthday
+        {
+            get => Properties.ContainsKey(UserBirthdayKey) ? (DateTime)Properties[UserBirthdayKey] : DateTime.Now;
+            set => Properties[UserBirthdayKey] = value;
+
         }
 
     }

@@ -50,7 +50,7 @@ namespace WorkshopScheduler.Logic
             if (account != null)
             {
                 var expiriationTime = JsonConvert.DeserializeObject<DateTime>(account.Properties["expires"]);
-                if (expiriationTime.CompareTo(DateTime.Now) < 0) return true;
+                if (expiriationTime.CompareTo(DateTime.Now) > 0) return true;
                 
             }
 

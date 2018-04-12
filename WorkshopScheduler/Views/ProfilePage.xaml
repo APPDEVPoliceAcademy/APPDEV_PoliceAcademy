@@ -1,24 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ContentPage  BackgroundColor="{StaticResource backgroundColor}" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="WorkshopScheduler.Views.ProfilePage">
-    <TableView Intent="Form"  BackgroundColor="{StaticResource backgroundColor}">
+
+<ContentPage BackgroundColor="{StaticResource backgroundColor}" xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="WorkshopScheduler.Views.ProfilePage">
+
+
+    <TableView Intent="Form" BackgroundColor="{StaticResource backgroundColor}">
+
         <TableRoot>
             <TableSection Title="Personal Data">
                 <ViewCell>
                     <StackLayout Orientation="Horizontal" Padding="20, 0, 20, 0">
                         <Label Text="Name" VerticalOptions="Center" HorizontalOptions="Start" WidthRequest="80" />
-                        <Entry x:Name="NameCell" Text="{Binding UserName}" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
+                        <Entry x:Name="NameCell"  VerticalOptions="Center"
+                               HorizontalOptions="FillAndExpand" />
                     </StackLayout>
                 </ViewCell>
                 <ViewCell>
                     <StackLayout Orientation="Horizontal" Padding="20, 0, 20, 0">
                         <Label Text="Surname" VerticalOptions="Center" HorizontalOptions="Start" WidthRequest="80" />
-                        <Entry x:Name="SurnameCell" VerticalOptions="Center" Text="{Binding UserSurname}" HorizontalOptions="FillAndExpand" />
+                        <Entry x:Name="SurnameCell" VerticalOptions="Center" 
+                               HorizontalOptions="FillAndExpand" />
                     </StackLayout>
                 </ViewCell>
                 <ViewCell>
                     <StackLayout Orientation="Horizontal" Padding="20, 0, 20, 0">
                         <Label Text="Birthday" VerticalOptions="Center" HorizontalOptions="Start" WidthRequest="80" />
-                        <DatePicker x:Name="BirthdayCell" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
+                        <DatePicker x:Name="BirthdayCell" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/> 
                     </StackLayout>
                 </ViewCell>
             </TableSection>
@@ -31,15 +38,15 @@
                 </ViewCell>
             </TableSection>
 
-                <TableSection >
+            <TableSection>
                 <ViewCell>
                     <StackLayout Orientation="Horizontal" Padding="20, 0, 20, 0">
-                        <Button TextColor="{StaticResource buttonText}" Text="Done" Clicked="DoneButton_OnClicked"/>
-                        
+                        <Button TextColor="{StaticResource buttonText}" Text="Done" Clicked="DoneButton_OnClicked" />
                     </StackLayout>
                 </ViewCell>
             </TableSection>
-            
+
         </TableRoot>
     </TableView>
+
 </ContentPage>
