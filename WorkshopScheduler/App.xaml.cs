@@ -17,8 +17,6 @@ namespace WorkshopScheduler
         public static string AppName => "WorkshopApp";
 
 
-        public static string AppName => "WorkshopApp";
-
 
         public App()
         {
