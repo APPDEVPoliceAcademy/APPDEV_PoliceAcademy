@@ -17,10 +17,12 @@ namespace WorkshopScheduler
         public static string AppName => "WorkshopApp";
 
 
+        public static string AppName => "WorkshopApp";
+
+
         public App()
         {
             InitializeComponent();
-            //TokenManager.DeleteToken();
             if (TokenManager.IsTokenValid())
             {
                 MainPage = new MainView();
@@ -71,6 +73,7 @@ namespace WorkshopScheduler
         {
             get => Properties.ContainsKey(UserBirthdayKey) ? (DateTime)Properties[UserBirthdayKey] : DateTime.Now;
             set => Properties[UserBirthdayKey] = value;
+
         }
 
     }

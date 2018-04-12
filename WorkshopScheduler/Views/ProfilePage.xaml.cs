@@ -64,8 +64,6 @@ namespace WorkshopScheduler.Views
             }
 
 
-            
-
         }
     }
 }

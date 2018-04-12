@@ -5,6 +5,7 @@
 
 
     <TableView Intent="Form" BackgroundColor="{StaticResource backgroundColor}">
+
         <TableRoot>
             <TableSection Title="Personal Data">
                 <ViewCell>

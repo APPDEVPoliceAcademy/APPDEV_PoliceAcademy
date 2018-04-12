@@ -162,6 +162,7 @@ namespace WorkshopScheduler.Views
                 workshopDto.IsEnrolled = false;
                 UserDisenrolled?.Invoke(this, workshopDto);
             };
+
             await Navigation.PushModalAsync(workshopDetailpage);
             WorkshopsListView.SelectedItem = null;
         }

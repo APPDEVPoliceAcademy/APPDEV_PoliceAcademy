@@ -174,6 +174,7 @@ namespace WorkshopScheduler.Views
             reservedList?.Remove(_local);
            
         }
+
     }
 
 }
