@@ -161,9 +161,18 @@ namespace WorkshopScheduler.Views
 
 
         //Handler for event send from WorkshopBrowser, when user enrolls on given workshop
-        public void OnWorkshopEnrolled(object sender, WorkshopDTO workshopDto)
+        public void OnUserEnrolled(object sender, WorkshopDTO workshopDto)
         {
             reservedList?.Add(workshopDto);
+        }
+
+        //Handler for event send from WorkshopBrowser, when user disenrolls from given workshop
+        public void OnUserDisenrolled(object sender, WorkshopDTO workshopDto)
+        {
+            var _local = reservedList?.FirstOrDefault(dto => dto.Id == workshopDto.Id);
+
+            reservedList?.Remove(_local);
+           
         }
     }
 

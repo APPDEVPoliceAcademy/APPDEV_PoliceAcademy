@@ -19,6 +19,7 @@ namespace WorkshopScheduler
         public App()
         {
             InitializeComponent();
+            TokenManager.DeleteToken();
             if (TokenManager.IsTokenValid())
             {
                 MainPage = new MainView();

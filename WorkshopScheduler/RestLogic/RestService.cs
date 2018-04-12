@@ -18,14 +18,20 @@ namespace WorkshopScheduler.RestLogic
 {
     public class RestService : IRestService
     {
-        private const string RestUserInfo = "http://10.0.2.2:58165/api/user/me";
-        private const string RestAuthUri = "http://10.0.2.2:58165/token";
-        private const string RestWorkshopAllUri = "http://10.0.2.2:58165/api/workshops/all";
-        private const string RestWorkshopMeUri = "http://10.0.2.2:58165/api/workshops/me";
-        private const string RestWorkshops = "http://10.0.2.2:58165/api/workshops/";
-        private const string RestAddUser = "http://10.0.2.2:58165/api/user/add";
-        private const string RestEnrollUser = "http://10.0.2.2:58165/api/workshops/enroll/";
-        private const string RestDisenrollser = "http://10.0.2.2:58165/api/workshops/disenroll/";
+#if DEBUG
+        private const string RestUri = "http://195.64.66.207:58165/";
+#else
+        private const string RestUri = "http://10.0.2.2:58165/";
+#endif
+
+        private const string RestUserInfo = "api/user/me";
+        private const string RestAuthUri = "token";
+        private const string RestWorkshopAllUri = "api/workshops/all";
+        private const string RestWorkshops = "api/workshops/";
+        private const string RestWorkshopMeUri = "api/workshops/me";
+        private const string RestAddUser = "api/user/add";
+        private const string RestEnrollUser = "api/workshops/enroll/";
+        private const string RestDisenrollser = "api/workshops/disenroll/";
 
         private HttpClient _client;
 
@@ -40,7 +46,7 @@ namespace WorkshopScheduler.RestLogic
             var restResponse = new RestResponse<List<WorkshopDTO>>();
             var request = new HttpRequestMessage()
             {
-                RequestUri = new Uri(RestWorkshopAllUri),
+                RequestUri = new Uri(RestUri + RestWorkshopAllUri),
                 Method = HttpMethod.Get
             };
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenManager.GetToken());
@@ -72,7 +78,7 @@ namespace WorkshopScheduler.RestLogic
             var restResponse = new RestResponse<List<WorkshopDTO>>();
             var request = new HttpRequestMessage()
             {
-                RequestUri = new Uri(RestWorkshopMeUri),
+                RequestUri = new Uri(RestUri + RestWorkshopMeUri),
                 Method = HttpMethod.Get
             };
 
@@ -106,7 +112,7 @@ namespace WorkshopScheduler.RestLogic
             var restResponse = new RestResponse<Workshop>();
             var request = new HttpRequestMessage()
             {
-                RequestUri = new Uri(RestWorkshops + id.ToString()),
+                RequestUri = new Uri(RestUri + RestWorkshops + id),
                 Method = HttpMethod.Get
             };
 
@@ -139,7 +145,7 @@ namespace WorkshopScheduler.RestLogic
             var restResponse = new RestResponse<Boolean>();
             var request = new HttpRequestMessage()
             {
-                RequestUri = new Uri(RestUserInfo),
+                RequestUri = new Uri(RestUri + RestUserInfo),
                 Method = HttpMethod.Post,
                 Content = new StringContent(JsonConvert.SerializeObject(userInfo))
             };
@@ -171,7 +177,7 @@ namespace WorkshopScheduler.RestLogic
             var restResponse = new RestResponse<UserInfo>();
             var request = new HttpRequestMessage()
             {
-                RequestUri = new Uri(RestUserInfo),
+                RequestUri = new Uri(RestUri + RestUserInfo),
                 Method = HttpMethod.Get
             };
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenManager.GetToken());
@@ -202,7 +208,7 @@ namespace WorkshopScheduler.RestLogic
             var restResponse = new RestResponse<TokenInfo>();
             var request = new HttpRequestMessage()
             {
-                RequestUri = new Uri(RestAuthUri),
+                RequestUri = new Uri(RestUri + RestAuthUri),
                 Method = HttpMethod.Post,
                 Content = new FormUrlEncodedContent(new[]
                 {
@@ -239,7 +245,7 @@ namespace WorkshopScheduler.RestLogic
             var restResponse = new RestResponse<TokenInfo>();
             var request = new HttpRequestMessage()
             {
-                RequestUri = new Uri(RestAddUser),
+                RequestUri = new Uri(RestUri + RestAddUser),
                 Method = HttpMethod.Post,
                 Content = new FormUrlEncodedContent(new[]
                 {
@@ -274,7 +280,7 @@ namespace WorkshopScheduler.RestLogic
             var restResponse = new RestResponse<Boolean>();
             var request = new HttpRequestMessage()
             {
-                RequestUri = new Uri(RestEnrollUser + workshopId),
+                RequestUri = new Uri(RestUri + RestEnrollUser + workshopId),
                 Method = HttpMethod.Post,
             };
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenManager.GetToken());
@@ -305,7 +311,7 @@ namespace WorkshopScheduler.RestLogic
             var restResponse = new RestResponse<Boolean>();
             var request = new HttpRequestMessage()
             {
-                RequestUri = new Uri(RestDisenrollser + workshopId),
+                RequestUri = new Uri(RestUri + RestDisenrollser + workshopId),
                 Method = HttpMethod.Delete,
             };
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenManager.GetToken());
