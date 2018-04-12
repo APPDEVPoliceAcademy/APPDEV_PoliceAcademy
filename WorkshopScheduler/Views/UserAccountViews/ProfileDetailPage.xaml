@@ -5,8 +5,8 @@
     <TableView Intent="Form">
         <TableRoot>
             <TableSection Title="Information">
-                <EntryCell x:Name="NameCell" Label="Name" Text="{Binding UserName}"></EntryCell>
-                <EntryCell x:Name="SurnameCell"  Label="Surname" Text="{Binding UserSurname}"></EntryCell>
+                <EntryCell x:Name="NameCell" Label="Name"/> 
+                <EntryCell x:Name="SurnameCell"  Label="Surname" />
                 <ViewCell>
                     <StackLayout Orientation="Horizontal" Padding="20, 0, 20, 0">
                         <Label Text="Unit" VerticalOptions="Center" HorizontalOptions="StartAndExpand"></Label>

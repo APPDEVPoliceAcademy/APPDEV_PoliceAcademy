@@ -53,6 +53,7 @@ namespace WorkshopScheduler.Views.UserAccountViews
 	            app.UserName = userInfo.Value.Name;
 	            app.UserSurname = userInfo.Value.Surname;
 	            app.UserUnit = userInfo.Value.Unit;
+	            app.UserBirthday = userInfo.Value.Birthday;
 
 	            Application.Current.MainPage = new MainView();
             }

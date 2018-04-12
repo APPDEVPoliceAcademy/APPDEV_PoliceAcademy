@@ -147,7 +147,7 @@ namespace WorkshopScheduler.RestLogic
             {
                 RequestUri = new Uri(RestUri + RestUserInfo),
                 Method = HttpMethod.Post,
-                Content = new StringContent(JsonConvert.SerializeObject(userInfo))
+                Content = new StringContent(JsonConvert.SerializeObject(userInfo), Encoding.UTF8, "application/json")
             };
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenManager.GetToken());
             try

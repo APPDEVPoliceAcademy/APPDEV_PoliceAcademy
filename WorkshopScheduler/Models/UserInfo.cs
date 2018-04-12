@@ -6,6 +6,7 @@ namespace WorkshopScheduler.Models
     {
         public String Name { get; set; }
         public String Surname { get; set; }
+        public DateTime Birthday { get; set; }
         public Unit Unit { get; set; }
     }
 }
