@@ -22,5 +22,7 @@ namespace WorkshopScheduler.RestLogic
         Task<RestResponse<TokenInfo>> CreateUser(string login, string password);
 
         Task<RestResponse<Boolean>> EnrollUser(int workshopId);
+
+        Task<RestResponse<Boolean>> DisenrollUser(int workshopId);
     }
 }

@@ -7,7 +7,8 @@ namespace WorkshopScheduler.Views
         public MainView()
         {
             InitializeComponent();
-
+            WorkshopBrowser.WorkshopEnrolled += ReservedBrowser.OnWorkshopEnrolled;
+            ReservedBrowser.UserDisenrolled += WorkshopBrowser.OnWorkshopDisenrolled;
 
         }
     }

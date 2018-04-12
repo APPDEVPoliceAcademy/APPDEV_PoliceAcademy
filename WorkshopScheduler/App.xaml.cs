@@ -21,11 +21,11 @@ namespace WorkshopScheduler
             InitializeComponent();
             if (TokenManager.IsTokenValid())
             {
-                MainPage = new LoginView();
+                MainPage = new MainView();
             }
             else
             {
-                MainPage = new MainView();
+                MainPage = new LoginView();
             }
             //MainPage = new MainView();
 
@@ -61,7 +61,7 @@ namespace WorkshopScheduler
 
         public Unit UserUnit
         {
-            get => Properties.ContainsKey(UserUnitKey) ? (Unit) Enum.Parse(typeof(Unit), Properties[UserUnitKey].ToString()) : Unit.Noone;
+            get => Properties.ContainsKey(UserUnitKey) ? (Unit) Enum.Parse(typeof(Unit), Properties[UserUnitKey].ToString()) : Unit.Nord;
             set => Properties[UserUnitKey] = value.ToString();
         }
 

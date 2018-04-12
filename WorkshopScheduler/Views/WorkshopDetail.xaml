@@ -40,7 +40,11 @@
                 </StackLayout>
             </ContentView>
             <ContentView BackgroundColor="#ebebeb" Grid.Row="2">
-                <Button x:Name="ApplyButton" Text="Apply" BackgroundColor="Red" TextColor="White"  Clicked="ApplyButton_OnClicked"/>
+                <StackLayout>
+                    <Button x:Name="ApplyButton" Text="Apply" BackgroundColor="Red" TextColor="White"  Clicked="ApplyButton_OnClicked" IsVisible="{Binding IsNotEnrolled}"/>
+                    <Button x:Name="DisenrollButton" Text="Disenroll" BackgroundColor="Red" TextColor="White" Clicked="DisenrollButton_OnClicked" IsVisible="{Binding IsEnrolled}"/>
+                </StackLayout>
+                
             </ContentView>
         </Grid>
     </ContentPage.Content>

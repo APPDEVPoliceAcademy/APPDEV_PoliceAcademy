@@ -25,6 +25,8 @@
                                     <Label Text="{Binding Date, StringFormat='{0:D}'}" FontAttributes="Bold" />
                                     <Label Text="{Binding Place}" TextColor="Gray" />
                                 </StackLayout>
+                                <Label Text="Enrolled" IsVisible="{Binding IsEnrolled}"></Label>
+
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

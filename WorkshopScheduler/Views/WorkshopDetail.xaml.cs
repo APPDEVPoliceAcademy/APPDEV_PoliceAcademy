@@ -16,6 +16,8 @@ namespace WorkshopScheduler.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class WorkshopDetail : ContentPage
     {
+        public event EventHandler<Workshop> UserEnrolled;
+        public event EventHandler<Workshop> UserDisenrolled;
         private IRestService _restService = new RestService();
         private int _currentWorkshopID;
 
@@ -90,6 +92,32 @@ namespace WorkshopScheduler.Views
 
             if (restResponse.ResponseCode == HttpStatusCode.OK)
             {
+                UserEnrolled?.Invoke(this, (BindingContext) as Workshop);
+                await Navigation.PopModalAsync();
+            }
+        }
+
+        private async void DisenrollButton_OnClicked(object sender, EventArgs e)
+        {
+            var restResponse = await _restService.DisenrollUser((BindingContext as Workshop).Id);
+
+            if (restResponse.ResponseCode == null)
+            {
+                await DisplayAlert("Error",
+                    restResponse.ErrorMessage + "\nMake sure that you have internet connection", "Ok");
+                return;
+            }
+
+            if (restResponse.ResponseCode == HttpStatusCode.Unauthorized)
+            {
+                //Check token validation additionaly
+                await DisplayAlert("Error", "Your session has expired. You will be redirected to log in", "Ok");
+                Application.Current.MainPage = new LoginView();
+            }
+
+            if (restResponse.ResponseCode == HttpStatusCode.OK)
+            {
+                UserDisenrolled?.Invoke(this, (BindingContext) as Workshop);
                 await Navigation.PopModalAsync();
             }
         }
