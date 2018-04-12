@@ -13,7 +13,7 @@
         <StackLayout>
             <SearchBar x:Name="SearchWorkshop" Placeholder="Search workshops"   BackgroundColor="{StaticResource backgroundColor}" PropertyChanged="SearchWorkshop_OnPropertyChanged" />
              <Button x:Name="sortingsButton" Text="sorting" Clicked="SortingsButton_OnClicked" BackgroundColor="{StaticResource backgroundColor}"/>
-            <ListView x:Name="WorkshopsListView" HasUnevenRows="true" BackgroundColor="{StaticResource backgroundColor}">
+            <ListView x:Name="WorkshopsListView" HasUnevenRows="true" ItemSelected="WorkshopsListView_OnItemSelected" BackgroundColor="{StaticResource backgroundColor}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

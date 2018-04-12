@@ -21,6 +21,7 @@ namespace WorkshopScheduler.Views
         ObservableCollection<WorkshopDTO> displayList;
         FiltersModalView filtersView;
         private RestService _restService;
+        public event EventHandler<WorkshopDTO> WorkshopEnrolled;
 
 
         public WorkshopBrowser()
@@ -75,7 +76,7 @@ namespace WorkshopScheduler.Views
                 WorkshopsListView.ItemsSource = displayList;
             };
 
-            filtersView.PlaceFilterChanged += (o, place) =>
+            filtersView.UnitFilterChanged += (o, place) =>
             {
                 displayList = filters.FilterByPlace(workshopsList, place.ToString());
                 WorkshopsListView.ItemsSource = displayList;
@@ -147,8 +148,23 @@ namespace WorkshopScheduler.Views
         {
             if (e.SelectedItem == null) return;
             var currentItem = e.SelectedItem as WorkshopDTO;
-            await Navigation.PushModalAsync(new WorkshopDetail(currentItem.Id));
+            var workshopDetailpage = new WorkshopDetail(currentItem.Id);
+            workshopDetailpage.UserEnrolled += (o, workshop) =>
+                {
+                    var workshopDto = workshopsList.FirstOrDefault(dto => dto.Id == workshop.Id);
+                    workshopDto.IsEnrolled = true;
+                    WorkshopEnrolled.Invoke(this, workshopDto);
+                };
+            await Navigation.PushModalAsync(workshopDetailpage);
             WorkshopsListView.SelectedItem = null;
         }
+
+        //Handler For Disenrolling
+        public void OnWorkshopDisenrolled(object sender, WorkshopDTO workshopDto)
+        {
+            var workshop = workshopsList.FirstOrDefault(dto => dto.Id == workshopDto.Id);
+            workshop.IsEnrolled = false;
+        }
+
     }
 }

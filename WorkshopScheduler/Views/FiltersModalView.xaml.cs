@@ -12,11 +12,11 @@ namespace WorkshopScheduler.Views
         public event EventHandler<SortingsEnum> SortingChanged;
         public event EventHandler<bool> WeeksFilterChanged;
         public event EventHandler<DateTime[]> DatesFilterChanged;
-        public event EventHandler<PlacesEnum> PlaceFilterChanged;
+        public event EventHandler<Unit> UnitFilterChanged;
         public event EventHandler ResetSettings;
 
         List<SortingsEnum> sourceSortings = Enum.GetValues(typeof(SortingsEnum)).Cast<SortingsEnum>().ToList();
-        List<PlacesEnum> placesSortings = Enum.GetValues(typeof(PlacesEnum)).Cast<PlacesEnum>().ToList();
+        List<Unit> placesSortings = Enum.GetValues(typeof(Unit)).Cast<Unit>().ToList();
 
         public FiltersModalView()
         {

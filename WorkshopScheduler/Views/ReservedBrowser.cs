@@ -21,6 +21,8 @@ namespace WorkshopScheduler.Views
         FiltersModalView filtersView;
         private RestService _restService;
 
+        public event EventHandler<WorkshopDTO> UserDisenrolled;
+
 
         public ReservedBrowser()
         {
@@ -75,7 +77,7 @@ namespace WorkshopScheduler.Views
                 WorkshopsListView.ItemsSource = displayList;
             };
 
-            filtersView.PlaceFilterChanged += (o, place) =>
+            filtersView.UnitFilterChanged += (o, place) =>
             {
                 displayList = filters.FilterByPlace(reservedList, place.ToString());
                 WorkshopsListView.ItemsSource = displayList;
@@ -92,27 +94,31 @@ namespace WorkshopScheduler.Views
         {
             base.OnAppearing();
 
-            var workshopsResponse = await _restService.GetUserWorkshopAsynch();
-
-            if (workshopsResponse.ResponseCode == null)
+            if (reservedList == null)
             {
-                await DisplayAlert("Error", workshopsResponse.ErrorMessage + "\nMake sure that you have internet connection", "Ok");
-                WorkshopsListView.ItemsSource = new ObservableCollection<WorkshopDTO>();
-            }
+                var workshopsResponse = await _restService.GetUserWorkshopAsynch();
 
-            if (workshopsResponse.ResponseCode == HttpStatusCode.Unauthorized)
-            {
-                //Check token validation additionaly
-                await DisplayAlert("Error", "Your session has expired. You will be redirected to log in", "Ok");
-                WorkshopsListView.ItemsSource = new ObservableCollection<WorkshopDTO>();
-                Application.Current.MainPage = new LoginView();
-            }
+                if (workshopsResponse.ResponseCode == null)
+                {
+                    await DisplayAlert("Error", workshopsResponse.ErrorMessage + "\nMake sure that you have internet connection", "Ok");
+                    WorkshopsListView.ItemsSource = new ObservableCollection<WorkshopDTO>();
+                }
 
-            if (workshopsResponse.ResponseCode == HttpStatusCode.OK)
-            {
-                reservedList = new ObservableCollection<WorkshopDTO>(workshopsResponse.Value);
+                if (workshopsResponse.ResponseCode == HttpStatusCode.Unauthorized)
+                {
+                    //Check token validation additionaly
+                    await DisplayAlert("Error", "Your session has expired. You will be redirected to log in", "Ok");
+                    WorkshopsListView.ItemsSource = new ObservableCollection<WorkshopDTO>();
+                    Application.Current.MainPage = new LoginView();
+                }
+
+                if (workshopsResponse.ResponseCode == HttpStatusCode.OK)
+                {
+                    reservedList = new ObservableCollection<WorkshopDTO>(workshopsResponse.Value);
+                }
+                WorkshopsListView.ItemsSource = reservedList;
             }
-            WorkshopsListView.ItemsSource = reservedList;
+            
 
         }
 
@@ -130,12 +136,34 @@ namespace WorkshopScheduler.Views
             }
         }
 
+        private async void WorkshopsListView_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            if (e.SelectedItem == null) return;
+            var currentItem = e.SelectedItem as WorkshopDTO;
+            var workshopDetailpage = new WorkshopDetail(currentItem.Id);
+            workshopDetailpage.UserDisenrolled += (o, workshop) =>
+            {
+                var workshopDto = reservedList.FirstOrDefault(dto => dto.Id == workshop.Id);
+                reservedList.Remove(workshopDto);
+                UserDisenrolled.Invoke(this, workshopDto);
+            };
+            await Navigation.PushModalAsync(workshopDetailpage);
+            WorkshopsListView.SelectedItem = null;
+        }
+
         async void SortingsButton_OnClicked(object sender, System.EventArgs e)
         {
             // DisplayAlert("refreshed",sortingChosen.ToString(),"ok");
 
             await Navigation.PushModalAsync(filtersView);
 
+        }
+
+
+        //Handler for event send from WorkshopBrowser, when user enrolls on given workshop
+        public void OnWorkshopEnrolled(object sender, WorkshopDTO workshopDto)
+        {
+            reservedList?.Add(workshopDto);
         }
     }
 

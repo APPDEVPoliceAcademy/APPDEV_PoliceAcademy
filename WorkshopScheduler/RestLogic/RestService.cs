@@ -24,6 +24,9 @@ namespace WorkshopScheduler.RestLogic
         private const string RestWorkshopMeUri = "http://10.0.2.2:58165/api/workshops/me";
         private const string RestWorkshops = "http://10.0.2.2:58165/api/workshops/";
         private const string RestAddUser = "http://10.0.2.2:58165/api/user/add";
+        private const string RestEnrollUser = "http://10.0.2.2:58165/api/workshops/enroll/";
+        private const string RestDisenrollser = "http://10.0.2.2:58165/api/workshops/disenroll/";
+
         private HttpClient _client;
 
         public RestService()
@@ -271,8 +274,39 @@ namespace WorkshopScheduler.RestLogic
             var restResponse = new RestResponse<Boolean>();
             var request = new HttpRequestMessage()
             {
-                RequestUri = new Uri(RestWorkshops + workshopId),
+                RequestUri = new Uri(RestEnrollUser + workshopId),
                 Method = HttpMethod.Post,
+            };
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenManager.GetToken());
+            try
+            {
+                var response = await _client.SendAsync(request);
+                restResponse.ResponseCode = response.StatusCode;
+                if (response.IsSuccessStatusCode)
+                {
+                    restResponse.Value = true;
+                }
+                else
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    restResponse.ErrorMessage = content;
+                }
+            }
+            catch (Exception ex)
+            {
+                restResponse.ErrorMessage = ex.Message;
+            }
+
+            return restResponse;
+        }
+
+        public async Task<RestResponse<bool>> DisenrollUser(int workshopId)
+        {
+            var restResponse = new RestResponse<Boolean>();
+            var request = new HttpRequestMessage()
+            {
+                RequestUri = new Uri(RestDisenrollser + workshopId),
+                Method = HttpMethod.Delete,
             };
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenManager.GetToken());
             try

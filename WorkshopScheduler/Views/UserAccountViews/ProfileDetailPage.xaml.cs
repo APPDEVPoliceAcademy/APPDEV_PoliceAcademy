@@ -16,11 +16,10 @@ namespace WorkshopScheduler.Views.UserAccountViews
     public partial class ProfileDetailPage : ContentPage
     {
 
-        private List<Unit> _pickerUnitsOptions;
+        private readonly List<Unit> _pickerUnitsOptions = Enum.GetValues(typeof(Unit)).Cast<Unit>().ToList();
         public ProfileDetailPage()
         {
             InitializeComponent();
-            _pickerUnitsOptions = Enum.GetValues(typeof(Unit)).Cast<Unit>().ToList();
             UnitPicker.ItemsSource = _pickerUnitsOptions;
 
         }
