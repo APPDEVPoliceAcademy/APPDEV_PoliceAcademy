@@ -6,11 +6,10 @@
             x:Class="WorkshopScheduler.Views.MainView"
             BarBackgroundColor="#ebebeb"
             BackgroundColor="{StaticResource backgroundColor}"
+            BarTextColor="{StaticResource primaryText}"
             Title="WorkshopScheduler"
                >
-    <TabbedPage.ToolbarItems>
-        
-    </TabbedPage.ToolbarItems>
+    
     <local:WorkshopBrowser x:Name="WorkshopBrowser" Title="All"  Icon="ic_tab_event_free.png" />
     <local:ReservedBrowser x:Name="ReservedBrowser"  Title="Reserved" Icon="ic_tab_event_checked.png"/>
     <local:ProfilePage x:Name="ProfilePage" Title="Profile" Icon="ic_tab_person.png"/>

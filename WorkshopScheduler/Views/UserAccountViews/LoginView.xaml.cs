@@ -31,17 +31,26 @@ namespace WorkshopScheduler.Views.UserAccountViews
 
             IRestService rs = new RestService();
 
-	        var tokenResponse = await rs.AuthenticateUser(Login.Text, Password.Text);
+	        ActivityIndicator.IsRunning = true;
+	        ActivityIndicator.IsVisible = true;
 
-	        if (tokenResponse.ResponseCode == null)
+            var tokenResponse = await rs.AuthenticateUser(Login.Text, Password.Text);
+
+	        
+
+            if (tokenResponse.ResponseCode == null)
 	        {
-	            await DisplayAlert("Error", tokenResponse.ErrorMessage + "\nMake sure that you have internet connection", "Ok");
+	            ActivityIndicator.IsRunning = false;
+	            ActivityIndicator.IsVisible = false;
+                await DisplayAlert("Error", tokenResponse.ErrorMessage + "\nMake sure that you have internet connection", "Ok");
 	            return;
 	        }
 
 	        if (tokenResponse.ResponseCode == HttpStatusCode.BadRequest)
 	        {
-	            await DisplayAlert("Error", tokenResponse.ErrorMessage, "Ok");
+	            ActivityIndicator.IsRunning = false;
+	            ActivityIndicator.IsVisible = false;
+                await DisplayAlert("Error", tokenResponse.ErrorMessage, "Ok");
 	        }
 
 	        if (tokenResponse.ResponseCode == HttpStatusCode.OK)
@@ -55,7 +64,10 @@ namespace WorkshopScheduler.Views.UserAccountViews
 	            app.UserUnit = userInfo.Value.Unit;
 	            app.UserBirthday = userInfo.Value.Birthday;
 
-	            Application.Current.MainPage = new MainView();
+	            ActivityIndicator.IsRunning = false;
+	            ActivityIndicator.IsVisible = false;
+
+                Application.Current.MainPage = new MainView();
             }
 
 	        

@@ -8,16 +8,22 @@
             <On Platform="iOS" Value="20, 40, 20, 20" />
         </OnPlatform>
     </ContentPage.Padding>
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Create Account" TextColor="{StaticResource primaryText}" />
-            <Label x:Name="Login" Text="Login" />
-            <Entry />
-            <Label Text="Password" TextColor="{StaticResource primaryText}"/>
+    <AbsoluteLayout>
+        <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" Spacing="20" Padding="20, 0, 20, 0">
+            <BoxView HeightRequest="10" />
+            <Label Text="Create Account" TextColor="{StaticResource primaryText}"  
+                   FontSize="25" HorizontalOptions="Center"/>
+            <BoxView HeightRequest="10" />
+            <Label Text="Login" TextColor="{StaticResource primaryText}" FontSize="15"/>
+            <Entry x:Name="Login" />
+            <Label Text="Password" TextColor="{StaticResource primaryText}" FontSize="15"/>
             <Entry x:Name="FirstPassword" IsPassword="True" />
-            <Label Text="Repeat Password" TextColor="{StaticResource primaryText}"/>
+            <Label Text="Repeat Password" TextColor="{StaticResource primaryText}" FontSize="15"/>
             <Entry x:Name="RepeatPassword" IsPassword="True" />
-            <Button x:Name="RegisterButton" Text="Register" Clicked="RegisterButton_OnClicked" TextColor="{StaticResource buttonText}" />
+            <Button x:Name="RegisterButton" Text="Register" Clicked="RegisterButton_OnClicked" BackgroundColor="{StaticResource buttonBackground}" TextColor="White" />
         </StackLayout>
-    </ContentPage.Content>
+        <ActivityIndicator AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0.5, 0.5, 60, 60" x:Name="ActivityIndicator" IsVisible="False" IsRunning="False"/>
+
+    </AbsoluteLayout>
+    
 </ContentPage>
