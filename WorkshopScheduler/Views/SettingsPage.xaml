@@ -5,9 +5,8 @@
              BackgroundColor="{StaticResource backgroundColor}">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Button x:Name="LogOutButton" Text="Log out" BackgroundColor="{StaticResource buttonBackground}" TextColor="White" Clicked="LogOutButton_OnClicked"/>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

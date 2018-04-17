@@ -16,7 +16,10 @@ namespace WorkshopScheduler.Views.UserAccountViews
     public partial class ProfileDetailPage : ContentPage
     {
 
+        IRestService _restService = new RestService();
         private readonly List<Unit> _pickerUnitsOptions = Enum.GetValues(typeof(Unit)).Cast<Unit>().ToList();
+        private App _currentApp = Application.Current as App;
+
         public ProfileDetailPage()
         {
             InitializeComponent();
@@ -26,17 +29,22 @@ namespace WorkshopScheduler.Views.UserAccountViews
 
         private async void ConfirmInformation_OnClicked(object sender, EventArgs e)
         {
-            IRestService restService = new RestService();
+
+            if (NameCell.Text == null || SurnameCell.Text == null || SurnameCell.Text == null || UnitPicker.SelectedIndex == -1)
+            {
+                await DisplayAlert("Error", "Please fill all fields", "Ok");
+                return;
+            }
 
             var userInfo = new UserInfo()
             {
+                Birthday = BirthdayCell.Date,
                 Name = NameCell.Text,
-                Surname = NameCell.Text,
-                Unit = (Unit)Enum.Parse(typeof(Unit), UnitPicker.Items[UnitPicker.SelectedIndex])            
-             };
+                Surname = SurnameCell.Text,
+                Unit = (Unit)Enum.Parse(typeof(Unit), UnitPicker.Items[UnitPicker.SelectedIndex])
+            };
 
-
-            var response = await restService.UpdateUserInfo(userInfo);
+            var response = await _restService.UpdateUserInfo(userInfo);
 
             if (response.ResponseCode == null)
             {
@@ -51,7 +59,14 @@ namespace WorkshopScheduler.Views.UserAccountViews
 
             if (response.ResponseCode == HttpStatusCode.OK)
             {
+                _currentApp.UserName = userInfo.Name;
+                _currentApp.UserSurname = userInfo.Surname;
+                _currentApp.UserUnit = userInfo.Unit;
+                _currentApp.UserBirthday = userInfo.Birthday;
+                await _currentApp.SavePropertiesAsync();
+                await DisplayAlert("Done", "Succesfully saved new information", "Ok");
                 Application.Current.MainPage = new MainView();
+
             }
 
         }

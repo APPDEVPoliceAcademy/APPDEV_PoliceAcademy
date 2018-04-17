@@ -116,6 +116,11 @@ namespace WorkshopScheduler.Views
                 if (workshopsResponse.ResponseCode == HttpStatusCode.OK)
                 {
                     workshopsList = new ObservableCollection<WorkshopDTO>(workshopsResponse.Value);
+                    displayList = workshopsList;
+                    ActivityIndicator.IsRunning = false;
+                    ActivityIndicator.IsVisible = false;
+                    WorkshopsListView.IsVisible = true;
+
                 }
                 WorkshopsListView.ItemsSource = workshopsList;
             }
@@ -135,6 +140,36 @@ namespace WorkshopScheduler.Views
             {
                 WorkshopsListView.ItemsSource = workshopsList;
             }
+        }
+
+        private async void WorkshopsListView_OnRefreshing(object sender, EventArgs e)
+        {
+            //Check if there is any point in refreshing !!!
+
+
+            var workshopsResponse = await _restService.GetAllWorkshopsAsync();
+
+            if (workshopsResponse.ResponseCode == null)
+            {
+                await DisplayAlert("Error", workshopsResponse.ErrorMessage + "\nMake sure that you have internet connection", "Ok");
+                WorkshopsListView.ItemsSource = new ObservableCollection<WorkshopDTO>();
+            }
+
+            if (workshopsResponse.ResponseCode == HttpStatusCode.Unauthorized)
+            {
+                //Check token validation additionaly
+                await DisplayAlert("Error", "Your session has expired. You will be redirected to log in", "Ok");
+                WorkshopsListView.ItemsSource = new ObservableCollection<WorkshopDTO>();
+                Application.Current.MainPage = new LoginView();
+            }
+
+            if (workshopsResponse.ResponseCode == HttpStatusCode.OK)
+            {
+                workshopsList = new ObservableCollection<WorkshopDTO>(workshopsResponse.Value);
+                displayList = workshopsList;
+                WorkshopsListView.IsRefreshing = false;
+            }
+            WorkshopsListView.ItemsSource = workshopsList;
         }
 
         async void SortingsButton_OnClicked(object sender, System.EventArgs e)
@@ -174,5 +209,6 @@ namespace WorkshopScheduler.Views
             workshop.IsEnrolled = false;
         }
 
+       
     }
 }

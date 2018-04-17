@@ -33,6 +33,14 @@ namespace WorkshopScheduler.Views
 
         async void DoneButton_OnClicked(object sender, System.EventArgs e)
         {
+            if (NameCell.Text == _currentApp.UserName &&
+                SurnameCell.Text == _currentApp.UserSurname &&
+                UnitPicker.ItemsSource == _pickerUnitsOptions &&
+                (Unit)Enum.Parse(typeof(Unit), UnitPicker.Items[UnitPicker.SelectedIndex]) == _currentApp.UserUnit &&
+                BirthdayCell.Date == _currentApp.UserBirthday)
+            {
+                return;
+            }
              var userInfo = new UserInfo()
             {
                 Birthday = BirthdayCell.Date,
@@ -60,6 +68,7 @@ namespace WorkshopScheduler.Views
                 _currentApp.UserSurname = userInfo.Surname;
                 _currentApp.UserUnit = userInfo.Unit;
                 _currentApp.UserBirthday = userInfo.Birthday;
+                await _currentApp.SavePropertiesAsync();
                 await DisplayAlert("Done", "Succesfully saved new information", "Ok");
             }
 

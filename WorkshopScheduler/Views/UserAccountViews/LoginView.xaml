@@ -1,21 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" BackgroundColor="{StaticResource backgroundColor}" x:Class="WorkshopScheduler.Views.UserAccountViews.LoginView">
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             BackgroundColor="{StaticResource backgroundColor}"
+             x:Class="WorkshopScheduler.Views.UserAccountViews.LoginView">
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness">
             <On Platform="iOS" Value="20, 40, 20, 20" />
         </OnPlatform>
     </ContentPage.Padding>
-    <ContentPage.Content>
-        <StackLayout >
-            <Label Text="Welcome to InspiratiePunt"  TextColor="{StaticResource primaryText}"/>
-            <Label Text="Login" TextColor="{StaticResource primaryText}"/>
-            <Entry x:Name="Login"/>
-            <Label Text="Password" TextColor="{StaticResource primaryText}"/>
+
+    <AbsoluteLayout>
+
+       
+        <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1"  Spacing="20" Padding="20, 0, 20, 0">
+            <BoxView HeightRequest="10" />
+            <Label Text="Welcome to InspiratiePunt" TextColor="{StaticResource primaryText}"
+                   FontSize="25" HorizontalOptions="Center" />
+            <BoxView HeightRequest="10" />
+            <Label Text="Login" TextColor="{StaticResource primaryText}" FontSize="20" />
+            <Entry x:Name="Login" />
+            <Label Text="Password" TextColor="{StaticResource primaryText}" FontSize="20" />
             <Entry x:Name="Password" IsPassword="True" />
-            <StackLayout Orientation="Horizontal">
-                <Button x:Name="CreateAccountButton" Text="Create Account" Clicked="CreateAccountButton_OnClicked" TextColor="{StaticResource buttonText}"/>
-                <Button x:Name="LogInButton" Text="Log In" Clicked="LogInButton_OnClicked" TextColor="{StaticResource buttonText}"/>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Button x:Name="CreateAccountButton" Text="Create Account"
+                        Clicked="CreateAccountButton_OnClicked"
+                        BackgroundColor="{StaticResource buttonBackground}" TextColor="White" />
+                <Button x:Name="LogInButton" Text="Log In" Clicked="LogInButton_OnClicked"
+                        BackgroundColor="{StaticResource buttonBackground}" TextColor="White" />
             </StackLayout>
         </StackLayout>
-    </ContentPage.Content>
+        <ActivityIndicator AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0.5, 0.5, 60, 60" x:Name="ActivityIndicator" IsVisible="False" IsRunning="False"/>
+
+    </AbsoluteLayout>
+    
 </ContentPage>

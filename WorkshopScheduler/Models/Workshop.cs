@@ -13,16 +13,12 @@ namespace WorkshopScheduler.Models
         public bool IsEnrolled { get; set; }
         public bool IsNotEnrolled => !IsEnrolled;
 
-        public bool IsWithin12Weeks
-        {
-            //
-            get { return Date.CompareTo(DateTime.Now.AddDays(12 * 7)) < 0; }
-        }
+        public bool IsWithin12Weeks => Date.CompareTo(DateTime.Now.AddDays(12 * 7)) < 0;
 
 
         public override bool Equals(object obj)
         {
-            WorkshopDTO workshopObj = obj as WorkshopDTO; 
+            var workshopObj = obj as WorkshopDTO; 
             if (workshopObj == null)
                 return false;
             else

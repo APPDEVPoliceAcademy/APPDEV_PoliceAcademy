@@ -41,7 +41,7 @@
             <TableSection>
                 <ViewCell>
                     <StackLayout Orientation="Horizontal" Padding="20, 0, 20, 0">
-                        <Button TextColor="{StaticResource buttonText}" Text="Done" Clicked="DoneButton_OnClicked" />
+                        <Button BackgroundColor="{StaticResource buttonBackground}" TextColor="White" Text="Done" Clicked="DoneButton_OnClicked" />
                     </StackLayout>
                 </ViewCell>
             </TableSection>

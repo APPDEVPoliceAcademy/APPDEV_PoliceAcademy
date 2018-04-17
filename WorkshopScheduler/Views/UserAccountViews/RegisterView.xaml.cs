@@ -16,6 +16,7 @@ namespace WorkshopScheduler.Views.UserAccountViews
 	public partial class RegisterView : ContentPage
 	{
 
+
 		public RegisterView ()
 		{
 			InitializeComponent ();
@@ -56,6 +57,9 @@ namespace WorkshopScheduler.Views.UserAccountViews
 	            return;
 	        }
 
+	        ActivityIndicator.IsRunning = true;
+	        ActivityIndicator.IsVisible = true;
+
 
             IRestService restService = new RestService();
 
@@ -63,19 +67,31 @@ namespace WorkshopScheduler.Views.UserAccountViews
 
 	        if (restResponse.ResponseCode == null)
 	        {
-	            await DisplayAlert("Error", restResponse.ErrorMessage + "\nMake sure that you have internet connection", "Ok");
+	            ActivityIndicator.IsRunning = false;
+	            ActivityIndicator.IsVisible = false;
+                await DisplayAlert("Error", restResponse.ErrorMessage + "\nMake sure that you have internet connection", "Ok");
 	            return;
 	        }
 
 	        if (restResponse.ResponseCode == HttpStatusCode.BadRequest)
 	        {
-	            await DisplayAlert("Error", restResponse.ErrorMessage, "Ok");
+	            ActivityIndicator.IsRunning = false;
+	            ActivityIndicator.IsVisible = false;
+                await DisplayAlert("Error", restResponse.ErrorMessage, "Ok");
 	        }
 
 	        if (restResponse.ResponseCode == HttpStatusCode.OK)
 	        {
-	            TokenManager.SaveToken(restResponse.Value);
-	            await Navigation.PushModalAsync(new ProfileDetailPage());
+	            
+                TokenManager.SaveToken(restResponse.Value);
+	            var app = Application.Current as App;
+	            app.UserBirthday = DateTime.Now;
+	            app.UserName = "";
+	            app.UserSurname = "";
+	            app.UserUnit = Unit.Nord;
+	            ActivityIndicator.IsRunning = false;
+	            ActivityIndicator.IsVisible = false;
+                await Navigation.PushModalAsync(new ProfileDetailPage());
             }
 
 	    }

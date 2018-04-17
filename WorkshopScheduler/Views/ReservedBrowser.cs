@@ -115,6 +115,7 @@ namespace WorkshopScheduler.Views
                 if (workshopsResponse.ResponseCode == HttpStatusCode.OK)
                 {
                     reservedList = new ObservableCollection<WorkshopDTO>(workshopsResponse.Value);
+                    displayList = reservedList;
                 }
                 WorkshopsListView.ItemsSource = reservedList;
             }
