@@ -1,12 +1,13 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="WorkshopScheduler.Views.SettingsPage"
-             BackgroundColor="{StaticResource backgroundColor}">
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="WorkshopScheduler.Views.SettingsPage" BackgroundColor="{StaticResource backgroundColor}">
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="0, 40, 0, 0" />
+        </OnPlatform>
+    </ContentPage.Padding>
     <ContentPage.Content>
         <StackLayout>
-            <Button x:Name="LogOutButton" Text="Log out" BackgroundColor="{StaticResource buttonBackground}" TextColor="White" Clicked="LogOutButton_OnClicked"/>
-
+            <Button x:Name="LogOutButton" Text="Log out" BackgroundColor="{StaticResource buttonBackground}" TextColor="White" Clicked="LogOutButton_OnClicked" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
