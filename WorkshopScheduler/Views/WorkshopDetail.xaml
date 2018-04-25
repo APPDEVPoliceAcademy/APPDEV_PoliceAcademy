@@ -4,12 +4,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WorkshopScheduler.Views.WorkshopDetail">
 
-      <ContentPage.Padding>
+    <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness">
             <On Platform="iOS" Value="0, 40, 0, 0" />
         </OnPlatform>
     </ContentPage.Padding>
-    
+
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
@@ -51,7 +51,7 @@
                     <Button x:Name="ApplyButton" Text="Apply" BackgroundColor="{StaticResource buttonBackground}" TextColor="White"  Clicked="ApplyButton_OnClicked" IsVisible="{Binding IsNotEnrolled}"/>
                     <Button x:Name="DisenrollButton" Text="Disenroll" BackgroundColor="{StaticResource buttonBackground}" TextColor="White" Clicked="DisenrollButton_OnClicked" IsVisible="{Binding IsEnrolled}"/>
                 </StackLayout>
-                
+
             </ContentView>
         </Grid>
     </ContentPage.Content>
