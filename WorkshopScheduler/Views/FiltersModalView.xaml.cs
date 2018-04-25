@@ -22,7 +22,7 @@ namespace WorkshopScheduler.Views
         {
             InitializeComponent();
 
-
+            //populate pickets
             sortingPicker.ItemsSource = sourceSortings;
             PlacesPicker.ItemsSource = placesSortings;
         }

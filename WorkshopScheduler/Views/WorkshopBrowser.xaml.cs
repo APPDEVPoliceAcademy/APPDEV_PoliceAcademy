@@ -19,19 +19,22 @@ namespace WorkshopScheduler.Views
   
         ObservableCollection<WorkshopDTO> workshopsList;
         ObservableCollection<WorkshopDTO> displayList;
+        Sorting sortings = new Sorting();
+        Filters filters = new Filters();
         FiltersModalView filtersView;
         private RestService _restService;
         public event EventHandler<WorkshopDTO> UserEnrolled;
         public event EventHandler<WorkshopDTO> UserDisenrolled;
+       
 
 
         public WorkshopBrowser()
         {
             InitializeComponent();
 
-            Sorting sortings = new Sorting();
-            Filters filters = new Filters();
+           
             filtersView = new FiltersModalView();
+
 
             filtersView.SortingChanged += (o, sortingChosen) =>
             {
@@ -116,13 +119,17 @@ namespace WorkshopScheduler.Views
                 if (workshopsResponse.ResponseCode == HttpStatusCode.OK)
                 {
                     workshopsList = new ObservableCollection<WorkshopDTO>(workshopsResponse.Value);
-                    displayList = workshopsList;
+                   // displayList = workshopsList;
                     ActivityIndicator.IsRunning = false;
                     ActivityIndicator.IsVisible = false;
                     WorkshopsListView.IsVisible = true;
 
+                    //apply default sorting & display only future events
+                    displayList = sortings.ByDateAscending(filters.FilterByDate(workshopsList, new DateTime[] { DateTime.Now, DateTime.Now.AddYears(1) }));
+                   
                 }
-                WorkshopsListView.ItemsSource = workshopsList;
+
+                WorkshopsListView.ItemsSource = displayList;
             }
             
 
@@ -130,6 +137,10 @@ namespace WorkshopScheduler.Views
 
         private void SearchWorkshop_OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+
+            if (workshopsList == null)
+                return;
+
             if (SearchWorkshop.Text != null)
             {
                 WorkshopsListView.ItemsSource = displayList.Where(x =>
@@ -138,7 +149,8 @@ namespace WorkshopScheduler.Views
             }
             else
             {
-                WorkshopsListView.ItemsSource = workshopsList;
+                displayList = sortings.ByDateAscending(filters.FilterByDate(workshopsList, new DateTime[] { DateTime.Now, DateTime.Now.AddYears(1) }));
+                WorkshopsListView.ItemsSource = displayList;
             }
         }
 
@@ -166,10 +178,15 @@ namespace WorkshopScheduler.Views
             if (workshopsResponse.ResponseCode == HttpStatusCode.OK)
             {
                 workshopsList = new ObservableCollection<WorkshopDTO>(workshopsResponse.Value);
-                displayList = workshopsList;
+               // displayList = workshopsList;
                 WorkshopsListView.IsRefreshing = false;
+
+                //apply default sorting & display only future events
+                displayList = sortings.ByDateAscending(filters.FilterByDate(workshopsList, new DateTime[] { DateTime.Now, DateTime.Now.AddYears(1) }));
+
             }
-            WorkshopsListView.ItemsSource = workshopsList;
+           
+            WorkshopsListView.ItemsSource = displayList;
         }
 
         async void SortingsButton_OnClicked(object sender, System.EventArgs e)
