@@ -9,8 +9,10 @@ namespace WorkshopScheduler.Views
             InitializeComponent();
             WorkshopBrowser.UserEnrolled += ReservedBrowser.OnUserEnrolled;
             WorkshopBrowser.UserDisenrolled += ReservedBrowser.OnUserDisenrolled;
-            ReservedBrowser.UserDisenrolled += WorkshopBrowser.OnWorkshopDisenrolled;
+            WorkshopBrowser.WorkshopEvaluated += ReservedBrowser.OnWorkshopEvaluated;
 
+            ReservedBrowser.UserDisenrolled += WorkshopBrowser.OnUserDisenrolled;
+            ReservedBrowser.WorkshopEvaluated += WorkshopBrowser.OnWorkshopEvaluated;
         }
     }
 }

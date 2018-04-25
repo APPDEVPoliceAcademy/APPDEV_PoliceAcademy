@@ -12,9 +12,9 @@ namespace WorkshopScheduler.Models
         public string Place { get; set; }
         public bool IsEnrolled { get; set; }
         public bool IsNotEnrolled => !IsEnrolled;
-
+        public bool IsEvaluated { get; set; }
+        public string EvaluationUri { get; set; }
         public bool IsWithin12Weeks => Date.CompareTo(DateTime.Now.AddDays(12 * 7)) < 0;
-
 
         public override bool Equals(object obj)
         {

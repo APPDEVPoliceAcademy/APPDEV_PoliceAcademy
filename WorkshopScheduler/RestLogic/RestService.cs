@@ -19,9 +19,10 @@ namespace WorkshopScheduler.RestLogic
     public class RestService : IRestService
     {
 #if DEBUG
-        private const string RestUri = "https://restnet.conveyor.cloud/";
-#else
         private const string RestUri = "http://10.0.2.2:58165/";
+
+#else
+        private const string RestUri = "https://restnet.conveyor.cloud/";
 #endif
 
         private const string RestUserInfo = "api/user/me";
@@ -31,7 +32,8 @@ namespace WorkshopScheduler.RestLogic
         private const string RestWorkshopMeUri = "api/workshops/me";
         private const string RestAddUser = "api/user/add";
         private const string RestEnrollUser = "api/workshops/enroll/";
-        private const string RestDisenrollser = "api/workshops/disenroll/";
+        private const string RestDisenrollUser = "api/workshops/disenroll/";
+        private const string RestEvalute = "api/workshops/evaluate/";
 
         private HttpClient _client;
 
@@ -311,7 +313,7 @@ namespace WorkshopScheduler.RestLogic
             var restResponse = new RestResponse<Boolean>();
             var request = new HttpRequestMessage()
             {
-                RequestUri = new Uri(RestUri + RestDisenrollser + workshopId),
+                RequestUri = new Uri(RestUri + RestDisenrollUser + workshopId),
                 Method = HttpMethod.Delete,
             };
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenManager.GetToken());
@@ -336,5 +338,37 @@ namespace WorkshopScheduler.RestLogic
 
             return restResponse;
         }
+
+        public async Task<RestResponse<bool>> EvaluateWorkshop(int workshopId)
+        {
+            var restResponse = new RestResponse<Boolean>();
+            var request = new HttpRequestMessage()
+            {
+                RequestUri = new Uri(RestUri + RestEvalute + workshopId),
+                Method = HttpMethod.Put,
+            };
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenManager.GetToken());
+            try
+            {
+                var response = await _client.SendAsync(request);
+                restResponse.ResponseCode = response.StatusCode;
+                if (response.IsSuccessStatusCode)
+                {
+                    restResponse.Value = true;
+                }
+                else
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    restResponse.ErrorMessage = content;
+                }
+            }
+            catch (Exception ex)
+            {
+                restResponse.ErrorMessage = ex.Message;
+            }
+
+            return restResponse;
+        }
+
     }
 }
