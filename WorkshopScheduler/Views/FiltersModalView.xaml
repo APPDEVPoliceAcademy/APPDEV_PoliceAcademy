@@ -11,10 +11,10 @@
             <TableRoot>
                 <TableSection>
                     <ViewCell>
-                        <Button Text="Done" Clicked="BackButton_OnClicked" />
+                        <Button Text="Opslaan" Clicked="BackButton_OnClicked" />
                     </ViewCell>
                 </TableSection>
-                <TableSection Title="Sort by:">
+                <TableSection Title="Volorde van weergave:">
                     <ViewCell>
                         <StackLayout>
                             <Picker x:Name="sortingPicker" PropertyChanged="SortingPicker_OnPropertyChanged" />
@@ -31,23 +31,23 @@
                         </StackLayout>
                     </ViewCell>
 
-                   <!-- ViewCell made on purpose, to achieve conisistent padding-->
+                    <!-- ViewCell made on purpose, to achieve conisistent padding-->
                     <ViewCell>
                         <StackLayout Orientation="Horizontal">
-                               <Label VerticalOptions="Center" Text="Less then 12 weeks" />
-                               <Switch HorizontalOptions="EndAndExpand" x:Name="weeksSwitch" Toggled="OnWeeksSwitchToggled" />
+                            <Label VerticalOptions="Center" Text="Minder dan 12 weken" />
+                            <Switch HorizontalOptions="EndAndExpand" x:Name="weeksSwitch" Toggled="OnWeeksSwitchToggled" />
                         </StackLayout>
-                     </ViewCell>
-                        <ViewCell>
-                          <StackLayout Orientation="Horizontal">
-                               <Label VerticalOptions="Center" Text="Region"/>
-                               <Picker x:Name="PlacesPicker" HorizontalOptions="FillAndExpand" />
-                              <Switch HorizontalOptions="End"/>
-                        </StackLayout>
-                  </ViewCell>
+                    </ViewCell>
                     <ViewCell>
-                        <Button  Text ="Reset" Clicked="OnResetButtonClicked"/>
-                     </ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label VerticalOptions="Center" Text="Unit"/>
+                            <Picker x:Name="PlacesPicker" HorizontalOptions="FillAndExpand" />
+                            <Switch HorizontalOptions="End"/>
+                        </StackLayout>
+                    </ViewCell>
+                    <ViewCell>
+                        <Button  Text ="Standaart instellingen herstellen" Clicked="OnResetButtonClicked"/>
+                    </ViewCell>
                 </TableSection>
             </TableRoot>
         </TableView>

@@ -4,49 +4,49 @@
              x:Class="WorkshopScheduler.Views.UserAccountViews.ProfileDetailPage">
     <StackLayout>
 
-    <Label Text="Please fill basic data" FontSize="20" TextColor="{StaticResource primaryText}" HorizontalOptions="Center"/>
-    <TableView Intent="Form">
-        <TableRoot>
-            <TableSection Title="Personal Data">
-                <ViewCell>
-                    <StackLayout Orientation="Horizontal" Padding="20, 0, 20, 0">
-                        <Label Text="Name" VerticalOptions="Center" HorizontalOptions="Start" WidthRequest="80" />
-                        <Entry x:Name="NameCell"  VerticalOptions="Center"
+        <Label Text="Please fill basic data" FontSize="20" TextColor="{StaticResource primaryText}" HorizontalOptions="Center"/>
+        <TableView Intent="Form">
+            <TableRoot>
+                <TableSection Title="Persoonlijke Data">
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Padding="20, 0, 20, 0">
+                            <Label Text="Naam" VerticalOptions="Center" HorizontalOptions="Start" WidthRequest="80" />
+                            <Entry x:Name="NameCell"  VerticalOptions="Center"
                                HorizontalOptions="FillAndExpand" />
-                    </StackLayout>
-                </ViewCell>
-                <ViewCell>
-                    <StackLayout Orientation="Horizontal" Padding="20, 0, 20, 0">
-                        <Label Text="Surname" VerticalOptions="Center" HorizontalOptions="Start" WidthRequest="80" />
-                        <Entry x:Name="SurnameCell" VerticalOptions="Center" 
+                        </StackLayout>
+                    </ViewCell>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Padding="20, 0, 20, 0">
+                            <Label Text="Achternaam" VerticalOptions="Center" HorizontalOptions="Start" WidthRequest="80" />
+                            <Entry x:Name="SurnameCell" VerticalOptions="Center" 
                                HorizontalOptions="FillAndExpand" />
-                    </StackLayout>
-                </ViewCell>
-                <ViewCell>
-                    <StackLayout Orientation="Horizontal" Padding="20, 0, 20, 0">
-                        <Label Text="Birthday" VerticalOptions="Center" HorizontalOptions="Start" WidthRequest="80" />
-                        <DatePicker x:Name="BirthdayCell" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
-                    </StackLayout>
-                </ViewCell>
-            </TableSection>
-            <TableSection Title="Professional Data">
-                <ViewCell>
-                    <StackLayout Orientation="Horizontal" Padding="20, 0, 20, 0">
-                        <Label Text="Unit" VerticalOptions="Center" HorizontalOptions="Start" WidthRequest="80" />
-                        <Picker x:Name="UnitPicker" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
-                    </StackLayout>
-                </ViewCell>
-            </TableSection>
+                        </StackLayout>
+                    </ViewCell>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Padding="20, 0, 20, 0">
+                            <Label Text="Geboorte datum" VerticalOptions="Center" HorizontalOptions="Start" WidthRequest="80" />
+                            <DatePicker x:Name="BirthdayCell" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>
+                    </ViewCell>
+                </TableSection>
+                <TableSection Title="Proffesionele Data">
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Padding="20, 0, 20, 0">
+                            <Label Text="Unit" VerticalOptions="Center" HorizontalOptions="Start" WidthRequest="80" />
+                            <Picker x:Name="UnitPicker" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
+                        </StackLayout>
+                    </ViewCell>
+                </TableSection>
 
-            <TableSection>
-                <ViewCell>
-                    <StackLayout Orientation="Horizontal" Padding="20, 0, 20, 0">
-                        <Button BackgroundColor="{StaticResource buttonBackground}" Text="Done" Clicked="ConfirmInformation_OnClicked" TextColor="White"/>
-                    </StackLayout>
-                </ViewCell>
-            </TableSection>
+                <TableSection>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Padding="20, 0, 20, 0">
+                            <Button BackgroundColor="{StaticResource buttonBackground}" Text="Done" Clicked="ConfirmInformation_OnClicked" TextColor="White"/>
+                        </StackLayout>
+                    </ViewCell>
+                </TableSection>
 
-        </TableRoot>
-    </TableView>
+            </TableRoot>
+        </TableView>
     </StackLayout>
 </ContentPage>
