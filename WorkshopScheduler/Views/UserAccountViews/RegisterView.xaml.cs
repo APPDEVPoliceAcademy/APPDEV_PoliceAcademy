@@ -88,7 +88,7 @@ namespace WorkshopScheduler.Views.UserAccountViews
 	            app.UserBirthday = DateTime.Now;
 	            app.UserName = "";
 	            app.UserSurname = "";
-	            app.UserUnit = Unit.Nord;
+	            app.UserUnit = Unit.Noord;
 	            ActivityIndicator.IsRunning = false;
 	            ActivityIndicator.IsVisible = false;
                 await Navigation.PushModalAsync(new ProfileDetailPage());

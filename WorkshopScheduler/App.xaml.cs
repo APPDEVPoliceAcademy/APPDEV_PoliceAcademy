@@ -63,7 +63,7 @@ namespace WorkshopScheduler
 
         public Unit UserUnit
         {
-            get => Properties.ContainsKey(UserUnitKey) ? (Unit) Enum.Parse(typeof(Unit), Properties[UserUnitKey].ToString()) : Unit.Nord;
+            get => Properties.ContainsKey(UserUnitKey) ? (Unit) Enum.Parse(typeof(Unit), Properties[UserUnitKey].ToString()) : Unit.Noord;
             set => Properties[UserUnitKey] = value.ToString();
         }
 

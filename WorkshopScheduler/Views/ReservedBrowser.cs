@@ -40,19 +40,19 @@ namespace WorkshopScheduler.Views
 
                 switch (sortingChosen)
                 {
-                    case SortingsEnum.ByDateAscending:
+                    case SortingsEnum.DatumLaagHoog:
                         displayList = sortings.ByDateAscending(reservedList);
                         break;
-                    case SortingsEnum.ByDateDescending:
+                    case SortingsEnum.DatumHoogLaag:
                         displayList = sortings.ByDateDescending(reservedList);
                         break;
-                    case SortingsEnum.ByTitleAscending:
+                    case SortingsEnum.NaamLaagHoog:
                         displayList = sortings.ByTitleAscending(reservedList);
                         break;
-                    case SortingsEnum.ByTitleDescending:
+                    case SortingsEnum.NaamHoogLaag:
                         displayList = sortings.ByTitleDescending(reservedList);
                         break;
-                    case SortingsEnum.None:
+                    case SortingsEnum.Geen:
                         displayList = reservedList;
                         break;
                     default:
