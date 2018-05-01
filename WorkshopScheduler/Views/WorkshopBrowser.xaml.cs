@@ -25,7 +25,7 @@ namespace WorkshopScheduler.Views
         private RestService _restService;
         public event EventHandler<WorkshopDTO> UserEnrolled;
         public event EventHandler<WorkshopDTO> UserDisenrolled;
-       
+        public event EventHandler<WorkshopDTO> WorkshopEvaluated;
 
 
         public WorkshopBrowser()
@@ -76,7 +76,7 @@ namespace WorkshopScheduler.Views
 
             filtersView.WeeksFilterChanged += (o, flag) =>
             {
-                displayList = filters.FilterBy12weeks(workshopsList, flag);
+                displayList = filters.FilterBy12Weeks(workshopsList, flag);
                 WorkshopsListView.ItemsSource = displayList;
             };
 
@@ -214,18 +214,29 @@ namespace WorkshopScheduler.Views
                 workshopDto.IsEnrolled = false;
                 UserDisenrolled?.Invoke(this, workshopDto);
             };
+            workshopDetailpage.WorkshopEvaluated += (o, workshop) =>
+            {
+                var workshopDto = workshopsList.FirstOrDefault(dto => dto.Id == workshop.Id);
+                if (workshopDto != null) workshopDto.IsEvaluated = true;
+                WorkshopEvaluated?.Invoke(this, workshopDto);
 
+            };
             await Navigation.PushModalAsync(workshopDetailpage);
             WorkshopsListView.SelectedItem = null;
         }
 
         //Handler For Disenrolling
-        public void OnWorkshopDisenrolled(object sender, WorkshopDTO workshopDto)
+        public void OnUserDisenrolled(object sender, WorkshopDTO workshopDto)
         {
             var workshop = workshopsList.FirstOrDefault(dto => dto.Id == workshopDto.Id);
-            workshop.IsEnrolled = false;
+            if (workshop != null) workshop.IsEnrolled = false;
         }
 
-       
+        //Handler for workshop evalauation from reserved browser
+        public void OnWorkshopEvaluated(object sender, WorkshopDTO workshopDto)
+        {
+            var workshop = workshopsList.FirstOrDefault(dto => dto.Id == workshopDto.Id);
+            if (workshop != null) workshop.IsEvaluated = true;
+        }       
     }
 }

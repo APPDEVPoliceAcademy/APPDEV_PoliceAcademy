@@ -12,17 +12,17 @@ namespace WorkshopScheduler.Logic
     public static class TokenManager
     {
 
-        private const string _userName = "Local";
+        private const string UserName = "Local";
 
         public static bool SaveToken(TokenInfo token)
         {
             if(token == null) return false;
             var account = new Account()
             {
-                Username = _userName
+                Username = UserName
             };
-            account.Properties.Add("token", token.Access_token);
-            var expirationDate = DateTime.Now.AddSeconds(Double.Parse(token.Expires_in));
+            account.Properties.Add("token", token.access_token);
+            var expirationDate = DateTime.Now.AddSeconds(Double.Parse(token.expires_in));
             account.Properties.Add("expires", JsonConvert.SerializeObject(expirationDate));
             AccountStore.Create().Save(account, App.AppName);
             return true;
@@ -47,14 +47,10 @@ namespace WorkshopScheduler.Logic
         public static bool IsTokenValid()
         {
             var account = AccountStore.Create().FindAccountsForService(App.AppName).FirstOrDefault();
-            if (account != null)
-            {
-                var expiriationTime = JsonConvert.DeserializeObject<DateTime>(account.Properties["expires"]);
-                if (expiriationTime.CompareTo(DateTime.Now) > 0) return true;
-                
-            }
-
-            return false;
+            if (account == null) return false;
+            var expiriationTime = JsonConvert.DeserializeObject<DateTime>(account.Properties["expires"]);
+            return expiriationTime.CompareTo(DateTime.Now) > 0;
+         
         }
     }
 }

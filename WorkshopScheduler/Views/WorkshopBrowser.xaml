@@ -2,8 +2,9 @@
 <ContentPage  BackgroundColor="{StaticResource backgroundColor}" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="WorkshopScheduler.Views.WorkshopBrowser">
     <ContentPage.Padding>
          <OnPlatform x:TypeArguments="Thickness">
-            <On Platform="iOS" Value="0, 40, 0, 0" />
-         </OnPlatform>
+            <On Platform="iOS" Value="0, 30, 0, 0" />
+            <On Platform="Droid" Value="0, 0, 0, 0"/>
+        </OnPlatform>
     </ContentPage.Padding>
 
     

@@ -22,18 +22,28 @@ namespace WorkshopScheduler.Models
         public bool IsEnrolled
         {
             get => _isEnrolled;
-            set { _isEnrolled = value;
+            set
+            {
+                _isEnrolled = value;
                 OnPropertyChanged("IsEnrolled");
+            }
+        }
+
+        private bool _isEvaluated;
+
+        public bool IsEvaluated
+        {
+            get => _isEvaluated;
+            set
+            {
+                _isEvaluated = value;
+                OnPropertyChanged("IsEvaluated");
             }
         }
 
         protected void OnPropertyChanged(string name)
         {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(name));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
 }

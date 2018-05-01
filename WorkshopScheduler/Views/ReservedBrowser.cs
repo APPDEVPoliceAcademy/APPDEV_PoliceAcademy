@@ -22,6 +22,7 @@ namespace WorkshopScheduler.Views
         private RestService _restService;
 
         public event EventHandler<WorkshopDTO> UserDisenrolled;
+        public event EventHandler<WorkshopDTO> WorkshopEvaluated;
 
 
         public ReservedBrowser()
@@ -73,7 +74,7 @@ namespace WorkshopScheduler.Views
 
             filtersView.WeeksFilterChanged += (o, flag) =>
             {
-                displayList = filters.FilterBy12weeks(reservedList, flag);
+                displayList = filters.FilterBy12Weeks(reservedList, flag);
                 WorkshopsListView.ItemsSource = displayList;
             };
 
@@ -146,7 +147,16 @@ namespace WorkshopScheduler.Views
             {
                 var workshopDto = reservedList.FirstOrDefault(dto => dto.Id == workshop.Id);
                 reservedList.Remove(workshopDto);
-                UserDisenrolled.Invoke(this, workshopDto);
+                UserDisenrolled?.Invoke(this, workshopDto);
+            };
+            workshopDetailpage.WorkshopEvaluated += (o, workshop) =>
+            {
+                var workshopDto = reservedList.FirstOrDefault(dto => dto.Id == workshop.Id);
+                if (workshopDto != null)
+                {
+                    workshopDto.IsEvaluated = true;
+                    WorkshopEvaluated?.Invoke(this, workshopDto);
+                }
             };
             await Navigation.PushModalAsync(workshopDetailpage);
             WorkshopsListView.SelectedItem = null;
@@ -170,10 +180,16 @@ namespace WorkshopScheduler.Views
         //Handler for event send from WorkshopBrowser, when user disenrolls from given workshop
         public void OnUserDisenrolled(object sender, WorkshopDTO workshopDto)
         {
-            var _local = reservedList?.FirstOrDefault(dto => dto.Id == workshopDto.Id);
+            var local = reservedList?.FirstOrDefault(dto => dto.Id == workshopDto.Id);
 
-            reservedList?.Remove(_local);
+            reservedList?.Remove(local);
            
+        }
+
+        public void OnWorkshopEvaluated(object sender, WorkshopDTO workshopDto)
+        {
+            var local = reservedList?.FirstOrDefault(dto => dto.Id == workshopDto.Id);
+            if (local != null) local.IsEvaluated = true;
         }
 
     }
