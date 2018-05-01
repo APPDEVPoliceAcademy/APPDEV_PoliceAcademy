@@ -14,7 +14,10 @@ namespace WorkshopScheduler.Models
         public bool IsNotEnrolled => !IsEnrolled;
         public bool IsEvaluated { get; set; }
         public string EvaluationUri { get; set; }
+        public int NumberOfSpots { get; set; }
+        public int TakenSpots { get; set; } 
         public bool IsWithin12Weeks => Date.CompareTo(DateTime.Now.AddDays(12 * 7)) < 0;
+        public string Spots => TakenSpots + "/" + NumberOfSpots;
 
         public override bool Equals(object obj)
         {

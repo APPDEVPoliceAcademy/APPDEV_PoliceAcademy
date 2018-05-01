@@ -17,6 +17,20 @@ namespace WorkshopScheduler.Models
         public string Coach { get; set; }
         public string Place { get; set; }
         public DateTime Date { get; set; }
+        public int NumberOfSpots { get; set; }
+
+        private int _takenSpots;
+
+        public int TakenSpots
+        {
+            get => _takenSpots;
+            set
+            {
+                _takenSpots = value;
+                OnPropertyChanged("TakenSpots");
+                OnPropertyChanged("Spots");
+            }
+        }
 
         private bool _isEnrolled;
         public bool IsEnrolled
@@ -40,6 +54,8 @@ namespace WorkshopScheduler.Models
                 OnPropertyChanged("IsEvaluated");
             }
         }
+
+        public string Spots => TakenSpots + "/" + NumberOfSpots;
 
         protected void OnPropertyChanged(string name)
         {

@@ -116,6 +116,7 @@ namespace WorkshopScheduler.Views
             {
                 UserEnrolled?.Invoke(this, _currentWorkshop);
                 _currentWorkshop.IsEnrolled = true;
+                _currentWorkshop.TakenSpots++;
                 await Navigation.PopModalAsync();
             }
         }
@@ -142,6 +143,7 @@ namespace WorkshopScheduler.Views
             {
                 UserDisenrolled?.Invoke(this, _currentWorkshop);
                 _currentWorkshop.IsEnrolled = false;
+                _currentWorkshop.TakenSpots--;
                 await Navigation.PopModalAsync();
             }
         }

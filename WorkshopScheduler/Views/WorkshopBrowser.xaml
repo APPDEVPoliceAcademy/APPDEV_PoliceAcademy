@@ -22,7 +22,10 @@
                         <ViewCell>
                             <StackLayout Padding="20" Orientation="Vertical"  BackgroundColor="{StaticResource backgroundColor}">
                                 <StackLayout Orientation="Vertical">
-                                    <Label Text="{Binding Title}" FontAttributes="Bold" />
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding Title}" FontAttributes="Bold" HorizontalOptions="StartAndExpand" />
+                                        <Label Text="{Binding Spots}" FontSize="Small" ></Label>
+                                    </StackLayout>
                                     <Label Text="{Binding Coach}" FontSize="Small" />
                                     <Label Text="{Binding ShortDescription}" TextColor="Gray" />
                                 </StackLayout>
