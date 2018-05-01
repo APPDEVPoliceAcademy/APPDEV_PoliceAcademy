@@ -205,13 +205,21 @@ namespace WorkshopScheduler.Views
             workshopDetailpage.UserEnrolled += (o, workshop) =>
             {
                 var workshopDto = workshopsList.FirstOrDefault(dto => dto.Id == workshop.Id);
-                workshopDto.IsEnrolled = true;
+                if (workshopDto != null)
+                {
+                    workshopDto.IsEnrolled = true;
+                    workshopDto.TakenSpots++;
+                }
                 UserEnrolled?.Invoke(this, workshopDto);
             };
             workshopDetailpage.UserDisenrolled += (o, workshop) =>
             {
                 var workshopDto = workshopsList.FirstOrDefault(dto => dto.Id == workshop.Id);
-                workshopDto.IsEnrolled = false;
+                if (workshopDto != null)
+                {
+                    workshopDto.IsEnrolled = false;
+                    workshopDto.TakenSpots--;
+                }
                 UserDisenrolled?.Invoke(this, workshopDto);
             };
             workshopDetailpage.WorkshopEvaluated += (o, workshop) =>
@@ -229,14 +237,21 @@ namespace WorkshopScheduler.Views
         public void OnUserDisenrolled(object sender, WorkshopDTO workshopDto)
         {
             var workshop = workshopsList.FirstOrDefault(dto => dto.Id == workshopDto.Id);
-            if (workshop != null) workshop.IsEnrolled = false;
+            if (workshop != null)
+            {
+                workshop.IsEnrolled = false;
+                workshop.TakenSpots--;
+            }
         }
 
         //Handler for workshop evalauation from reserved browser
         public void OnWorkshopEvaluated(object sender, WorkshopDTO workshopDto)
         {
             var workshop = workshopsList.FirstOrDefault(dto => dto.Id == workshopDto.Id);
-            if (workshop != null) workshop.IsEvaluated = true;
+            if (workshop != null)
+            {
+                workshop.IsEvaluated = true;
+            }
         }       
     }
 }

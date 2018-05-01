@@ -40,6 +40,7 @@
                 <ContentView BackgroundColor="#f7f6f6" Opacity="0.8" Grid.Row="1" Padding="20, 20, 20, 20">
                     <StackLayout>
                         <Label Text="{Binding Description}" VerticalOptions="StartAndExpand"  />
+                        <Label Text="{Binding Spots}" HorizontalOptions="Center"></Label>
                         <StackLayout  Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="End">
                             <Image Source="ic_calendar.png" Aspect="AspectFit"/>
                             <Label Text="{Binding Date,
