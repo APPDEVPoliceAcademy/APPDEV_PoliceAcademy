@@ -7,25 +7,25 @@
     <TableView Intent="Form" BackgroundColor="{StaticResource backgroundColor}">
 
         <TableRoot>
-            <TableSection Title="Personal Data">
+            <TableSection Title="Profiel Informatie">
                 <ViewCell>
                     <StackLayout Orientation="Horizontal" Padding="20, 0, 20, 0">
-                        <Label Text="Name" VerticalOptions="Center" HorizontalOptions="Start" WidthRequest="80" />
+                        <Label Text="Naam" VerticalOptions="Center" HorizontalOptions="Start" WidthRequest="80" />
                         <Entry x:Name="NameCell"  VerticalOptions="Center"
                                HorizontalOptions="FillAndExpand" />
                     </StackLayout>
                 </ViewCell>
                 <ViewCell>
                     <StackLayout Orientation="Horizontal" Padding="20, 0, 20, 0">
-                        <Label Text="Surname" VerticalOptions="Center" HorizontalOptions="Start" WidthRequest="80" />
+                        <Label Text="Achternaam" VerticalOptions="Center" HorizontalOptions="Start" WidthRequest="80" />
                         <Entry x:Name="SurnameCell" VerticalOptions="Center" 
                                HorizontalOptions="FillAndExpand" />
                     </StackLayout>
                 </ViewCell>
                 <ViewCell>
                     <StackLayout Orientation="Horizontal" Padding="20, 0, 20, 0">
-                        <Label Text="Birthday" VerticalOptions="Center" HorizontalOptions="Start" WidthRequest="80" />
-                        <DatePicker x:Name="BirthdayCell" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/> 
+                        <Label Text="Geboorte datum" VerticalOptions="Center" HorizontalOptions="Start" WidthRequest="80" />
+                        <DatePicker x:Name="BirthdayCell" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
                     </StackLayout>
                 </ViewCell>
             </TableSection>
@@ -41,7 +41,7 @@
             <TableSection>
                 <ViewCell>
                     <StackLayout Orientation="Horizontal" Padding="20, 0, 20, 0">
-                        <Button BackgroundColor="{StaticResource buttonBackground}" TextColor="White" Text="Done" Clicked="DoneButton_OnClicked" />
+                        <Button BackgroundColor="{StaticResource buttonBackground}" TextColor="White" Text="Opslaan" Clicked="DoneButton_OnClicked" />
                     </StackLayout>
                 </ViewCell>
             </TableSection>

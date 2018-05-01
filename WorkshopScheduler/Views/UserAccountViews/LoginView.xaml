@@ -11,18 +11,18 @@
 
     <AbsoluteLayout>
 
-       
+
         <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1"  Spacing="20" Padding="20, 0, 20, 0">
             <BoxView HeightRequest="10" />
-            <Label Text="Welcome to InspiratiePunt" TextColor="{StaticResource primaryText}"
+            <Label Text="Welkom bij InspiratiePunt" TextColor="{StaticResource primaryText}"
                    FontSize="25" HorizontalOptions="Center" />
             <BoxView HeightRequest="10" />
-            <Label Text="Login" TextColor="{StaticResource primaryText}" FontSize="20" />
+            <Label Text="Gebruikersnaam" TextColor="{StaticResource primaryText}" FontSize="20" />
             <Entry x:Name="Login" />
-            <Label Text="Password" TextColor="{StaticResource primaryText}" FontSize="20" />
+            <Label Text="Wachtwoord" TextColor="{StaticResource primaryText}" FontSize="20" />
             <Entry x:Name="Password" IsPassword="True" />
             <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                <Button x:Name="CreateAccountButton" Text="Create Account"
+                <Button x:Name="CreateAccountButton" Text="Account aanmaken"
                         Clicked="CreateAccountButton_OnClicked"
                         BackgroundColor="{StaticResource buttonBackground}" TextColor="White" />
                 <Button x:Name="LogInButton" Text="Log In" Clicked="LogInButton_OnClicked"
@@ -32,5 +32,5 @@
         <ActivityIndicator AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0.5, 0.5, 60, 60" x:Name="ActivityIndicator" IsVisible="False" IsRunning="False"/>
 
     </AbsoluteLayout>
-    
+
 </ContentPage>

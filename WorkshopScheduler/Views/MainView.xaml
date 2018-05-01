@@ -9,11 +9,11 @@
             BarTextColor="{StaticResource primaryText}"
             Title="WorkshopScheduler"
                >
-    
-    <local:WorkshopBrowser x:Name="WorkshopBrowser" Title="All"  Icon="ic_tab_event_free.png" />
-    <local:ReservedBrowser x:Name="ReservedBrowser"  Title="Reserved" Icon="ic_tab_event_checked.png"/>
-    <local:ProfilePage x:Name="ProfilePage" Title="Profile" Icon="ic_tab_person.png"/>
-    <local:SettingsPage x:Name="SettingsPage" Title="Setting" Icon="ic_tab_settings.png"/>
+
+    <local:WorkshopBrowser x:Name="WorkshopBrowser" Title="Alles"  Icon="ic_tab_event_free.png" />
+    <local:ReservedBrowser x:Name="ReservedBrowser"  Title="Gereserved" Icon="ic_tab_event_checked.png"/>
+    <local:ProfilePage x:Name="ProfilePage" Title="Profiel" Icon="ic_tab_person.png"/>
+    <local:SettingsPage x:Name="SettingsPage" Title="Instellingen" Icon="ic_tab_settings.png"/>
 
 
 </TabbedPage>

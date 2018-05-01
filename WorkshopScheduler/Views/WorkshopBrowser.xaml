@@ -2,19 +2,19 @@
 <ContentPage  BackgroundColor="{StaticResource backgroundColor}" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="WorkshopScheduler.Views.WorkshopBrowser">
     <ContentPage.Padding>
          <OnPlatform x:TypeArguments="Thickness">
-            <On Platform="iOS" Value="0, 30, 0, 0" />
+            <On Platform="iOS" Value="0, 40, 0, 0" />
             <On Platform="Droid" Value="0, 0, 0, 0"/>
         </OnPlatform>
     </ContentPage.Padding>
 
-    
+
     <ContentPage.Content>
         <StackLayout MinimumWidthRequest='1' >
-             <AbsoluteLayout BackgroundColor="{StaticResource backgroundColor}">
-                    <SearchBar MinimumWidthRequest='1'  AbsoluteLayout.LayoutBounds="0, 0, 0.9, 1" AbsoluteLayout.LayoutFlags="All" x:Name="SearchWorkshop" Placeholder="Search workshops" BackgroundColor="{StaticResource backgroundColor}" PropertyChanged="SearchWorkshop_OnPropertyChanged" />
-                    <Button MinimumWidthRequest='1'  AbsoluteLayout.LayoutBounds="1, 0, 0.1, 1" AbsoluteLayout.LayoutFlags="All" x:Name="sortingsButton" Image="ic_tab_settings" Clicked="SortingsButton_OnClicked" BackgroundColor="{StaticResource backgroundColor}" />
-              </AbsoluteLayout>
-            
+            <AbsoluteLayout BackgroundColor="{StaticResource backgroundColor}">
+                <SearchBar MinimumWidthRequest='1'  AbsoluteLayout.LayoutBounds="0, 0, 0.9, 1" AbsoluteLayout.LayoutFlags="All" x:Name="SearchWorkshop" Placeholder="Zoeken" BackgroundColor="{StaticResource backgroundColor}" PropertyChanged="SearchWorkshop_OnPropertyChanged" />
+                <Button MinimumWidthRequest='1'  AbsoluteLayout.LayoutBounds="1, 0, 0.1, 1" AbsoluteLayout.LayoutFlags="All" x:Name="sortingsButton" Image="ic_tab_settings" Clicked="SortingsButton_OnClicked" BackgroundColor="{StaticResource backgroundColor}" />
+            </AbsoluteLayout>
+
             <ActivityIndicator x:Name="ActivityIndicator" IsVisible="True" IsRunning="True"/>
             <ListView x:Name="WorkshopsListView" IsPullToRefreshEnabled="True" Refreshing="WorkshopsListView_OnRefreshing" HasUnevenRows="true" ItemSelected="WorkshopsListView_OnItemSelected" BackgroundColor="{StaticResource backgroundColor}" IsVisible="False">
                 <ListView.ItemTemplate>

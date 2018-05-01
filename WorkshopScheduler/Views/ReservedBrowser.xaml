@@ -3,16 +3,16 @@
              x:Class="WorkshopScheduler.Views.ReservedBrowser" 
              BackgroundColor="{StaticResource backgroundColor}"
              >
-        <ContentPage.Padding>
-         <OnPlatform x:TypeArguments="Thickness">
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
             <On Platform="iOS" Value="0, 30, 0, 0" />
-         </OnPlatform>
+        </OnPlatform>
     </ContentPage.Padding>
 
     <ContentPage.Content>
         <StackLayout>
-            <SearchBar x:Name="SearchWorkshop" Placeholder="Search workshops"   BackgroundColor="{StaticResource backgroundColor}" PropertyChanged="SearchWorkshop_OnPropertyChanged" />
-             <Button x:Name="sortingsButton" Text="sorting" Clicked="SortingsButton_OnClicked" BackgroundColor="{StaticResource backgroundColor}"/>
+            <SearchBar x:Name="SearchWorkshop" Placeholder="Zoeken"   BackgroundColor="{StaticResource backgroundColor}" PropertyChanged="SearchWorkshop_OnPropertyChanged" />
+            <Button x:Name="sortingsButton" Text="Sorteren" Clicked="SortingsButton_OnClicked" BackgroundColor="{StaticResource backgroundColor}"/>
             <ListView x:Name="WorkshopsListView" HasUnevenRows="true" ItemSelected="WorkshopsListView_OnItemSelected" BackgroundColor="{StaticResource backgroundColor}">
                 <ListView.ItemTemplate>
                     <DataTemplate>

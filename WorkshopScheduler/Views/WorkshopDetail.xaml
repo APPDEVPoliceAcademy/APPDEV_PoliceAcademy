@@ -4,12 +4,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WorkshopScheduler.Views.WorkshopDetail">
 
-      <ContentPage.Padding>
+    <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness">
             <On Platform="iOS" Value="0, 40, 0, 0" />
         </OnPlatform>
     </ContentPage.Padding>
-    
+
     <ContentPage.Content>
         
         <AbsoluteLayout>
@@ -74,5 +74,6 @@
             
 </AbsoluteLayout>
         
+
     </ContentPage.Content>
 </ContentPage>
