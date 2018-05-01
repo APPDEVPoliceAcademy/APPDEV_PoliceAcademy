@@ -19,19 +19,22 @@ namespace WorkshopScheduler.Views
   
         ObservableCollection<WorkshopDTO> workshopsList;
         ObservableCollection<WorkshopDTO> displayList;
+        Sorting sortings = new Sorting();
+        Filters filters = new Filters();
         FiltersModalView filtersView;
         private RestService _restService;
         public event EventHandler<WorkshopDTO> UserEnrolled;
         public event EventHandler<WorkshopDTO> UserDisenrolled;
+        public event EventHandler<WorkshopDTO> WorkshopEvaluated;
 
 
         public WorkshopBrowser()
         {
             InitializeComponent();
 
-            Sorting sortings = new Sorting();
-            Filters filters = new Filters();
+           
             filtersView = new FiltersModalView();
+
 
             filtersView.SortingChanged += (o, sortingChosen) =>
             {
@@ -73,7 +76,7 @@ namespace WorkshopScheduler.Views
 
             filtersView.WeeksFilterChanged += (o, flag) =>
             {
-                displayList = filters.FilterBy12weeks(workshopsList, flag);
+                displayList = filters.FilterBy12Weeks(workshopsList, flag);
                 WorkshopsListView.ItemsSource = displayList;
             };
 
@@ -116,13 +119,17 @@ namespace WorkshopScheduler.Views
                 if (workshopsResponse.ResponseCode == HttpStatusCode.OK)
                 {
                     workshopsList = new ObservableCollection<WorkshopDTO>(workshopsResponse.Value);
-                    displayList = workshopsList;
+                   // displayList = workshopsList;
                     ActivityIndicator.IsRunning = false;
                     ActivityIndicator.IsVisible = false;
                     WorkshopsListView.IsVisible = true;
 
+                    //apply default sorting & display only future events
+                    displayList = sortings.ByDateAscending(filters.FilterByDate(workshopsList, new DateTime[] { DateTime.Now, DateTime.Now.AddYears(1) }));
+                   
                 }
-                WorkshopsListView.ItemsSource = workshopsList;
+
+                WorkshopsListView.ItemsSource = displayList;
             }
             
 
@@ -130,6 +137,10 @@ namespace WorkshopScheduler.Views
 
         private void SearchWorkshop_OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+
+            if (workshopsList == null)
+                return;
+
             if (SearchWorkshop.Text != null)
             {
                 WorkshopsListView.ItemsSource = displayList.Where(x =>
@@ -138,7 +149,8 @@ namespace WorkshopScheduler.Views
             }
             else
             {
-                WorkshopsListView.ItemsSource = workshopsList;
+                displayList = sortings.ByDateAscending(filters.FilterByDate(workshopsList, new DateTime[] { DateTime.Now, DateTime.Now.AddYears(1) }));
+                WorkshopsListView.ItemsSource = displayList;
             }
         }
 
@@ -166,10 +178,15 @@ namespace WorkshopScheduler.Views
             if (workshopsResponse.ResponseCode == HttpStatusCode.OK)
             {
                 workshopsList = new ObservableCollection<WorkshopDTO>(workshopsResponse.Value);
-                displayList = workshopsList;
+               // displayList = workshopsList;
                 WorkshopsListView.IsRefreshing = false;
+
+                //apply default sorting & display only future events
+                displayList = sortings.ByDateAscending(filters.FilterByDate(workshopsList, new DateTime[] { DateTime.Now, DateTime.Now.AddYears(1) }));
+
             }
-            WorkshopsListView.ItemsSource = workshopsList;
+           
+            WorkshopsListView.ItemsSource = displayList;
         }
 
         async void SortingsButton_OnClicked(object sender, System.EventArgs e)
@@ -197,18 +214,29 @@ namespace WorkshopScheduler.Views
                 workshopDto.IsEnrolled = false;
                 UserDisenrolled?.Invoke(this, workshopDto);
             };
+            workshopDetailpage.WorkshopEvaluated += (o, workshop) =>
+            {
+                var workshopDto = workshopsList.FirstOrDefault(dto => dto.Id == workshop.Id);
+                if (workshopDto != null) workshopDto.IsEvaluated = true;
+                WorkshopEvaluated?.Invoke(this, workshopDto);
 
+            };
             await Navigation.PushModalAsync(workshopDetailpage);
             WorkshopsListView.SelectedItem = null;
         }
 
         //Handler For Disenrolling
-        public void OnWorkshopDisenrolled(object sender, WorkshopDTO workshopDto)
+        public void OnUserDisenrolled(object sender, WorkshopDTO workshopDto)
         {
             var workshop = workshopsList.FirstOrDefault(dto => dto.Id == workshopDto.Id);
-            workshop.IsEnrolled = false;
+            if (workshop != null) workshop.IsEnrolled = false;
         }
 
-       
+        //Handler for workshop evalauation from reserved browser
+        public void OnWorkshopEvaluated(object sender, WorkshopDTO workshopDto)
+        {
+            var workshop = workshopsList.FirstOrDefault(dto => dto.Id == workshopDto.Id);
+            if (workshop != null) workshop.IsEvaluated = true;
+        }       
     }
 }

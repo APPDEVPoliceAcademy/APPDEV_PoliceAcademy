@@ -11,48 +11,69 @@
     </ContentPage.Padding>
 
     <ContentPage.Content>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <ContentView BackgroundColor="#ebebeb" Grid.Row="0" Padding="0, 0, 0, 20">
-                <StackLayout>
-                    <StackLayout Orientation="Horizontal" >
-                        <Button x:Name="BackButton" Image="ic_action_keyboard_backspace.png" 
+        
+        <AbsoluteLayout>
+            <Grid AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" x:Name="GridView" IsVisible="False">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <ContentView BackgroundColor="#ebebeb" Grid.Row="0" Padding="0, 0, 0, 20">
+                    <StackLayout>
+                        <StackLayout Orientation="Horizontal" >
+                            <Button x:Name="BackButton" Image="ic_action_keyboard_backspace.png" 
                                 BackgroundColor="#ebebeb" Clicked="BackButton_OnClicked"
                                 BorderColor="Transparent" BorderWidth="0"/>
-                        <Label  Text="{Binding Title}" VerticalOptions="Center" TextColor="#444444" FontSize="20" />
+                            <Label  Text="{Binding Title}" VerticalOptions="Center" TextColor="#444444" FontSize="20" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                            <Image Source="ic_place.png"   VerticalOptions="Center"  />
+                            <Label Text="{Binding Place}"  VerticalOptions="Center" TextColor="#444444" FontSize="10" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" >
+                            <Image Source="ic_person.png"      VerticalOptions="Center" />
+                            <Label Text="{Binding Coach}" VerticalOptions="Center" TextColor="#444444" FontSize="10" />
+                        </StackLayout>
                     </StackLayout>
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                        <Image Source="ic_place.png"   VerticalOptions="Center"  />
-                        <Label Text="{Binding Place}"  VerticalOptions="Center" TextColor="#444444" FontSize="10" />
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" >
-                        <Image Source="ic_person.png"      VerticalOptions="Center" />
-                        <Label Text="{Binding Coach}" VerticalOptions="Center" TextColor="#444444" FontSize="10" />
-                    </StackLayout>
-                </StackLayout>
-            </ContentView>
-            <ContentView BackgroundColor="#f7f6f6" Opacity="0.8" Grid.Row="1" Padding="20, 20, 20, 20">
-                <StackLayout>
-                    <Label Text="{Binding Description}" VerticalOptions="StartAndExpand"  />
-                    <StackLayout  Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="End">
-                        <Image Source="ic_calendar.png" Aspect="AspectFit"/>
-                        <Label Text="{Binding Date,
+                </ContentView>
+                <ContentView BackgroundColor="#f7f6f6" Opacity="0.8" Grid.Row="1" Padding="20, 20, 20, 20">
+                    <StackLayout>
+                        <Label Text="{Binding Description}" VerticalOptions="StartAndExpand"  />
+                        <StackLayout  Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="End">
+                            <Image Source="ic_calendar.png" Aspect="AspectFit"/>
+                            <Label Text="{Binding Date,
                          StringFormat='{0:MMMM dd, yyyy}'}"/>
-                        <Image Source="ic_warning.png" IsVisible="{Binding IsWithin12Weeks}"></Image>
+                            <Image Source="ic_warning.png" IsVisible="{Binding IsWithin12Weeks}"></Image>
+                        </StackLayout>
                     </StackLayout>
-                </StackLayout>
-            </ContentView>
-            <ContentView BackgroundColor="#ebebeb" Grid.Row="2">
-                <StackLayout>
-                    <Button x:Name="ApplyButton" Text="Apply" BackgroundColor="{StaticResource buttonBackground}" TextColor="White"  Clicked="ApplyButton_OnClicked" IsVisible="{Binding IsNotEnrolled}"/>
-                    <Button x:Name="DisenrollButton" Text="Disenroll" BackgroundColor="{StaticResource buttonBackground}" TextColor="White" Clicked="DisenrollButton_OnClicked" IsVisible="{Binding IsEnrolled}"/>
-                </StackLayout>
+                </ContentView>
+                <ContentView BackgroundColor="#ebebeb" Grid.Row="2">
+                    <StackLayout>
+                        <Button x:Name="ApplyButton" Text="Apply" BackgroundColor="{StaticResource buttonBackground}" TextColor="White"  Clicked="ApplyButton_OnClicked"/>
+                        <Button x:Name="DisenrollButton" Text="Disenroll" BackgroundColor="{StaticResource buttonBackground}" TextColor="White" Clicked="DisenrollButton_OnClicked"/>
+                        <Button x:Name="EvaluateButton" Text="Evaluate" BackgroundColor="{StaticResource buttonBackground}" TextColor="White" Clicked="EvaluateButton_OnClicked"/>
+                    </StackLayout>
 
-            </ContentView>
-        </Grid>
+                </ContentView>
+            </Grid>
+            <StackLayout x:Name="WebStackLayout" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" IsVisible="False">
+                <RelativeLayout x:Name="WebViewLayout">
+                    <Button x:Name="CloseWebView" BackgroundColor="{StaticResource buttonBackground}" TextColor="White" Clicked="CloseWebView_OnClicked" Text="Finish" 
+                            RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
+                            Property=Height, Factor=0.1}"
+                            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                            Property=Width, Factor=1}"
+                            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                            Property=Height, Factor=0.9}"/>
+                    
+                </RelativeLayout>
+                
+            </StackLayout>
+            <ActivityIndicator AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0.5, 0.5, 60, 60" x:Name="ActivityIndicator" IsVisible="True" IsRunning="True"/>
+            
+</AbsoluteLayout>
+        
+
     </ContentPage.Content>
 </ContentPage>

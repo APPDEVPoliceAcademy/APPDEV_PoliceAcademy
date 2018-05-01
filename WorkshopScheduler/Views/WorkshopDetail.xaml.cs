@@ -18,7 +18,8 @@ namespace WorkshopScheduler.Views
     {
         public event EventHandler<Workshop> UserEnrolled;
         public event EventHandler<Workshop> UserDisenrolled;
-        private  List<Workshop> cachedWorkshops = new List<Workshop>();
+        public event EventHandler<Workshop> WorkshopEvaluated;
+        private static  List<Workshop> cachedWorkshops = new List<Workshop>();
         private IRestService _restService = new RestService();
         private int _currentWorkshopID;
         private Workshop _currentWorkshop;
@@ -31,13 +32,15 @@ namespace WorkshopScheduler.Views
 
         protected override async void OnAppearing()
         {
+            base.OnAppearing();
+
             //if workshop is already cached
 
             var cachedWorkshop = cachedWorkshops?.FirstOrDefault(workshop => workshop.Id == _currentWorkshopID);
             if (cachedWorkshop != null)
             {
                 _currentWorkshop = cachedWorkshop;
-
+                HideIndicator();
             }
 
             else
@@ -63,12 +66,14 @@ namespace WorkshopScheduler.Views
                 {
                     _currentWorkshop = workshopsResponse.Value;
                     cachedWorkshops?.Add(_currentWorkshop);
+                    HideIndicator();
                 }
-                //}
-
-                BindingContext = _currentWorkshop;
-                base.OnAppearing();
+                
             }
+            BindingContext = _currentWorkshop;
+
+            setButtons();
+
         }
 
 
@@ -140,5 +145,101 @@ namespace WorkshopScheduler.Views
                 await Navigation.PopModalAsync();
             }
         }
+
+        private async void CloseWebView_OnClicked(object sender, EventArgs e)
+        {
+            var decision = await DisplayAlert("Warning", "Have you fulfiled evaluation form?", "Yes", "No");
+            if (decision)
+            {
+                var restResponse = await _restService.EvaluateWorkshop(_currentWorkshopID);
+                if (restResponse.ResponseCode == null)
+                {
+                    await DisplayAlert("Error",
+                        restResponse.ErrorMessage + "\nMake sure that you have internet connection", "Ok");
+                    return;
+                }
+
+                if (restResponse.ResponseCode == HttpStatusCode.Unauthorized)
+                {
+                    //Check token validation additionaly
+                    await DisplayAlert("Error", "Your session has expired. You will be redirected to log in", "Ok");
+                    Application.Current.MainPage = new LoginView();
+                }
+
+                if (restResponse.ResponseCode == HttpStatusCode.OK)
+                {
+                    WorkshopEvaluated?.Invoke(this, _currentWorkshop);
+                    _currentWorkshop.IsEvaluated = true;
+                    EvaluateButton.IsVisible = false;
+                }
+            }
+
+            WebStackLayout.IsVisible = false;
+        }
+
+        private void EvaluateButton_OnClicked(object sender, EventArgs e)
+        {
+
+
+
+            WebViewLayout.Children.Add(new WebView()
+                {
+                    Source = _currentWorkshop.EvaluationUri,
+                    HeightRequest = 1000,
+                    WidthRequest = 800
+                },
+                widthConstraint: Constraint.RelativeToParent(layout => layout.Width),
+                heightConstraint: Constraint.RelativeToParent(layout => layout.Height * 0.9));
+            WebStackLayout.IsVisible = true;
+        }
+
+
+        private void HideIndicator()
+        {
+            ActivityIndicator.IsRunning = false;
+            ActivityIndicator.IsVisible = false;
+            GridView.IsVisible = true;
+        }
+
+        private void setButtons()
+        {
+            // This is past workshop
+            if (_currentWorkshop.Date < DateTime.Now)
+            {
+                ApplyButton.IsVisible = false;
+                DisenrollButton.IsVisible = false;
+                //User took part and did not evaluate workshop
+                if (_currentWorkshop.IsEnrolled && !_currentWorkshop.IsEvaluated)
+                {
+                    EvaluateButton.IsVisible = true;
+                }
+                //User eitheir did not take part or did evaluate it already 
+                else
+                {
+                    EvaluateButton.IsVisible = false;
+                }
+                
+            }
+            //It's future workshop
+            else
+            {
+                EvaluateButton.IsVisible = false;
+                //User is enrolled, show option to disenroll
+                if (_currentWorkshop.IsEnrolled)
+                {
+                    ApplyButton.IsVisible = false;
+                    DisenrollButton.IsVisible = true;
+                }
+                //User is not enrolled, show option to enroll
+                else
+                {
+                    ApplyButton.IsVisible = true;
+                    DisenrollButton.IsVisible = false;
+                }
+            }
+        }
+
+
+     
     }
 }

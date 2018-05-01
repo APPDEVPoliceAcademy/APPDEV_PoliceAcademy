@@ -24,5 +24,7 @@ namespace WorkshopScheduler.RestLogic
         Task<RestResponse<Boolean>> EnrollUser(int workshopId);
 
         Task<RestResponse<Boolean>> DisenrollUser(int workshopId);
+
+        Task<RestResponse<Boolean>> EvaluateWorkshop(int workshopId);
     }
 }
