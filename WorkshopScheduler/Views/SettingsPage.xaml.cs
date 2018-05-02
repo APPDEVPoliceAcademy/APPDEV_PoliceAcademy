@@ -36,8 +36,8 @@ namespace WorkshopScheduler.Views
                  var email = new EmailMessageBuilder()
                   .To("wyrzuc.maciej@gmail.com")
                   .Cc("krymarys.jakub@gmail.com")
-                    .Subject("Test")
-                    .BodyAsHtml("<h1> TEST </h1> <br> Can I go to this party... <br> <h3>MOOOOOM PLEEEAASE</h3>")
+                    .Subject("Ik heb een Idee")
+                    .BodyAsHtml("Below please discribe concisely the vision of workshop you have")
                   .Build();
                  Task.Delay(100);
                 emailMessenger.SendEmail(email);
