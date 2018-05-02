@@ -18,12 +18,12 @@ namespace WorkshopScheduler.RestLogic
 {
     public class RestService : IRestService
     {
-#if DEBUG
-        private const string RestUri = "http://10.0.2.2:58165/";
+//#if DEBUG
+//        private const string RestUri = "http://10.0.2.2:58165/";
 
-#else
+//#else
         private const string RestUri = "https://restnet.conveyor.cloud/";
-#endif
+//#endif
 
         private const string RestUserInfo = "api/user/me";
         private const string RestAuthUri = "token";
