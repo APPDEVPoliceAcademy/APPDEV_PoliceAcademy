@@ -1,6 +1,7 @@
 ﻿using System;
 using WorkshopScheduler.Logic;
 using WorkshopScheduler.Models;
+using WorkshopScheduler.RestLogic;
 using Xamarin.Forms;
 using WorkshopScheduler.Views;
 using WorkshopScheduler.Views.UserAccountViews;
@@ -21,6 +22,8 @@ namespace WorkshopScheduler
         public App()
         {
             InitializeComponent();
+           
+
             if (TokenManager.IsTokenValid())
             {
                 MainPage = new MainView();
@@ -33,9 +36,10 @@ namespace WorkshopScheduler
 
         }
 
-        protected override void OnStart()
+        protected override async void OnStart()
         {
-            
+            IRestService restService = new RestService();
+            await restService.SaveFile("http://szgrabowski.kis.p.lodz.pl/zpo17/lab02.pdf", "lab02.pdf");
             // Handle when your app starts
         }
 

@@ -26,5 +26,7 @@ namespace WorkshopScheduler.RestLogic
         Task<RestResponse<Boolean>> DisenrollUser(int workshopId);
 
         Task<RestResponse<Boolean>> EvaluateWorkshop(int workshopId);
+
+        Task<RestResponse<Boolean>> SaveFile(string fileUri, string filename);
     }
 }

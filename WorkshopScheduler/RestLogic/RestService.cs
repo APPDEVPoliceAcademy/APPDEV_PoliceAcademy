@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using PCLStorage;
 using WorkshopScheduler.Logic;
 using WorkshopScheduler.Models;
 using Xamarin.Forms;
@@ -72,6 +73,7 @@ namespace WorkshopScheduler.RestLogic
             {
                 restResponse.ErrorMessage = ex.Message;
             }
+
             return restResponse;
         }
 
@@ -105,7 +107,7 @@ namespace WorkshopScheduler.RestLogic
             {
                 restResponse.ErrorMessage = ex.Message;
             }
-  
+
             return restResponse;
         }
 
@@ -126,7 +128,7 @@ namespace WorkshopScheduler.RestLogic
                 if (response.IsSuccessStatusCode)
                 {
                     var responseContent = await response.Content.ReadAsStringAsync();
-                    var workshop = JsonConvert.DeserializeObject<Workshop>(responseContent);  
+                    var workshop = JsonConvert.DeserializeObject<Workshop>(responseContent);
                     restResponse.Value = workshop;
                 }
                 else
@@ -139,6 +141,7 @@ namespace WorkshopScheduler.RestLogic
             {
                 restResponse.ErrorMessage = ex.Message;
             }
+
             return restResponse;
         }
 
@@ -370,5 +373,44 @@ namespace WorkshopScheduler.RestLogic
             return restResponse;
         }
 
+        public async Task<RestResponse<bool>> SaveFile(string fileUri, string filename)
+        {
+            var restResponse = new RestResponse<bool>();
+            var request = new HttpRequestMessage()
+            {
+                RequestUri = new Uri(fileUri),
+                Method = HttpMethod.Get,
+            };
+            try
+            {
+                var response = await _client.SendAsync(request);
+                restResponse.ResponseCode = response.StatusCode;
+                if (response.IsSuccessStatusCode)
+                {
+                    restResponse.Value = true;
+                    var content = await response.Content.ReadAsByteArrayAsync();
+                    var rootFolder = FileSystem.Current.LocalStorage;
+                    var folder = await rootFolder.CreateFolderAsync("MySubFolder",
+                        CreationCollisionOption.OpenIfExists);
+                    var file = await folder.CreateFileAsync(filename,
+                        CreationCollisionOption.ReplaceExisting);
+                    using (System.IO.Stream stream = await file.OpenAsync(FileAccess.ReadAndWrite))
+                    {
+                        stream.Write(content, 0, content.Length);
+                    }
+                }
+                else
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    restResponse.ErrorMessage = content;
+                }
+            }
+            catch (Exception ex)
+            {
+                restResponse.ErrorMessage = ex.Message;
+            }
+
+            return restResponse;
+        }
     }
 }
