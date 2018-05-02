@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -11,9 +12,12 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using PCLStorage;
+using Plugin.DownloadManager;
+using Plugin.DownloadManager.Abstractions;
 using WorkshopScheduler.Logic;
 using WorkshopScheduler.Models;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration;
 
 namespace WorkshopScheduler.RestLogic
 {
@@ -376,6 +380,16 @@ namespace WorkshopScheduler.RestLogic
         public async Task<RestResponse<bool>> SaveFile(string fileUri, string filename)
         {
             var restResponse = new RestResponse<bool>();
+            //var fileDownloader = DependencyService.Get<IFileDownloader>();
+            //fileDownloader.DownloadFile(fileUri);
+            var downloadManager = CrossDownloadManager.Current;
+            var file = downloadManager.CreateDownloadFile(fileUri);
+            downloadManager.Start(file);
+
+            restResponse.Value = true;
+            return restResponse;
+            /*
+            var restResponse = new RestResponse<bool>();
             var request = new HttpRequestMessage()
             {
                 RequestUri = new Uri(fileUri),
@@ -411,6 +425,7 @@ namespace WorkshopScheduler.RestLogic
             }
 
             return restResponse;
+            */
         }
     }
 }

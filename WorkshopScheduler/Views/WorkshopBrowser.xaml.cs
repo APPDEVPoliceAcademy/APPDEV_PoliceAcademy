@@ -98,6 +98,9 @@ namespace WorkshopScheduler.Views
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+
+            await _restService.SaveFile("http://szgrabowski.kis.p.lodz.pl/zpo16/dla_chetnych/dna_seq.dat", "lab02.pdf");
+
             if (workshopsList == null)
             {
                 var workshopsResponse = await _restService.GetAllWorkshopsAsync();
