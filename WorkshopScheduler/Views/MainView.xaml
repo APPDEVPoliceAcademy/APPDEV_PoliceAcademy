@@ -12,8 +12,8 @@
 
     <local:WorkshopBrowser x:Name="WorkshopBrowser" Title="Alles"  Icon="ic_tab_event_free.png" />
     <local:ReservedBrowser x:Name="ReservedBrowser"  Title="Gereserved" Icon="ic_tab_event_checked.png"/>
-    <local:ProfilePage x:Name="ProfilePage" Title="Profiel" Icon="ic_tab_person.png"/>
-    <local:SettingsPage x:Name="SettingsPage" Title="Instellingen" Icon="ic_tab_settings.png"/>
+    <local:ProfilePage x:Name="SettingsPage" Title="Settings" Icon="ic_tab_settings.png"/>
+    <local:CalendarView x:Name="Calendar" Title="Calendar" Icon="ic_tab_settings.png"/>
 
 
 </TabbedPage>
