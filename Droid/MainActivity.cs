@@ -34,7 +34,8 @@ namespace WorkshopScheduler.Droid
                 return Path.Combine(ApplicationContext.GetExternalFilesDir(Android.OS.Environment.DirectoryDownloads).AbsolutePath, fileName);
             });
 
-            (CrossDownloadManager.Current as DownloadManagerImplementation).NotificationVisibility = DownloadVisibility.Visible;
+            (CrossDownloadManager.Current as DownloadManagerImplementation).NotificationVisibility =
+                DownloadVisibility.VisibleNotifyCompleted;
 
 
         }

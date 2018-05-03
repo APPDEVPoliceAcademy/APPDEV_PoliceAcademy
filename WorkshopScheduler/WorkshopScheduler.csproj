@@ -64,6 +64,7 @@
     <Compile Include="Logic\IFileDownloader.cs" />
     <Compile Include="Logic\Filters.cs" />
     <Compile Include="Logic\TokenManager.cs" />
+    <Compile Include="Models\Link.cs" />
     <Compile Include="Models\TokenInfo.cs" />
     <Compile Include="Models\UserInfo.cs" />
     <Compile Include="Models\WorkshopDTO.cs" />
