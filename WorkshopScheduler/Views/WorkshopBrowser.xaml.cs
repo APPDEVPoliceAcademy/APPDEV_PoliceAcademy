@@ -13,11 +13,32 @@ using WorkshopScheduler.Views.UserAccountViews;
 
 namespace WorkshopScheduler.Views
 {
+    public struct SettingsToApply
+    {
+        public bool weeksFilter;
+        public bool datesFilter;
+        public DateTime[] dates;
+        public bool unitFilter;
+        public Unit unit;
+        public SortingsEnum chosenSorting;
+
+        public SettingsToApply(bool weeksFilter, bool datesFilter, DateTime[] dates, bool unitFilter, Unit unit)
+        {
+            this.weeksFilter = weeksFilter;
+            this.datesFilter = datesFilter;
+            this.dates = dates;
+            this.unitFilter = unitFilter;
+            this.unit = unit;
+            this.chosenSorting = SortingsEnum.ByDateDescending;
+        }
+    }
+
     public partial class WorkshopBrowser : ContentPage
     {
 
-  
-        ObservableCollection<WorkshopDTO> workshopsList;
+
+        ObservableCollection<WorkshopDTO> workshopListOnlyFuture;
+        ObservableCollection<WorkshopDTO> workshopsRawList;
         ObservableCollection<WorkshopDTO> displayList;
         Sorting sortings = new Sorting();
         Filters filters = new Filters();
@@ -26,74 +47,110 @@ namespace WorkshopScheduler.Views
         public event EventHandler<WorkshopDTO> UserEnrolled;
         public event EventHandler<WorkshopDTO> UserDisenrolled;
         public event EventHandler<WorkshopDTO> WorkshopEvaluated;
-
+        SettingsToApply chosenSettings;
 
         public WorkshopBrowser()
         {
             InitializeComponent();
 
-           
+
             filtersView = new FiltersModalView();
+            chosenSettings = new SettingsToApply(false, false, null, false, Unit.None);
 
 
             filtersView.SortingChanged += (o, sortingChosen) =>
             {
-               // displayList = null;
-
-                switch (sortingChosen)
-                {
-                    case SortingsEnum.ByDateAscending:
-                        displayList = sortings.ByDateAscending(workshopsList);
-                        break;
-                    case SortingsEnum.ByDateDescending:
-                        displayList = sortings.ByDateDescending(workshopsList);
-                        break;
-                    case SortingsEnum.ByTitleAscending:
-                        displayList = sortings.ByTitleAscending(workshopsList);
-                        break;
-                    case SortingsEnum.ByTitleDescending:
-                        displayList = sortings.ByTitleDescending(workshopsList);
-                        break;
-                    case SortingsEnum.None:
-                        displayList = workshopsList;
-                        break;
-                    default:
-                        //DisplayAlert("couldn't match any", "", "ok");
-                        break;
-                };
-
-
-                WorkshopsListView.ItemsSource = displayList;
+                
+                WorkshopsListView.ItemsSource = applySorting(displayList,sortingChosen);
 
             };
 
             filtersView.DatesFilterChanged += (o, dates) =>
             {
-                displayList = filters.FilterByDate(workshopsList, dates);
-                WorkshopsListView.ItemsSource = displayList;
-                
+                //if(dates[0] < DateTime.Now.Date)
+                //    displayList = filters.FilterByDate(workshopsRawList, dates);
+                //else
+                //    displayList = filters.FilterByDate(displayList, dates);
+
+                //WorkshopsListView.ItemsSource = displayList;
+                chosenSettings.datesFilter = (chosenSettings.datesFilter == true) ? false : true;
+                if (chosenSettings.datesFilter)
+                    chosenSettings.dates = dates;
+               
+
             };
 
             filtersView.WeeksFilterChanged += (o, flag) =>
             {
-                displayList = filters.FilterBy12Weeks(workshopsList, flag);
-                WorkshopsListView.ItemsSource = displayList;
+                //displayList = filters.FilterBy12Weeks(displayList, flag);
+                //WorkshopsListView.ItemsSource = displayList;
+                chosenSettings.weeksFilter = (chosenSettings.weeksFilter == true) ? false : true;
             };
 
             filtersView.UnitFilterChanged += (o, place) =>
             {
-                displayList = filters.FilterByPlace(workshopsList, place.ToString());
-                WorkshopsListView.ItemsSource = displayList;
+                //displayList = filters.FilterByPlace(displayList, place.ToString());
+                //WorkshopsListView.ItemsSource = displayList;
+                chosenSettings.unitFilter = (chosenSettings.weeksFilter == true) ? false : true;
             };
 
-            filtersView.ResetSettings += (o, s) => {
-                displayList = workshopsList;
-                WorkshopsListView.ItemsSource = displayList;
+            filtersView.ResetSettings += (o, s) =>
+            {
+                //displayList = workshopListOnlyFuture;
+                //WorkshopsListView.ItemsSource = displayList;
+                chosenSettings = new SettingsToApply(false, false, null, false, Unit.None); //just to remove all filters
             };
 
             _restService = new RestService();
         }
 
+        private ObservableCollection<WorkshopDTO> applyFilters( ObservableCollection<WorkshopDTO>  _displayList)
+        {
+            if (chosenSettings.datesFilter)
+                _displayList = filters.FilterByDate(_displayList, chosenSettings.dates);
+            else
+                _displayList = filters.FilterByDate(workshopsRawList, new DateTime[] { DateTime.Now.Date, DateTime.Now.Date.AddYears(1) });
+
+
+            if (chosenSettings.weeksFilter)
+                _displayList = filters.FilterBy12Weeks(_displayList);
+
+          
+            if (chosenSettings.unitFilter)
+                _displayList = filters.FilterByPlace(_displayList, chosenSettings.unit.ToString());
+
+
+          return _displayList;
+        }
+
+        private ObservableCollection<WorkshopDTO> applySorting( ObservableCollection<WorkshopDTO> _displaylist, SortingsEnum sortingChosen)
+        {
+
+            switch (sortingChosen)
+            {
+                case SortingsEnum.ByDateAscending:
+                    _displaylist = sortings.ByDateAscending(displayList);
+                    break;
+                case SortingsEnum.ByDateDescending:
+                    _displaylist = sortings.ByDateDescending(displayList);
+                    break;
+                case SortingsEnum.ByTitleAscending:
+                    _displaylist = sortings.ByTitleAscending(displayList);
+                    break;
+                case SortingsEnum.ByTitleDescending:
+                    _displaylist = sortings.ByTitleDescending(displayList);
+                    break;
+                case SortingsEnum.None:
+                    _displaylist = workshopListOnlyFuture;
+                    break;
+                default:
+                    //DisplayAlert("couldn't match any", "", "ok");
+                    break;
+            };
+
+            return _displaylist;
+        }
+       
 
         protected override async void OnAppearing()
         {
@@ -101,12 +158,13 @@ namespace WorkshopScheduler.Views
 
            
 
-            if (workshopsList == null)
+            if (workshopsRawList == null)
             {
                 var workshopsResponse = await _restService.GetAllWorkshopsAsync();
 
                 if (workshopsResponse.ResponseCode == null)
                 {
+
                     await DisplayAlert("Error", workshopsResponse.ErrorMessage + "\nMake sure that you have internet connection", "Ok");
                     WorkshopsListView.ItemsSource = new ObservableCollection<WorkshopDTO>();
                 }
@@ -121,27 +179,30 @@ namespace WorkshopScheduler.Views
 
                 if (workshopsResponse.ResponseCode == HttpStatusCode.OK)
                 {
-                    workshopsList = new ObservableCollection<WorkshopDTO>(workshopsResponse.Value);
-                   // displayList = workshopsList;
+                    workshopsRawList = new ObservableCollection<WorkshopDTO>(workshopsResponse.Value);
+                    workshopListOnlyFuture = filters.FilterByDate(workshopsRawList, new DateTime[] { DateTime.Now.Date, DateTime.Now.Date.AddYears(1) }); //we are working only on future events here!
+
+
                     ActivityIndicator.IsRunning = false;
                     ActivityIndicator.IsVisible = false;
                     WorkshopsListView.IsVisible = true;
 
-                    //apply default sorting & display only future events
-                    displayList = sortings.ByDateAscending(filters.FilterByDate(workshopsList, new DateTime[] { DateTime.Now, DateTime.Now.AddYears(1) }));
-                   
+                    //apply default sorting
+                    displayList = applySorting(workshopListOnlyFuture, chosenSettings.chosenSorting);
+
                 }
 
-                WorkshopsListView.ItemsSource = displayList;
+
+                WorkshopsListView.ItemsSource = applyFilters(displayList);
             }
-            
+
 
         }
 
         private void SearchWorkshop_OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
 
-            if (workshopsList == null)
+            if (workshopListOnlyFuture == null)
                 return;
 
             if (SearchWorkshop.Text != null)
@@ -152,7 +213,7 @@ namespace WorkshopScheduler.Views
             }
             else
             {
-                displayList = sortings.ByDateAscending(filters.FilterByDate(workshopsList, new DateTime[] { DateTime.Now, DateTime.Now.AddYears(1) }));
+                displayList = sortings.ByDateAscending(workshopListOnlyFuture);
                 WorkshopsListView.ItemsSource = displayList;
             }
         }
@@ -180,16 +241,17 @@ namespace WorkshopScheduler.Views
 
             if (workshopsResponse.ResponseCode == HttpStatusCode.OK)
             {
-                workshopsList = new ObservableCollection<WorkshopDTO>(workshopsResponse.Value);
-               // displayList = workshopsList;
+                workshopsRawList = new ObservableCollection<WorkshopDTO>(workshopsResponse.Value);
+                workshopListOnlyFuture = filters.FilterByDate(workshopsRawList, new DateTime[] { DateTime.Now.Date, DateTime.Now.Date.AddYears(1) }); //we are working only on future events here!
+
                 WorkshopsListView.IsRefreshing = false;
 
-                //apply default sorting & display only future events
-                displayList = sortings.ByDateAscending(filters.FilterByDate(workshopsList, new DateTime[] { DateTime.Now, DateTime.Now.AddYears(1) }));
+                //apply default sorting 
+                //displayList = sortings.ByDateAscending(workshopListOnlyFuture);
 
             }
-           
-            WorkshopsListView.ItemsSource = displayList;
+
+            WorkshopsListView.ItemsSource = applySorting(applyFilters(workshopListOnlyFuture),chosenSettings.chosenSorting);
         }
 
         async void SortingsButton_OnClicked(object sender, System.EventArgs e)
@@ -207,7 +269,7 @@ namespace WorkshopScheduler.Views
             var workshopDetailpage = new WorkshopDetail(currentItem.Id);
             workshopDetailpage.UserEnrolled += (o, workshop) =>
             {
-                var workshopDto = workshopsList.FirstOrDefault(dto => dto.Id == workshop.Id);
+                var workshopDto = workshopListOnlyFuture.FirstOrDefault(dto => dto.Id == workshop.Id);
                 if (workshopDto != null)
                 {
                     workshopDto.IsEnrolled = true;
@@ -217,7 +279,7 @@ namespace WorkshopScheduler.Views
             };
             workshopDetailpage.UserDisenrolled += (o, workshop) =>
             {
-                var workshopDto = workshopsList.FirstOrDefault(dto => dto.Id == workshop.Id);
+                var workshopDto = workshopListOnlyFuture.FirstOrDefault(dto => dto.Id == workshop.Id);
                 if (workshopDto != null)
                 {
                     workshopDto.IsEnrolled = false;
@@ -227,7 +289,7 @@ namespace WorkshopScheduler.Views
             };
             workshopDetailpage.WorkshopEvaluated += (o, workshop) =>
             {
-                var workshopDto = workshopsList.FirstOrDefault(dto => dto.Id == workshop.Id);
+                var workshopDto = workshopListOnlyFuture.FirstOrDefault(dto => dto.Id == workshop.Id);
                 if (workshopDto != null) workshopDto.IsEvaluated = true;
                 WorkshopEvaluated?.Invoke(this, workshopDto);
 
@@ -239,7 +301,7 @@ namespace WorkshopScheduler.Views
         //Handler For Disenrolling
         public void OnUserDisenrolled(object sender, WorkshopDTO workshopDto)
         {
-            var workshop = workshopsList.FirstOrDefault(dto => dto.Id == workshopDto.Id);
+            var workshop = workshopListOnlyFuture.FirstOrDefault(dto => dto.Id == workshopDto.Id);
             if (workshop != null)
             {
                 workshop.IsEnrolled = false;
@@ -250,11 +312,11 @@ namespace WorkshopScheduler.Views
         //Handler for workshop evalauation from reserved browser
         public void OnWorkshopEvaluated(object sender, WorkshopDTO workshopDto)
         {
-            var workshop = workshopsList.FirstOrDefault(dto => dto.Id == workshopDto.Id);
+            var workshop = workshopListOnlyFuture.FirstOrDefault(dto => dto.Id == workshopDto.Id);
             if (workshop != null)
             {
                 workshop.IsEvaluated = true;
             }
-        }       
+        }
     }
 }

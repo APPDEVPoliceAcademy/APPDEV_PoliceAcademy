@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage BackgroundColor="{StaticResource backgroundColor}"   xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="WorkshopScheduler.Views.FiltersModalView">
+<ContentPage BackgroundColor="{StaticResource backgroundColor}" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="WorkshopScheduler.Views.FiltersModalView">
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness">
             <On Platform="iOS" Value="20, 40, 20, 20" />
-            <On Platform="Droid" Value="20, 20, 20, 20"/>
+            <On Platform="Droid" Value="20, 20, 20, 20" />
         </OnPlatform>
     </ContentPage.Padding>
     <ContentPage.Content>
@@ -25,12 +25,11 @@
                 <TableSection Title="Filters:">
                     <ViewCell>
                         <StackLayout Orientation="Horizontal">
-                            <DatePicker Style="Border:none" IsEnabled="{Binding On}" x:Name="startDate" />
-                            <DatePicker IsEnabled="{Binding On}" x:Name="endDate" />
+                            <DatePicker Style="Border:none" IsEnabled="{Binding On}" x:Name="startDate" PropertyChanged="DatePicker_OnChange" />
+                            <DatePicker IsEnabled="{Binding On}" x:Name="endDate" PropertyChanged="DatePicker_OnChange" />
                             <Switch HorizontalOptions="EndAndExpand" x:Name="datePickerSwitch" Toggled="OnDateSwitchToggled" />
                         </StackLayout>
                     </ViewCell>
-
                     <!-- ViewCell made on purpose, to achieve conisistent padding-->
                     <ViewCell>
                         <StackLayout Orientation="Horizontal">
@@ -40,13 +39,13 @@
                     </ViewCell>
                     <ViewCell>
                         <StackLayout Orientation="Horizontal">
-                            <Label VerticalOptions="Center" Text="Unit"/>
+                            <Label VerticalOptions="Center" Text="Unit" />
                             <Picker x:Name="PlacesPicker" HorizontalOptions="FillAndExpand" />
-                            <Switch HorizontalOptions="End"/>
+                            <Switch HorizontalOptions="End" />
                         </StackLayout>
                     </ViewCell>
                     <ViewCell>
-                        <Button  Text ="Standaart instellingen herstellen" Clicked="OnResetButtonClicked"/>
+                        <Button Text="Standaart instellingen herstellen" Clicked="OnResetButtonClicked" />
                     </ViewCell>
                 </TableSection>
             </TableRoot>
