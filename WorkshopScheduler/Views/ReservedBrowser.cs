@@ -74,7 +74,7 @@ namespace WorkshopScheduler.Views
 
             filtersView.WeeksFilterChanged += (o, flag) =>
             {
-                displayList = filters.FilterBy12Weeks(reservedList, flag);
+                displayList = filters.FilterBy12Weeks(reservedList);
                 WorkshopsListView.ItemsSource = displayList;
             };
 

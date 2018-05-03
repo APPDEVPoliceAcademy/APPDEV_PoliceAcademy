@@ -72,5 +72,11 @@ namespace WorkshopScheduler.Views
             ResetSettings(this, e);
             await Navigation.PopModalAsync();
         }
+
+        void DatePicker_OnChange(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (datePickerSwitch.IsToggled)
+                OnDateSwitchToggled(this, null);
+        }
     }
 }
