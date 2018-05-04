@@ -60,12 +60,12 @@ namespace WorkshopScheduler.Views
 
             filtersView.SortingChanged += (o, sortingChosen) =>
             {
-                
-                WorkshopsListView.ItemsSource = applySorting(displayList,sortingChosen);
+
+                chosenSettings.chosenSorting = sortingChosen;
 
             };
 
-            filtersView.DatesFilterChanged += (o, dates) =>
+            filtersView.DatesFilterChanged += (o, args) =>
             {
                 //if(dates[0] < DateTime.Now.Date)
                 //    displayList = filters.FilterByDate(workshopsRawList, dates);
@@ -73,9 +73,9 @@ namespace WorkshopScheduler.Views
                 //    displayList = filters.FilterByDate(displayList, dates);
 
                 //WorkshopsListView.ItemsSource = displayList;
-                chosenSettings.datesFilter = (chosenSettings.datesFilter == true) ? false : true;
+                chosenSettings.datesFilter = args.isOn;
                 if (chosenSettings.datesFilter)
-                    chosenSettings.dates = dates;
+                    chosenSettings.dates = args.dates;
                
 
             };
@@ -104,7 +104,7 @@ namespace WorkshopScheduler.Views
             _restService = new RestService();
         }
 
-        private ObservableCollection<WorkshopDTO> applyFilters( ObservableCollection<WorkshopDTO>  _displayList)
+        private ObservableCollection<WorkshopDTO> ApplyFilters( ObservableCollection<WorkshopDTO>  _displayList)
         {
             if (chosenSettings.datesFilter)
                 _displayList = filters.FilterByDate(_displayList, chosenSettings.dates);
@@ -123,26 +123,26 @@ namespace WorkshopScheduler.Views
           return _displayList;
         }
 
-        private ObservableCollection<WorkshopDTO> applySorting( ObservableCollection<WorkshopDTO> _displaylist, SortingsEnum sortingChosen)
+        private ObservableCollection<WorkshopDTO> ApplySorting( ObservableCollection<WorkshopDTO> _displaylist, SortingsEnum sortingChosen)
         {
 
             switch (sortingChosen)
             {
                 case SortingsEnum.ByDateAscending:
-                    _displaylist = sortings.ByDateAscending(displayList);
+                    _displaylist = sortings.ByDateAscending(_displaylist);
                     break;
                 case SortingsEnum.ByDateDescending:
-                    _displaylist = sortings.ByDateDescending(displayList);
+                    _displaylist = sortings.ByDateDescending(_displaylist);
                     break;
                 case SortingsEnum.ByTitleAscending:
-                    _displaylist = sortings.ByTitleAscending(displayList);
+                    _displaylist = sortings.ByTitleAscending(_displaylist);
                     break;
                 case SortingsEnum.ByTitleDescending:
-                    _displaylist = sortings.ByTitleDescending(displayList);
+                    _displaylist = sortings.ByTitleDescending(_displaylist);
                     break;
-                case SortingsEnum.None:
-                    _displaylist = workshopListOnlyFuture;
-                    break;
+                //case SortingsEnum.None:
+                    //_displaylist = workshopListOnlyFuture;
+                    //break;
                 default:
                     //DisplayAlert("couldn't match any", "", "ok");
                     break;
@@ -151,6 +151,12 @@ namespace WorkshopScheduler.Views
             return _displaylist;
         }
        
+
+        private void FillListView(ObservableCollection<WorkshopDTO> _displaylist)
+        {
+            
+            WorkshopsListView.ItemsSource = ApplySorting(ApplyFilters(_displaylist),chosenSettings.chosenSorting);
+        }
 
         protected override async void OnAppearing()
         {
@@ -187,13 +193,11 @@ namespace WorkshopScheduler.Views
                     ActivityIndicator.IsVisible = false;
                     WorkshopsListView.IsVisible = true;
 
-                    //apply default sorting
-                    displayList = applySorting(workshopListOnlyFuture, chosenSettings.chosenSorting);
 
                 }
 
+                FillListView(workshopListOnlyFuture);
 
-                WorkshopsListView.ItemsSource = applyFilters(displayList);
             }
 
 
@@ -251,7 +255,7 @@ namespace WorkshopScheduler.Views
 
             }
 
-            WorkshopsListView.ItemsSource = applySorting(applyFilters(workshopListOnlyFuture),chosenSettings.chosenSorting);
+            FillListView(workshopListOnlyFuture);
         }
 
         async void SortingsButton_OnClicked(object sender, System.EventArgs e)
@@ -320,3 +324,6 @@ namespace WorkshopScheduler.Views
         }
     }
 }
+
+
+ 

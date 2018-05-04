@@ -1,10 +1,10 @@
 ﻿using System;
 namespace WorkshopScheduler.Logic
 {
-    public class EmptyClass
+    public class DatesSortingEventArgs : EventArgs
     {
-        public EmptyClass()
-        {
-        }
+
+        public DateTime[] dates;
+        public bool isOn;
     }
 }
