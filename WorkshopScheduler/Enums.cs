@@ -1,7 +1,7 @@
 ﻿using System;
 namespace WorkshopScheduler
 {
-    public enum SortingsEnum { None, ByDateAscending, ByDateDescending, ByTitleAscending, ByTitleDescending };
+    public enum SortingsEnum { ByDateAscending, ByDateDescending, ByTitleAscending, ByTitleDescending };
 
     public enum Unit { None,Nord,Soud, Oost, Westen  };
 
