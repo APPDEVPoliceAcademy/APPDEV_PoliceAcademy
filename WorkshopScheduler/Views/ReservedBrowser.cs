@@ -97,7 +97,7 @@ namespace WorkshopScheduler.Views
 
             if (reservedList == null)
             {
-                var workshopsResponse = await _restService.GetUserWorkshopAsynch();
+                var workshopsResponse = await _restService.GetUserWorkshopAsync();
 
                 if (workshopsResponse.ResponseCode == null)
                 {
