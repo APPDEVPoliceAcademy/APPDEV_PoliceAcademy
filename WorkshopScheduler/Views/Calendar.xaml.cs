@@ -68,8 +68,9 @@ namespace WorkshopScheduler.Views
 
         private async Task PopulateCalendar()
         {
+            //Get list of days with workshops for given year/month
             var takenDaysRepsonse = await _restService.GetDaysWithWorkshop(_currentMonth, _currentYear);
-            List<int> takenDays = new List<int>();
+            var takenDays = new List<int>();
             if (takenDaysRepsonse.ResponseCode == null)
             {
                 await DisplayAlert("Error", takenDaysRepsonse.ErrorMessage + "\nMake sure that you have internet connection", "Ok");
@@ -90,8 +91,8 @@ namespace WorkshopScheduler.Views
 
 
 
-            Month.Text = _cultureInfo.DateTimeFormat.GetMonthName(_currentMonth) + " " +
-                         _currentYear.ToString();
+            Month.Text = (_cultureInfo.DateTimeFormat.GetMonthName(_currentMonth) + " " +
+                         _currentYear).ToUpper();
             var daysNumber = DateTime.DaysInMonth(_currentYear, _currentMonth);
             var firstDayOfWeek = (new DateTime(_currentYear, _currentMonth, 1)).DayOfWeek;
 
