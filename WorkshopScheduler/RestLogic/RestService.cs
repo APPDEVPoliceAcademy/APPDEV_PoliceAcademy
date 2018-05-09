@@ -39,6 +39,7 @@ namespace WorkshopScheduler.RestLogic
         private const string RestEnrollUser = "api/workshops/enroll/";
         private const string RestDisenrollUser = "api/workshops/disenroll/";
         private const string RestEvalute = "api/workshops/evaluate/";
+        private const string RestDaysWorkshop = "api/workshops/days";
 
         private HttpClient _client;
 
@@ -81,7 +82,7 @@ namespace WorkshopScheduler.RestLogic
             return restResponse;
         }
 
-        public async Task<RestResponse<List<WorkshopDTO>>> GetUserWorkshopAsynch()
+        public async Task<RestResponse<List<WorkshopDTO>>> GetUserWorkshopAsync()
         {
             var restResponse = new RestResponse<List<WorkshopDTO>>();
             var request = new HttpRequestMessage()
@@ -252,6 +253,7 @@ namespace WorkshopScheduler.RestLogic
         public async Task<RestResponse<TokenInfo>> CreateUser(string login, string password)
         {
             var restResponse = new RestResponse<TokenInfo>();
+
             var request = new HttpRequestMessage()
             {
                 RequestUri = new Uri(RestUri + RestAddUser),
@@ -377,41 +379,26 @@ namespace WorkshopScheduler.RestLogic
             return restResponse;
         }
 
-        public async Task<RestResponse<bool>> SaveFile(string fileUri, string filename)
+        public async Task<RestResponse<List<int>>> GetDaysWithWorkshop(int month, int year)
         {
-            var restResponse = new RestResponse<bool>();
-            //var fileDownloader = DependencyService.Get<IFileDownloader>();
-            //fileDownloader.DownloadFile(fileUri);
-            var downloadManager = CrossDownloadManager.Current;
-            var file = downloadManager.CreateDownloadFile(fileUri);
-            downloadManager.Start(file);
-
-            restResponse.Value = true;
-            return restResponse;
-            /*
-            var restResponse = new RestResponse<bool>();
+            var restResponse = new RestResponse<List<int>>();
+            var postString = String.Format("month={0}&year={1}", WebUtility.UrlEncode(month.ToString()),
+                WebUtility.UrlEncode(year.ToString()));
+            
             var request = new HttpRequestMessage()
             {
-                RequestUri = new Uri(fileUri),
+                RequestUri = new Uri(RestUri + RestDaysWorkshop + "?" + postString),
                 Method = HttpMethod.Get,
             };
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenManager.GetToken());
             try
             {
                 var response = await _client.SendAsync(request);
                 restResponse.ResponseCode = response.StatusCode;
                 if (response.IsSuccessStatusCode)
                 {
-                    restResponse.Value = true;
-                    var content = await response.Content.ReadAsByteArrayAsync();
-                    var rootFolder = FileSystem.Current.LocalStorage;
-                    var folder = await rootFolder.CreateFolderAsync("MySubFolder",
-                        CreationCollisionOption.OpenIfExists);
-                    var file = await folder.CreateFileAsync(filename,
-                        CreationCollisionOption.ReplaceExisting);
-                    using (System.IO.Stream stream = await file.OpenAsync(FileAccess.ReadAndWrite))
-                    {
-                        stream.Write(content, 0, content.Length);
-                    }
+                    var responseContet = await response.Content.ReadAsStringAsync();
+                    restResponse.Value = JsonConvert.DeserializeObject<List<int>>(responseContet);
                 }
                 else
                 {
@@ -425,7 +412,22 @@ namespace WorkshopScheduler.RestLogic
             }
 
             return restResponse;
-            */
         }
+
+        public async Task<RestResponse<bool>> SaveFile(string fileUri, string filename)
+        {
+            var restResponse = new RestResponse<bool>();
+            //var fileDownloader = DependencyService.Get<IFileDownloader>();
+            //fileDownloader.DownloadFile(fileUri);
+            var downloadManager = CrossDownloadManager.Current;
+            var file = downloadManager.CreateDownloadFile(fileUri);
+            downloadManager.Start(file);
+
+            restResponse.Value = true;
+            return restResponse;
+          
+        }
+
+        
     }
 }

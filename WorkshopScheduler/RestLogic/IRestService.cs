@@ -9,7 +9,7 @@ namespace WorkshopScheduler.RestLogic
     {
         Task<RestResponse<List<WorkshopDTO>>> GetAllWorkshopsAsync();
 
-        Task<RestResponse<List<WorkshopDTO>>> GetUserWorkshopAsynch();
+        Task<RestResponse<List<WorkshopDTO>>> GetUserWorkshopAsync();
 
         Task<RestResponse<Workshop>> GetSingleWorkshop(int id);
 
@@ -28,5 +28,7 @@ namespace WorkshopScheduler.RestLogic
         Task<RestResponse<Boolean>> EvaluateWorkshop(int workshopId);
 
         Task<RestResponse<Boolean>> SaveFile(string fileUri, string filename);
+
+        Task<RestResponse<List<int>>> GetDaysWithWorkshop(int month, int year);
     }
 }
