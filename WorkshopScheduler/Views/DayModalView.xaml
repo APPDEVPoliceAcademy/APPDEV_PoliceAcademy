@@ -1,5 +1,35 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="WorkshopScheduler.Views.DayModalView">
     <ContentPage.Content>
+        <AbsoluteLayout>
+            <Label x:Name="DateLabel" AbsoluteLayout.LayoutBounds="0,0.1,1,0.1" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="Large" AbsoluteLayout.LayoutFlags="All" Text="Date placeholder" TextColor="{StaticResource primaryText}" />
+            <ListView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,.4,1,0.6" x:Name="WorkshopsListView" IsPullToRefreshEnabled="true" HasUnevenRows="true" ItemSelected="WorkshopsListView_OnItemSelected" BackgroundColor="{StaticResource backgroundColor}" IsVisible="true">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="20" Orientation="Vertical"   BackgroundColor="{StaticResource backgroundColor}">
+                                <StackLayout Orientation="Vertical">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding Title}" FontAttributes="Bold" HorizontalOptions="StartAndExpand" />
+                                        <Label Text="{Binding Spots}" FontSize="Small" ></Label>
+                                    </StackLayout>
+                                    <Label Text="{Binding Coach}" FontSize="Small" />
+                                    <Label Text="{Binding ShortDescription}" TextColor="Gray" />
+                                </StackLayout>
+                                <StackLayout Padding="5" BackgroundColor="#e4e4e4" Orientation="Vertical">
+                                    <Label Text="{Binding Date, StringFormat='{0:D}'}" FontAttributes="Bold" />
+                                    <Label Text="{Binding Place}" TextColor="Gray" />
+                                </StackLayout>
+                                <Label Text="Enrolled" IsVisible="{Binding IsEnrolled}"></Label>
+
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Button x:Name="BackButton" BackgroundColor="{StaticResource buttonBackground}" TextColor="White" Clicked="BackButton_OnClick" AbsoluteLayout.LayoutBounds="0,0.95,1,0.1" AbsoluteLayout.LayoutFlags="All" Text="Back" />
+           
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

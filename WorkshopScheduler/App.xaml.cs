@@ -26,16 +26,18 @@ namespace WorkshopScheduler
         public App()
         {
             InitializeComponent();
-          
-            if (TokenManager.IsTokenValid())
-            {
-                MainPage = new MainView();
-            }
-            else
-            {
-                MainPage = new LoginView();
-            }
-            //MainPage = new MainView();
+
+
+            MainPage = new DayModalView();
+            //if (TokenManager.IsTokenValid())
+            //{
+            //    MainPage = new MainView();
+            //}
+            //else
+            //{
+            //    MainPage = new LoginView();
+            //}
+            ////MainPage = new MainView();
 
         }
 
