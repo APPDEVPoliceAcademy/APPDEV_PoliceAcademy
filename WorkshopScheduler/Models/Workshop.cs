@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace WorkshopScheduler.Models
 {
     public class Workshop
@@ -16,9 +18,11 @@ namespace WorkshopScheduler.Models
         public string EvaluationUri { get; set; }
         public int NumberOfSpots { get; set; }
         public int TakenSpots { get; set; } 
+        public ICollection<Link> Files { get; set; }
+
         public bool IsWithin12Weeks => Date.CompareTo(DateTime.Now.AddDays(12 * 7)) < 0;
         public string Spots => TakenSpots + "/" + NumberOfSpots;
-
+        
         public override bool Equals(object obj)
         {
             var workshopObj = obj as WorkshopDTO; 

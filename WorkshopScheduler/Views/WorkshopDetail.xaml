@@ -40,6 +40,15 @@
                 <ContentView BackgroundColor="#f7f6f6" Opacity="0.8" Grid.Row="1" Padding="20, 20, 20, 20">
                     <StackLayout>
                         <Label Text="{Binding Description}" VerticalOptions="StartAndExpand"  />
+
+                        <ListView x:Name="LinksListView" ItemSelected="LinksListView_OnItemSelected" BackgroundColor="{StaticResource backgroundColor}" >
+                            <ListView.ItemTemplate>
+
+                                <DataTemplate>
+                                    <TextCell Text="{Binding Uri}"/>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
                         <Label Text="{Binding Spots}" HorizontalOptions="Center"></Label>
                         <StackLayout  Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="End">
                             <Image Source="ic_calendar.png" Aspect="AspectFit"/>

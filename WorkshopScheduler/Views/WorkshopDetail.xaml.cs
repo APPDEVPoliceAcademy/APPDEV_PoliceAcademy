@@ -40,6 +40,7 @@ namespace WorkshopScheduler.Views
             if (cachedWorkshop != null)
             {
                 _currentWorkshop = cachedWorkshop;
+                LinksListView.ItemsSource = _currentWorkshop.Files;
                 HideIndicator();
             }
 
@@ -65,6 +66,7 @@ namespace WorkshopScheduler.Views
                 if (workshopsResponse.ResponseCode == HttpStatusCode.OK)
                 {
                     _currentWorkshop = workshopsResponse.Value;
+                    LinksListView.ItemsSource = _currentWorkshop.Files;
                     cachedWorkshops?.Add(_currentWorkshop);
                     HideIndicator();
                 }
@@ -242,6 +244,15 @@ namespace WorkshopScheduler.Views
         }
 
 
-     
+        private async void LinksListView_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            if (e.SelectedItem == null) return;
+            var uri = e.SelectedItem as Link;
+            var names = uri.Uri.Split('\\');
+
+            await _restService.SaveFile(uri.Uri, names.Last());
+            LinksListView.SelectedItem = null;
+
+        }
     }
 }

@@ -1,9 +1,14 @@
 ﻿using System;
+using System.IO;
+using Plugin.DownloadManager;
+using Plugin.DownloadManager.Abstractions;
 using WorkshopScheduler.Logic;
 using WorkshopScheduler.Models;
+using WorkshopScheduler.RestLogic;
 using Xamarin.Forms;
 using WorkshopScheduler.Views;
 using WorkshopScheduler.Views.UserAccountViews;
+using Xamarin.Forms.PlatformConfiguration;
 
 namespace WorkshopScheduler
 {
@@ -21,6 +26,7 @@ namespace WorkshopScheduler
         public App()
         {
             InitializeComponent();
+          
             if (TokenManager.IsTokenValid())
             {
                 MainPage = new MainView();

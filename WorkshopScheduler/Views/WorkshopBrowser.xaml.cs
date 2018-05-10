@@ -98,6 +98,9 @@ namespace WorkshopScheduler.Views
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+
+           
+
             if (workshopsList == null)
             {
                 var workshopsResponse = await _restService.GetAllWorkshopsAsync();
