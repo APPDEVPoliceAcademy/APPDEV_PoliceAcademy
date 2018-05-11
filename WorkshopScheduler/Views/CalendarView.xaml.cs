@@ -14,8 +14,8 @@ using Xamarin.Forms.Xaml;
 
 namespace WorkshopScheduler.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Calendar : ContentPage
+    //[XamlCompilation(XamlCompilationOptions.Compile)]
+	public partial class CalendarView : ContentPage
     {
         
         private int _currentYear = DateTime.Now.Year;
@@ -24,16 +24,24 @@ namespace WorkshopScheduler.Views
         readonly RestService _restService = new RestService();
         CultureInfo _cultureInfo = new CultureInfo("nl");
 
-        public Calendar()
+
+		public event EventHandler<int> DayModalInvoked;
+		DayModalView dayModal;
+        
+        public CalendarView()
         {
             InitializeComponent();
             InitializeCalendar();
+
+			dayModal = new DayModalView();
+		
         }
 
         protected override async void OnAppearing()
         {
             base.OnAppearing();
             await PopulateCalendar();
+
            
         }
 
@@ -125,8 +133,8 @@ namespace WorkshopScheduler.Views
                             var tap = new TapGestureRecognizer();
                             tap.Tapped += async (object sender, EventArgs e) =>
                             {
-								//await DisplayAlert("Tap", "You tapped + " + localCounter, "Yes!");
-								await Navigation.PushModalAsync(new DayModalView());
+								DayModalInvoked.Invoke(this, dayCounter);
+								await Navigation.PushModalAsync(dayModal);
                             };
                             _gridStackLayouts.ElementAt(j * 7 + i).GestureRecognizers.Add(tap);
                         }

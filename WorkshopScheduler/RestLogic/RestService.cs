@@ -27,7 +27,7 @@ namespace WorkshopScheduler.RestLogic
         private const string RestUri = "http://10.0.2.2:58165/";
 
 #else
-        private const string RestUri = "https://restnet.conveyor.cloud/";
+		private const string RestUri = "https://restnet-ij6.conveyor.cloud/";
 #endif
 
         private const string RestUserInfo = "api/user/me";

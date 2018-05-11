@@ -14,6 +14,7 @@ namespace WorkshopScheduler.Views
 		public event EventHandler<WorkshopDTO> UserDisenrolled;
 		public event EventHandler<WorkshopDTO> WorkshopEvaluated;
 
+	
 
 		public DayModalView()
 		{
@@ -21,13 +22,16 @@ namespace WorkshopScheduler.Views
 			DateLabel.Text = DateTime.Now.ToString("D");
 
 			workshopsList = new ObservableCollection<WorkshopDTO>();
+
+		    
 		
 		}
 
-		void BackButton_OnClick(object sender, System.EventArgs e)
+		async void BackButton_OnClick(object sender, System.EventArgs e)
 		{
-			DisplayAlert("a", "a", "a");
+			await Navigation.PopModalAsync();
 		}
+       
 
 		protected override void OnAppearing()
 		{
@@ -36,24 +40,30 @@ namespace WorkshopScheduler.Views
             
 			//	DisplayAlert("titlexd", "Hi! \n I am empty", " :<");
 
-			workshopsList.Add(new WorkshopDTO()
-			{
-				Id = 1,
-				Title = "PR for dummies",
-				Coach = "Grzegorz Brzęczyszczykiewicz",
-				ShortDescription = null,
-				Date = DateTime.Now,
-				Place = "Apeldoorn",
-				NumberOfSpots = 30,
-				TakenSpots = 1,
-				IsEnrolled = false,
-				IsEvaluated = false
-			});
+			//workshopsList.Add(new WorkshopDTO()
+			//{
+			//	Id = 1,
+			//	Title = "PR for dummies",
+			//	Coach = "Grzegorz Brzęczyszczykiewicz",
+			//	ShortDescription = null,
+			//	Date = DateTime.Now,
+			//	Place = "Apeldoorn",
+			//	NumberOfSpots = 30,
+			//	TakenSpots = 1,
+			//	IsEnrolled = false,
+			//	IsEvaluated = false
+			//});
+
+            
 
                 WorkshopsListView.ItemsSource = workshopsList;
 				//DisplayAlert("titlexd", "Not anymore", " :>");
 			}
 
+        public void PopulateModal(int id)
+		{
+			DisplayAlert("test", id.ToString(), "test");
+		}
 
 		private async void WorkshopsListView_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
 		{
@@ -87,6 +97,8 @@ namespace WorkshopScheduler.Views
 				WorkshopEvaluated?.Invoke(this, workshopDto);
 
 			};
+
+
 			await Navigation.PushModalAsync(workshopDetailpage);
 			WorkshopsListView.SelectedItem = null;
 		}
