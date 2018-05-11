@@ -125,7 +125,8 @@ namespace WorkshopScheduler.Views
                             var tap = new TapGestureRecognizer();
                             tap.Tapped += async (object sender, EventArgs e) =>
                             {
-                                await DisplayAlert("Tap", "You tapped + " + localCounter, "Yes!");
+								//await DisplayAlert("Tap", "You tapped + " + localCounter, "Yes!");
+								await Navigation.PushModalAsync(new DayModalView());
                             };
                             _gridStackLayouts.ElementAt(j * 7 + i).GestureRecognizers.Add(tap);
                         }
