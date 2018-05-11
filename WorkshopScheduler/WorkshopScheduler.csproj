@@ -76,8 +76,8 @@
     <Compile Include="RestLogic\RestResponse.cs" />
     <Compile Include="RestLogic\IRestService.cs" />
     <Compile Include="RestLogic\RestService.cs" />
-    <Compile Include="Views\Calendar.xaml.cs">
-      <DependentUpon>Calendar.xaml</DependentUpon>
+    <Compile Include="Views\CalendarView.xaml.cs">
+      <DependentUpon>CalendarView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserAccountViews\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
@@ -186,7 +186,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\Calendar.xaml">
+    <EmbeddedResource Include="Views\CalendarView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
