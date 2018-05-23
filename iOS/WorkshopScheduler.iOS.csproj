@@ -89,6 +89,8 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <MtouchLink>None</MtouchLink>
+    <MtouchDebug>true</MtouchDebug>
     <CodesignProvision>iOS Team Provisioning Profile: com.appdev.WorkshopScheduler</CodesignProvision>
     <CodesignKey>iPhone Developer: krymarys.jakub@gmail.com (WQVR8FVRF4)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
@@ -103,9 +105,11 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignProvision>iOS Team Provisioning Profile: com.appdev.WorkshopScheduler</CodesignProvision>
+    <CodesignKey>iPhone Developer: krymarys.jakub@gmail.com (WQVR8FVRF4)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchArch>ARM64</MtouchArch>
+    <MtouchDebug>true</MtouchDebug>
     <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
     <DeviceSpecificBuild>true</DeviceSpecificBuild>
     <MtouchFastDev>true</MtouchFastDev>

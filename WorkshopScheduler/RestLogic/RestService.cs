@@ -23,12 +23,12 @@ namespace WorkshopScheduler.RestLogic
 {
     public class RestService : IRestService
     {
-//#if DEBUG
-//        private const string RestUri = "http://10.0.2.2:58165/";
+#if DEBUG
+        private const string RestUri = "http://10.0.2.2:58165/";
+#else
+		private const string RestUri = "https://restnet-ij6.conveyor.cloud/";
+#endif
 
-//#else
-        private const string RestUri = "https://restnet.conveyor.cloud/";
-//#endif
 
         private const string RestUserInfo = "api/user/me";
         private const string RestAuthUri = "token";
@@ -426,6 +426,7 @@ namespace WorkshopScheduler.RestLogic
                 RequestUri = new Uri(RestUri + RestSingleDay + "?" + postString),
                 Method = HttpMethod.Get,
             };
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenManager.GetToken());
             try
             {
                 var response = await _client.SendAsync(request);
@@ -447,13 +448,11 @@ namespace WorkshopScheduler.RestLogic
             }
 
             return restResponse;
-
         }
 
         public async Task<RestResponse<bool>> SaveFile(string fileUri, string filename)
         {
             var restResponse = new RestResponse<bool>();
-
             var downloadManager = CrossDownloadManager.Current;
             var file = downloadManager.CreateDownloadFile(fileUri);
             downloadManager.Start(file);

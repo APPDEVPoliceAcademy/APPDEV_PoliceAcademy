@@ -32,5 +32,6 @@ namespace WorkshopScheduler.RestLogic
         Task<RestResponse<List<int>>> GetDaysWithWorkshop(int month, int year);
 
         Task<RestResponse<List<WorkshopDTO>>> GetWorkshopsForDay(int year, int month, int day);
+
     }
 }
