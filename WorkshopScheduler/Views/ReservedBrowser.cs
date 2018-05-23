@@ -53,9 +53,9 @@ namespace WorkshopScheduler.Views
                     case SortingsEnum.ByTitleDescending:
                         displayList = sortings.ByTitleDescending(reservedList);
                         break;
-                    case SortingsEnum.None:
-                        displayList = reservedList;
-                        break;
+                    //case SortingsEnum.None:
+                        //displayList = reservedList;
+                        //break;
                     default:
                         //DisplayAlert("couldn't match any", "shit", "ok");
                         break;
@@ -66,15 +66,15 @@ namespace WorkshopScheduler.Views
 
             };
 
-            filtersView.DatesFilterChanged += (o, dates) =>
+            filtersView.DatesFilterChanged += (o, args) =>
             {
-                displayList = filters.FilterByDate(reservedList, dates);
+                displayList = filters.FilterByDate(reservedList, args.dates);
                 WorkshopsListView.ItemsSource = displayList;
             };
 
             filtersView.WeeksFilterChanged += (o, flag) =>
             {
-                displayList = filters.FilterBy12Weeks(reservedList, flag);
+                displayList = filters.FilterBy12Weeks(reservedList);
                 WorkshopsListView.ItemsSource = displayList;
             };
 

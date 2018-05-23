@@ -25,10 +25,10 @@ namespace WorkshopScheduler.RestLogic
     {
 #if DEBUG
         private const string RestUri = "http://10.0.2.2:58165/";
-
 #else
 		private const string RestUri = "https://restnet-ij6.conveyor.cloud/";
 #endif
+
 
         private const string RestUserInfo = "api/user/me";
         private const string RestAuthUri = "token";
@@ -40,6 +40,7 @@ namespace WorkshopScheduler.RestLogic
         private const string RestDisenrollUser = "api/workshops/disenroll/";
         private const string RestEvalute = "api/workshops/evaluate/";
         private const string RestDaysWorkshop = "api/workshops/days";
+        private const string RestSingleDay = "api/workshops/day";
 
         private HttpClient _client;
 
@@ -382,8 +383,8 @@ namespace WorkshopScheduler.RestLogic
         public async Task<RestResponse<List<int>>> GetDaysWithWorkshop(int month, int year)
         {
             var restResponse = new RestResponse<List<int>>();
-            var postString = String.Format("month={0}&year={1}", WebUtility.UrlEncode(month.ToString()),
-                WebUtility.UrlEncode(year.ToString()));
+            var postString = String.Format("year={0}&month={1}", WebUtility.UrlEncode(year.ToString()),
+                WebUtility.UrlEncode(month.ToString()));
             
             var request = new HttpRequestMessage()
             {
@@ -414,11 +415,44 @@ namespace WorkshopScheduler.RestLogic
             return restResponse;
         }
 
+        public async Task<RestResponse<List<WorkshopDTO>>> GetWorkshopsForDay(int year, int month, int day)
+        {
+            var restResponse = new RestResponse<List<WorkshopDTO>>();
+            var postString = String.Format("year={0}&month={1}&day={2}", WebUtility.UrlEncode(month.ToString()),
+                WebUtility.UrlEncode(year.ToString()), WebUtility.UrlEncode(day.ToString()));
+
+            var request = new HttpRequestMessage()
+            {
+                RequestUri = new Uri(RestUri + RestSingleDay + "?" + postString),
+                Method = HttpMethod.Get,
+            };
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenManager.GetToken());
+            try
+            {
+                var response = await _client.SendAsync(request);
+                restResponse.ResponseCode = response.StatusCode;
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseContet = await response.Content.ReadAsStringAsync();
+                    restResponse.Value = JsonConvert.DeserializeObject<List<WorkshopDTO>>(responseContet);
+                }
+                else
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    restResponse.ErrorMessage = content;
+                }
+            }
+            catch (Exception ex)
+            {
+                restResponse.ErrorMessage = ex.Message;
+            }
+
+            return restResponse;
+        }
+
         public async Task<RestResponse<bool>> SaveFile(string fileUri, string filename)
         {
             var restResponse = new RestResponse<bool>();
-            //var fileDownloader = DependencyService.Get<IFileDownloader>();
-            //fileDownloader.DownloadFile(fileUri);
             var downloadManager = CrossDownloadManager.Current;
             var file = downloadManager.CreateDownloadFile(fileUri);
             downloadManager.Start(file);
