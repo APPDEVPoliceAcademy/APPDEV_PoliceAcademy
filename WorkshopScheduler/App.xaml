@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Application xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="WorkshopScheduler.App">
+<Application xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:WorkshopScheduler.Logic;assembly=WorkshopScheduler" x:Class="WorkshopScheduler.App">
     <Application.Resources>
         <ResourceDictionary>
             <Color x:Key="backgroundColor">#f7f6f6</Color>
             <Color x:Key="primaryText">#0c0c0c </Color>
             <Color x:Key="buttonBackground">#de0004 </Color>
+            <local:DateTimeToDutchStringConverter x:Key="cnvDateTimeConverter"></local:DateTimeToDutchStringConverter>
 
         </ResourceDictionary>
     </Application.Resources>

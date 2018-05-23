@@ -4,8 +4,10 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using WorkshopScheduler.Logic;
 using WorkshopScheduler.Models;
 using WorkshopScheduler.RestLogic;
+using WorkshopScheduler.Views.UserAccountViews;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -72,6 +74,13 @@ namespace WorkshopScheduler.Views
                 await DisplayAlert("Done", "Succesfully saved new information", "Ok");
             }
 
+
+        }
+
+        private void LogOutButton_OnClicked(object sender, EventArgs e)
+        {
+            TokenManager.DeleteToken();
+            Application.Current.MainPage = new LoginView();
 
         }
     }

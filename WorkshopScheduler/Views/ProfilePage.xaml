@@ -44,6 +44,11 @@
                         <Button BackgroundColor="{StaticResource buttonBackground}" TextColor="White" Text="Opslaan" Clicked="DoneButton_OnClicked" />
                     </StackLayout>
                 </ViewCell>
+                <ViewCell>
+                    <StackLayout Orientation="Vertical" Padding="20, 0, 20, 0" >
+                        <Button x:Name="LogOutButton" Text="Uitloggen" BackgroundColor="{StaticResource buttonBackground}" TextColor="White" Clicked="LogOutButton_OnClicked" HorizontalOptions="FillAndExpand" />
+                    </StackLayout>
+                </ViewCell>
             </TableSection>
 
         </TableRoot>

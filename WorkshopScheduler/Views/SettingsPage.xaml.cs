@@ -18,11 +18,6 @@ namespace WorkshopScheduler.Views
             InitializeComponent();
         }
 
-        private void LogOutButton_OnClicked(object sender, EventArgs e)
-        {
-            TokenManager.DeleteToken();
-            Application.Current.MainPage = new LoginView();
-
-        }
+        
     }
 }
