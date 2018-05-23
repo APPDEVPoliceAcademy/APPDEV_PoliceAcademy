@@ -8,6 +8,8 @@
     </ContentPage.Padding>
 
 
+    
+
     <ContentPage.Content>
         <StackLayout MinimumWidthRequest='1' >
             <AbsoluteLayout BackgroundColor="{StaticResource backgroundColor}">
@@ -24,13 +26,16 @@
                                 <StackLayout Orientation="Vertical">
                                     <StackLayout Orientation="Horizontal">
                                         <Label Text="{Binding Title}" FontAttributes="Bold" HorizontalOptions="StartAndExpand" />
-                                        <Label Text="{Binding Spots}" FontSize="Small" ></Label>
+                                        <Label Text="{Binding Spots}" FontSize="Small"></Label>
                                     </StackLayout>
-                                    <Label Text="{Binding Coach}" FontSize="Small" />
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding Coach}" FontSize="Small" HorizontalOptions="StartAndExpand"/>
+                                        <Image Source="ic_warning.png" IsVisible="{Binding NeedsEvaluation}"/>
+                                    </StackLayout>
                                     <Label Text="{Binding ShortDescription}" TextColor="Gray" />
                                 </StackLayout>
                                 <StackLayout Padding="5" BackgroundColor="#e4e4e4" Orientation="Vertical">
-                                    <Label Text="{Binding Date, StringFormat='{0:D}'}" FontAttributes="Bold" />
+                                    <Label Text="{Binding Date, Converter={StaticResource cnvDateTimeConverter}}" FontAttributes="Bold" />
                                     <Label Text="{Binding Place}" TextColor="Gray" />
                                 </StackLayout>
                                 <Label Text="Enrolled" IsVisible="{Binding IsEnrolled}"></Label>

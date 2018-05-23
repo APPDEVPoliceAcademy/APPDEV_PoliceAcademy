@@ -7,8 +7,6 @@
     </ContentPage.Padding>
     <ContentPage.Content>
         <StackLayout>
-            <Button x:Name="LogOutButton" Text="Uitloggen" BackgroundColor="{StaticResource buttonBackground}" TextColor="White" Clicked="LogOutButton_OnClicked" />
-            <Button x:Name="IdeaButton" Text="Ik heb een Idee" BackgroundColor="{StaticResource buttonBackground}" TextColor="White" Clicked="IdeaButton_OnClicked" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -1,23 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using PCLStorage;
 using Plugin.DownloadManager;
-using Plugin.DownloadManager.Abstractions;
 using WorkshopScheduler.Logic;
 using WorkshopScheduler.Models;
-using Xamarin.Forms;
-using Xamarin.Forms.PlatformConfiguration;
 
 namespace WorkshopScheduler.RestLogic
 {
@@ -41,6 +32,8 @@ namespace WorkshopScheduler.RestLogic
         private const string RestEvalute = "api/workshops/evaluate/";
         private const string RestDaysWorkshop = "api/workshops/days";
         private const string RestSingleDay = "api/workshops/day";
+        private const string RestNonEvaluated = "api/workshops/nonevaluated";
+
 
         private HttpClient _client;
 
@@ -435,6 +428,39 @@ namespace WorkshopScheduler.RestLogic
                 {
                     var responseContet = await response.Content.ReadAsStringAsync();
                     restResponse.Value = JsonConvert.DeserializeObject<List<WorkshopDTO>>(responseContet);
+                }
+                else
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    restResponse.ErrorMessage = content;
+                }
+            }
+            catch (Exception ex)
+            {
+                restResponse.ErrorMessage = ex.Message;
+            }
+
+            return restResponse;
+
+        }
+
+        public async Task<RestResponse<int>> GetNonEvaluatedCount()
+        {
+            var restResponse = new RestResponse<int>();
+            var request = new HttpRequestMessage()
+            {
+                RequestUri = new Uri(RestUri + RestNonEvaluated),
+                Method = HttpMethod.Get,
+            };
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenManager.GetToken());
+            try
+            {
+                var response = await _client.SendAsync(request);
+                restResponse.ResponseCode = response.StatusCode;
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseContet = await response.Content.ReadAsStringAsync();
+                    restResponse.Value = JsonConvert.DeserializeObject<int>(responseContet);
                 }
                 else
                 {

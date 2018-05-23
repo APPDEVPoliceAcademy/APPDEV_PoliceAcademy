@@ -3,6 +3,8 @@
             Padding="0,20,0,20" xmlns="http://xamarin.com/schemas/2014/forms" 
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
             xmlns:local="clr-namespace:WorkshopScheduler.Views;assembly=WorkshopScheduler" 
+            xmlns:plugin="clr-namespace:Plugin.Badge.Abstractions;assembly=Plugin.Badge.Abstractions" 
+
             x:Class="WorkshopScheduler.Views.MainView"
             BarBackgroundColor="#ebebeb"
             BackgroundColor="{StaticResource backgroundColor}"
@@ -10,10 +12,10 @@
             Title="WorkshopScheduler"
                >
 
-    <local:WorkshopBrowser x:Name="WorkshopBrowser" Title="Alles"  Icon="ic_tab_event_free.png" />
-    <local:ReservedBrowser x:Name="ReservedBrowser"  Title="Gereserved" Icon="ic_tab_event_checked.png"/>
+    <local:WorkshopBrowser x:Name="WorkshopBrowser" Title="Alles"  Icon="ic_tab_event_free.png"  />
+    <local:ReservedBrowser x:Name="ReservedBrowser"  Title="Gereserved" Icon="ic_tab_event_checked.png" plugin:TabBadge.BadgeText="{Binding}"/>
     <local:ProfilePage x:Name="ProfilePage" Title="Profiel" Icon="ic_tab_person.png"/>
-    <local:SettingsPage x:Name="SettingsPage" Title="Instellingen" Icon="ic_tab_settings.png"/>
+    <!--<local:SettingsPage x:Name="SettingsPage" Title="Instellingen" Icon="ic_tab_settings.png"/>-->
     <local:Calendar x:Name="CalendarPage" Title="Kalendar" Icon="ic_tab_event_free.png"/>
 
 

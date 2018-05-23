@@ -55,6 +55,7 @@ namespace WorkshopScheduler.Models
             }
         }
 
+        public bool NeedsEvaluation => _isEnrolled && (!IsEvaluated) && Date < DateTime.Now;
         public string Spots => TakenSpots + "/" + NumberOfSpots;
 
         protected void OnPropertyChanged(string name)
