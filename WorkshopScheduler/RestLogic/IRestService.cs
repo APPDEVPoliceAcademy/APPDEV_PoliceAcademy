@@ -34,5 +34,6 @@ namespace WorkshopScheduler.RestLogic
         Task<RestResponse<List<WorkshopDTO>>> GetWorkshopsForDay(int year, int month, int day);
 
         Task<RestResponse<int>> GetNonEvaluatedCount();
+
     }
 }

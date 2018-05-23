@@ -16,10 +16,10 @@ namespace WorkshopScheduler.RestLogic
     {
 #if DEBUG
         private const string RestUri = "http://10.0.2.2:58165/";
-
 #else
-        private const string RestUri = "https://restnet.conveyor.cloud/";
+		private const string RestUri = "https://restnet-ij6.conveyor.cloud/";
 #endif
+
 
         private const string RestUserInfo = "api/user/me";
         private const string RestAuthUri = "token";
@@ -33,6 +33,7 @@ namespace WorkshopScheduler.RestLogic
         private const string RestDaysWorkshop = "api/workshops/days";
         private const string RestSingleDay = "api/workshops/day";
         private const string RestNonEvaluated = "api/workshops/nonevaluated";
+
 
         private HttpClient _client;
 
@@ -418,6 +419,7 @@ namespace WorkshopScheduler.RestLogic
                 RequestUri = new Uri(RestUri + RestSingleDay + "?" + postString),
                 Method = HttpMethod.Get,
             };
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenManager.GetToken());
             try
             {
                 var response = await _client.SendAsync(request);
@@ -477,7 +479,6 @@ namespace WorkshopScheduler.RestLogic
         public async Task<RestResponse<bool>> SaveFile(string fileUri, string filename)
         {
             var restResponse = new RestResponse<bool>();
-
             var downloadManager = CrossDownloadManager.Current;
             var file = downloadManager.CreateDownloadFile(fileUri);
             downloadManager.Start(file);

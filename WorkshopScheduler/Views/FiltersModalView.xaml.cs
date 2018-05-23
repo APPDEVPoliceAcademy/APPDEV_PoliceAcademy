@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Forms;
+using WorkshopScheduler.Logic;
+
 namespace WorkshopScheduler.Views
 {
 
@@ -11,7 +13,7 @@ namespace WorkshopScheduler.Views
 
         public event EventHandler<SortingsEnum> SortingChanged;
         public event EventHandler<bool> WeeksFilterChanged;
-        public event EventHandler<DateTime[]> DatesFilterChanged;
+        public event EventHandler<DatesSortingEventArgs> DatesFilterChanged;
         public event EventHandler<Unit> UnitFilterChanged;
         public event EventHandler ResetSettings;
 
@@ -63,14 +65,26 @@ namespace WorkshopScheduler.Views
 
         void OnDateSwitchToggled(object sender, Xamarin.Forms.ToggledEventArgs e)
         {
-            DateTime[] dates = {startDate.Date, endDate.Date };
-            DatesFilterChanged(this, dates);
+            DateTime[] datesEventArgs = {startDate.Date, endDate.Date };
+            DatesSortingEventArgs args = new DatesSortingEventArgs();
+            args.dates = datesEventArgs;
+            if (e != null)
+                args.isOn = e.Value;
+            else
+                args.isOn = true;
+            DatesFilterChanged(this, args);
         }
 
         async void OnResetButtonClicked(object sender, System.EventArgs e)
         {
             ResetSettings(this, e);
             await Navigation.PopModalAsync();
+        }
+
+        void DatePicker_OnChange(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (datePickerSwitch.IsToggled)
+                OnDateSwitchToggled(this, null);
         }
     }
 }

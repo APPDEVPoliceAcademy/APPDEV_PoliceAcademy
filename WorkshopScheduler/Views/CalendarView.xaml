@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WorkshopScheduler.Views.CalendarView"
+             Padding="10, 20, 10, 0">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical">
+            <Label x:Name="Month" HorizontalOptions="Center" FontSize="25" FontAttributes="Bold" TextColor="Black" />
+            <Grid x:Name="Grid" RowSpacing="1" ColumnSpacing="1" BackgroundColor="Gray" />
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Button x:Name="BackButton" BackgroundColor="Red" Clicked="BackButton_OnClicked" Text="Vooruit" TextColor="White"/>
+                <Button x:Name="ForwardButton" BackgroundColor="Red" Clicked="ForwardButton_OnClicked" Text="Terug" TextColor="White"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

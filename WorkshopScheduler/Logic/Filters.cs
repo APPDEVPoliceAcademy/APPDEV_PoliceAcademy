@@ -22,13 +22,15 @@ namespace WorkshopScheduler.Logic
             return new ObservableCollection<WorkshopDTO>(input.Where(a => (a.Place == desiredPlace)));
         }
 
-        public ObservableCollection<WorkshopDTO> FilterBy12Weeks(ObservableCollection<WorkshopDTO> input, bool flag)
+        public ObservableCollection<WorkshopDTO> FilterBy12Weeks(ObservableCollection<WorkshopDTO> input)
         {
-            if (flag)
+           /// if (flag)
                 return new ObservableCollection<WorkshopDTO>(input.Where(a => (a.Date <= DateTime.Now.AddDays(84)) && a.Date >= DateTime.Now));
             
-                return input;
+              //  return input;
         }
+
+
     }
 
 
