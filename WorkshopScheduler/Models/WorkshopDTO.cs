@@ -52,6 +52,7 @@ namespace WorkshopScheduler.Models
             {
                 _isEvaluated = value;
                 OnPropertyChanged("IsEvaluated");
+                OnPropertyChanged("NeedsEvaluation");
             }
         }
 

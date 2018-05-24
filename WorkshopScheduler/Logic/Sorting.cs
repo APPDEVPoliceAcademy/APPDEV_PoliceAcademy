@@ -12,34 +12,34 @@ namespace WorkshopScheduler.Logic
 
         public  ObservableCollection<WorkshopDTO> ByDateAscending(ObservableCollection<WorkshopDTO> input)
         {
-            return new ObservableCollection<WorkshopDTO>( input.OrderBy(x => x.Date).ToList());
+            return input == null? null :  new ObservableCollection<WorkshopDTO>( input.OrderBy(x => x.Date).ToList());
            
         }
 
         public  ObservableCollection<WorkshopDTO> ByDateDescending(ObservableCollection<WorkshopDTO> input)
         {
-            return new ObservableCollection<WorkshopDTO>(input.OrderByDescending(x => x.Date).ToList());
+            return input == null ? null : new ObservableCollection<WorkshopDTO>(input.OrderByDescending(x => x.Date).ToList());
            
         }
     
         public  ObservableCollection<WorkshopDTO> ByTitleAscending(ObservableCollection<WorkshopDTO> input)
         {
-            return new ObservableCollection<WorkshopDTO>(input.OrderBy(x => x.Title).ToList());
+            return input == null ? null : new ObservableCollection<WorkshopDTO>(input.OrderBy(x => x.Title).ToList());
         }
 
         public  ObservableCollection<WorkshopDTO> ByTitleDescending(ObservableCollection<WorkshopDTO> input)
         {
-            return new ObservableCollection<WorkshopDTO>(input.OrderByDescending(x => x.Title).ToList());
+            return input == null ? null : new ObservableCollection<WorkshopDTO>(input.OrderByDescending(x => x.Title).ToList());
         }
 
         public  ObservableCollection<WorkshopDTO> ByPlaceAlphabeticalAscending(ObservableCollection<WorkshopDTO> input)
         {
-            return new ObservableCollection<WorkshopDTO>(input.OrderBy(x => x.Place).ToList());
+            return input == null ? null : new ObservableCollection<WorkshopDTO>(input.OrderBy(x => x.Place).ToList());
         }
 
         public  ObservableCollection<WorkshopDTO> ByPlaceAlphabeticalDescending(ObservableCollection<WorkshopDTO> input)
         {
-            return new ObservableCollection<WorkshopDTO>(input.OrderByDescending(x => x.Place).ToList());
+            return input == null ? null : new ObservableCollection<WorkshopDTO>(input.OrderByDescending(x => x.Place).ToList());
         }
 
     }
