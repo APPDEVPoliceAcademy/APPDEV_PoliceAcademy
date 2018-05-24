@@ -5866,14 +5866,14 @@ namespace WorkshopScheduler.Droid
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f070041
-			public const int ApplicationName = 2131165249;
+			// aapt resource value: 0x7f080041
+			public const int ApplicationName = 2131230785;
 			
-			// aapt resource value: 0x7f070040
-			public const int Hello = 2131165248;
+			// aapt resource value: 0x7f080040
+			public const int Hello = 2131230784;
 			
-			// aapt resource value: 0x7f070016
-			public const int abc_action_bar_home_description = 2131165206;
+			// aapt resource value: 0x7f080016
+			public const int abc_action_bar_home_description = 2131230742;
 			
 			// aapt resource value: 0x7f080017
 			public const int abc_action_bar_home_description_format = 2131230743;
@@ -5974,11 +5974,11 @@ namespace WorkshopScheduler.Droid
 			// aapt resource value: 0x7f080039
 			public const int character_counter_pattern = 2131230777;
 			
-			// aapt resource value: 0x7f07003f
-			public const int library_name = 2131165247;
+			// aapt resource value: 0x7f08003f
+			public const int library_name = 2131230783;
 			
-			// aapt resource value: 0x7f070001
-			public const int mr_button_content_description = 2131165185;
+			// aapt resource value: 0x7f080001
+			public const int mr_button_content_description = 2131230721;
 			
 			// aapt resource value: 0x7f080002
 			public const int mr_cast_button_connected = 2131230722;

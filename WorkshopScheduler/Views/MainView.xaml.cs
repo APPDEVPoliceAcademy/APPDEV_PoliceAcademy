@@ -20,16 +20,29 @@ namespace WorkshopScheduler.Views
             InitializeComponent();
 
 
-
+            //When user does something on workshopBrowser, update reservedBrowser
             WorkshopBrowser.UserEnrolled += ReservedBrowser.OnUserEnrolled;
             WorkshopBrowser.UserDisenrolled += ReservedBrowser.OnUserDisenrolled;
             WorkshopBrowser.WorkshopEvaluated += ReservedBrowser.OnWorkshopEvaluated;
 
+            //When user does something on reservedBrowser, update workshopBrowser
             ReservedBrowser.UserDisenrolled += WorkshopBrowser.OnUserDisenrolled;
             ReservedBrowser.WorkshopEvaluated += WorkshopBrowser.OnWorkshopEvaluated;
 
+
+            //When user does something from calendarView, update workshopBrowser and reservedBrowser
+            CalendarPage.UserDisenrolled += ReservedBrowser.OnUserDisenrolled;
+            CalendarPage.UserEnrolled += ReservedBrowser.OnUserEnrolled;
+            CalendarPage.WorkshopEvaluated += ReservedBrowser.OnWorkshopEvaluated;
+
+            CalendarPage.UserDisenrolled += WorkshopBrowser.OnUserDisenrolled;
+            CalendarPage.UserEnrolled += WorkshopBrowser.OnUserEnrolled;
+            CalendarPage.WorkshopEvaluated += WorkshopBrowser.OnWorkshopEvaluated;
+
+            // Change number on badge of not evaluated workshops
             WorkshopBrowser.WorkshopEvaluated += OnWorkshopEvaluated;
             ReservedBrowser.WorkshopEvaluated += OnWorkshopEvaluated;
+            CalendarPage.WorkshopEvaluated += OnWorkshopEvaluated;
         }
 
         protected override async void OnAppearing()

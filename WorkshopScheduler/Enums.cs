@@ -7,4 +7,10 @@ namespace WorkshopScheduler
 
     public enum CategoryEnum { Zwolle, Apeldoorn };
 
+    public enum WorkshopBrowserType
+    {
+        All,
+        Reserved
+    };
+
 }

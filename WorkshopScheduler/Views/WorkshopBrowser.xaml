@@ -26,6 +26,7 @@
                                 <StackLayout Orientation="Vertical">
                                     <StackLayout Orientation="Horizontal">
                                         <Label Text="{Binding Title}" FontAttributes="Bold" HorizontalOptions="StartAndExpand" />
+                                        <Image Source="ic_calendar" IsVisible="{Binding IsEnrolled}"></Image>
                                         <Label Text="{Binding Spots}" FontSize="Small"></Label>
                                     </StackLayout>
                                     <StackLayout Orientation="Horizontal">
@@ -38,7 +39,7 @@
                                     <Label Text="{Binding Date, Converter={StaticResource cnvDateTimeConverter}}" FontAttributes="Bold" />
                                     <Label Text="{Binding Place}" TextColor="Gray" />
                                 </StackLayout>
-                                <Label Text="Enrolled" IsVisible="{Binding IsEnrolled}"></Label>
+                                
 
                             </StackLayout>
                         </ViewCell>

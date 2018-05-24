@@ -11,21 +11,22 @@
                 <ViewCell>
                     <StackLayout Orientation="Horizontal" Padding="20, 0, 20, 0">
                         <Label Text="Naam" VerticalOptions="Center" HorizontalOptions="Start" WidthRequest="80" />
-                        <Entry x:Name="NameCell"  VerticalOptions="Center"
+                        <Entry x:Name="NameCell" VerticalOptions="Center"
                                HorizontalOptions="FillAndExpand" />
                     </StackLayout>
                 </ViewCell>
                 <ViewCell>
                     <StackLayout Orientation="Horizontal" Padding="20, 0, 20, 0">
                         <Label Text="Achternaam" VerticalOptions="Center" HorizontalOptions="Start" WidthRequest="80" />
-                        <Entry x:Name="SurnameCell" VerticalOptions="Center" 
+                        <Entry x:Name="SurnameCell" VerticalOptions="Center"
                                HorizontalOptions="FillAndExpand" />
                     </StackLayout>
                 </ViewCell>
                 <ViewCell>
                     <StackLayout Orientation="Horizontal" Padding="20, 0, 20, 0">
-                        <Label Text="Geboorte datum" VerticalOptions="Center" HorizontalOptions="Start" WidthRequest="80" />
-                        <DatePicker x:Name="BirthdayCell" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                        <Label Text="Geboorte datum" VerticalOptions="Center" HorizontalOptions="Start"
+                               WidthRequest="80" />
+                        <DatePicker x:Name="BirthdayCell" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
                     </StackLayout>
                 </ViewCell>
             </TableSection>
@@ -41,12 +42,23 @@
             <TableSection>
                 <ViewCell>
                     <StackLayout Orientation="Horizontal" Padding="20, 0, 20, 0">
-                        <Button BackgroundColor="{StaticResource buttonBackground}" TextColor="White" Text="Opslaan" Clicked="DoneButton_OnClicked" />
+                        <Button BackgroundColor="{StaticResource buttonBackground}" TextColor="White" Text="Opslaan"
+                                Clicked="DoneButton_OnClicked" />
                     </StackLayout>
                 </ViewCell>
                 <ViewCell>
-                    <StackLayout Orientation="Vertical" Padding="20, 0, 20, 0" >
-                        <Button x:Name="LogOutButton" Text="Uitloggen" BackgroundColor="{StaticResource buttonBackground}" TextColor="White" Clicked="LogOutButton_OnClicked" HorizontalOptions="FillAndExpand" />
+                    <StackLayout Orientation="Vertical" Padding="20, 0, 20, 0">
+                        <Button x:Name="LogOutButton" Text="Uitloggen"
+                                BackgroundColor="{StaticResource buttonBackground}" TextColor="White"
+                                Clicked="LogOutButton_OnClicked" HorizontalOptions="FillAndExpand" />
+                    </StackLayout>
+                </ViewCell>
+                <ViewCell>
+                    <StackLayout Orientation="Vertical" Padding="20, 0, 20, 0">
+
+                        <Button x:Name="IdeaButton" Text="Ik heb een Idee"
+                                BackgroundColor="{StaticResource buttonBackground}" TextColor="White"
+                                Clicked="IdeaButton_OnClicked" HorizontalOptions="FillAndExpand" />
                     </StackLayout>
                 </ViewCell>
             </TableSection>

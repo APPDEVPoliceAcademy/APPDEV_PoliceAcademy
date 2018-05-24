@@ -12,11 +12,20 @@
             Title="WorkshopScheduler"
                >
 
-    <local:WorkshopBrowser x:Name="WorkshopBrowser" Title="Alles"  Icon="ic_tab_event_free.png"  />
-    <local:ReservedBrowser x:Name="ReservedBrowser"  Title="Gereserved" Icon="ic_tab_event_checked.png" plugin:TabBadge.BadgeText="{Binding}"/>
+    <local:WorkshopBrowser x:Name="WorkshopBrowser" Title="Alles"  Icon="ic_tab_event_free.png">
+        <x:Arguments>
+            <x:Char>a</x:Char>
+        </x:Arguments>
+    </local:WorkshopBrowser>
+    <local:WorkshopBrowser x:Name="ReservedBrowser"  Title="Gereserved" Icon="ic_tab_event_checked.png" plugin:TabBadge.BadgeText="{Binding}">
+        <x:Arguments>
+            <x:Char>r</x:Char>
+        </x:Arguments>
+    </local:WorkshopBrowser>
+   
     <local:ProfilePage x:Name="ProfilePage" Title="Profiel" Icon="ic_tab_person.png"/>
     <!--<local:SettingsPage x:Name="SettingsPage" Title="Instellingen" Icon="ic_tab_settings.png"/>-->
-    <local:Calendar x:Name="CalendarPage" Title="Kalendar" Icon="ic_tab_event_free.png"/>
+    <local:CalendarView x:Name="CalendarPage" Title="Kalendar" Icon="ic_tab_event_free.png"/>
 
 
 </TabbedPage>
