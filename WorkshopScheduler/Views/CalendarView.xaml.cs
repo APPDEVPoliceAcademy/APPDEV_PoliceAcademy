@@ -21,19 +21,20 @@ namespace WorkshopScheduler.Views
         private int _currentYear = DateTime.Now.Year;
         private int _currentMonth = DateTime.Now.Month;
         private List<StackLayout> _gridStackLayouts = new List<StackLayout>(6 * 7);
-        readonly RestService _restService = new RestService();
-        CultureInfo _cultureInfo = new CultureInfo("nl");
+        private readonly RestService _restService = new RestService();
+        private readonly CultureInfo _cultureInfo = new CultureInfo("nl");
 
+        public event EventHandler<WorkshopDTO> UserEnrolled;
+        public event EventHandler<WorkshopDTO> UserDisenrolled;
+        public event EventHandler<WorkshopDTO> WorkshopEvaluated;
 
-		public event EventHandler<int> DayModalInvoked;
-		DayModalView dayModal;
+        public event EventHandler<int> DayModalInvoked;
         
         public CalendarView()
         {
             InitializeComponent();
             InitializeCalendar();
 
-			dayModal = new DayModalView();
 		
         }
 
@@ -133,8 +134,12 @@ namespace WorkshopScheduler.Views
                             var tap = new TapGestureRecognizer();
                             tap.Tapped += async (object sender, EventArgs e) =>
                             {
-								DayModalInvoked.Invoke(this, dayCounter);
-								await Navigation.PushModalAsync(dayModal);
+                                var newDayModal = new DayModalView(_currentYear, _currentMonth, localCounter);
+                                newDayModal.UserEnrolled += (o, dto) => { UserEnrolled?.Invoke(this, dto); };
+                                newDayModal.UserDisenrolled += (o, dto) => { UserDisenrolled?.Invoke(this, dto); };
+                                newDayModal.WorkshopEvaluated += (o, dto) => { WorkshopEvaluated?.Invoke(this, dto); };
+
+								await Navigation.PushModalAsync(newDayModal);
                             };
                             _gridStackLayouts.ElementAt(j * 7 + i).GestureRecognizers.Add(tap);
                         }

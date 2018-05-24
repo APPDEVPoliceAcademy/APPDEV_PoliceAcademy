@@ -411,8 +411,8 @@ namespace WorkshopScheduler.RestLogic
         public async Task<RestResponse<List<WorkshopDTO>>> GetWorkshopsForDay(int year, int month, int day)
         {
             var restResponse = new RestResponse<List<WorkshopDTO>>();
-            var postString = String.Format("year={0}&month={1}&day={2}", WebUtility.UrlEncode(month.ToString()),
-                WebUtility.UrlEncode(year.ToString()), WebUtility.UrlEncode(day.ToString()));
+            var postString = String.Format("year={0}&month={1}&day={2}", WebUtility.UrlEncode(year.ToString()),
+                WebUtility.UrlEncode(month.ToString()), WebUtility.UrlEncode(day.ToString()));
 
             var request = new HttpRequestMessage()
             {

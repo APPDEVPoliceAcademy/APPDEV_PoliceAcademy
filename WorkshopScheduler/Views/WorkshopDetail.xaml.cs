@@ -36,16 +36,16 @@ namespace WorkshopScheduler.Views
 
             //if workshop is already cached
 
-            var cachedWorkshop = cachedWorkshops?.FirstOrDefault(workshop => workshop.Id == _currentWorkshopID);
-            if (cachedWorkshop != null)
-            {
-                _currentWorkshop = cachedWorkshop;
-                LinksListView.ItemsSource = _currentWorkshop.Files;
-                HideIndicator();
-            }
+//            var cachedWorkshop = cachedWorkshops?.FirstOrDefault(workshop => workshop.Id == _currentWorkshopID);
+//           if (cachedWorkshop != null)
+//            {
+//                _currentWorkshop = cachedWorkshop;
+//                LinksListView.ItemsSource = _currentWorkshop.Files;
+//                HideIndicator();
+//            }
 
-            else
-            {
+//            else
+//            {
 
                 var workshopsResponse = await _restService.GetSingleWorkshop(_currentWorkshopID);
 
@@ -71,7 +71,7 @@ namespace WorkshopScheduler.Views
                     HideIndicator();
                 }
                 
-            }
+//            }
             BindingContext = _currentWorkshop;
 
             setButtons();
