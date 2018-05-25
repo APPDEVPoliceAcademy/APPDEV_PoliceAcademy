@@ -22,7 +22,8 @@ namespace WorkshopScheduler.Models
 
         public bool IsWithin12Weeks => Date.CompareTo(DateTime.Now.AddDays(12 * 7)) < 0;
         public string Spots => TakenSpots + "/" + NumberOfSpots;
-        
+        public bool HasLinks => Files.Count != 0;
+
         public override bool Equals(object obj)
         {
             var workshopObj = obj as WorkshopDTO; 

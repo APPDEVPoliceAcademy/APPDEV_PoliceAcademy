@@ -41,7 +41,7 @@
                     <StackLayout>
                         <Label Text="{Binding Description}" VerticalOptions="StartAndExpand"  />
 
-                        <ListView x:Name="LinksListView" ItemSelected="LinksListView_OnItemSelected" BackgroundColor="{StaticResource backgroundColor}" >
+                        <ListView x:Name="LinksListView" ItemSelected="LinksListView_OnItemSelected" BackgroundColor="{StaticResource backgroundColor}" IsVisible="{Binding HasLinks}" >
                             <ListView.ItemTemplate>
 
                                 <DataTemplate>
