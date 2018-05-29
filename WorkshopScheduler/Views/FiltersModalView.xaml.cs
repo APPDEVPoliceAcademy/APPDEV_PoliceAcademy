@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Xamarin.Forms;
 using WorkshopScheduler.Logic;
@@ -16,6 +17,7 @@ namespace WorkshopScheduler.Views
         public event EventHandler<DatesSortingEventArgs> DatesFilterChanged;
         public event EventHandler<Unit> UnitFilterChanged;
         public event EventHandler<bool> IsFinished;
+
 
         List<SortingsEnum> sourceSortings = Enum.GetValues(typeof(SortingsEnum)).Cast<SortingsEnum>().ToList();
         List<Unit> placesSortings = Enum.GetValues(typeof(Unit)).Cast<Unit>().ToList();
