@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using WorkshopScheduler.Models;
@@ -20,16 +21,19 @@ namespace WorkshopScheduler.Views
 	    private int _month;
 	    private int _day;
 	    private int _year;
+	    private readonly CultureInfo _cultureInfo = new CultureInfo("nl");
 
-		public DayModalView(int year, int month, int day)
+
+        public DayModalView(int year, int month, int day)
 		{
 			InitializeComponent();
 		    _month = month;
 		    _year = year;
 		    _day = day;
-			DateLabel.Text = DateTime.Now.ToString("D");
+		    DateLabel.Text = new DateTime(year, month, day).ToString("D", _cultureInfo);
 
-			_workshopsList = new ObservableCollection<WorkshopDTO>();
+
+            _workshopsList = new ObservableCollection<WorkshopDTO>();
 
 		    
 		

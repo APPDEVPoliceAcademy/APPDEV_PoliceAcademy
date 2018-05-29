@@ -53,14 +53,6 @@
                                 Clicked="LogOutButton_OnClicked" HorizontalOptions="FillAndExpand" />
                     </StackLayout>
                 </ViewCell>
-                <ViewCell>
-                    <StackLayout Orientation="Vertical" Padding="20, 0, 20, 0">
-
-                        <Button x:Name="IdeaButton" Text="Ik heb een Idee"
-                                BackgroundColor="{StaticResource buttonBackground}" TextColor="White"
-                                Clicked="IdeaButton_OnClicked" HorizontalOptions="FillAndExpand" />
-                    </StackLayout>
-                </ViewCell>
             </TableSection>
 
         </TableRoot>
