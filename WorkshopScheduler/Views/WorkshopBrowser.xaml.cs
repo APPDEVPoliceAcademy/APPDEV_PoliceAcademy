@@ -31,7 +31,7 @@ namespace WorkshopScheduler.Views
             this.dates = dates;
             this.unitFilter = unitFilter;
             this.unit = unit;
-            this.chosenSorting = SortingsEnum.ByDateDescending;
+            this.chosenSorting = SortingsEnum.DatumDalend;
         }
     }
 
@@ -70,14 +70,14 @@ namespace WorkshopScheduler.Views
             {
                 chosenSettings = new SettingsToApply(false, true, new DateTime[] { DateTime.Now, DateTime.Now.AddYears(2) },
                         false, Unit.None)
-                    { chosenSorting = SortingsEnum.ByDateAscending };
+                    { chosenSorting = SortingsEnum.DatumStijgend };
             }
             else
             {
                 
                 chosenSettings = new SettingsToApply(false, true , new DateTime[] { DateTime.Now.AddYears(-5), DateTime.Now.AddYears(2) },
                         false, Unit.None)
-                    { chosenSorting = SortingsEnum.ByDateAscending };
+                    { chosenSorting = SortingsEnum.DatumStijgend };
             }
             
 
@@ -139,16 +139,16 @@ namespace WorkshopScheduler.Views
 
             switch (chosenSettings.chosenSorting)
             {
-                case SortingsEnum.ByDateAscending:
+                case SortingsEnum.DatumStijgend:
                     _displaylist = sortings.ByDateAscending(_displaylist);
                     break;
-                case SortingsEnum.ByDateDescending:
+                case SortingsEnum.DatumDalend:
                     _displaylist = sortings.ByDateDescending(_displaylist);
                     break;
-                case SortingsEnum.ByTitleAscending:
+                case SortingsEnum.TitelStijgend:
                     _displaylist = sortings.ByTitleAscending(_displaylist);
                     break;
-                case SortingsEnum.ByTitleDescending:
+                case SortingsEnum.TitelDalend:
                     _displaylist = sortings.ByTitleDescending(_displaylist);
                     break;
                 default:
@@ -184,14 +184,14 @@ namespace WorkshopScheduler.Views
                 if (workshopsResponse.ResponseCode == null)
                 {
 
-                    await DisplayAlert("Error", workshopsResponse.ErrorMessage + "\nMake sure that you have internet connection", "Ok");
+                    await DisplayAlert("Error", workshopsResponse.ErrorMessage + "\nControleer of u verbining heeft met het internet", "Ok");
                     WorkshopsListView.ItemsSource = new ObservableCollection<WorkshopDTO>();
                 }
 
                 if (workshopsResponse.ResponseCode == HttpStatusCode.Unauthorized)
                 {
                     //Check token validation additionaly
-                    await DisplayAlert("Error", "Your session has expired. You will be redirected to log in", "Ok");
+                    await DisplayAlert("Error", "Uw sessie is verlopen, U wordt terug gestuurd naar de login pagina", "Ok");
                     WorkshopsListView.ItemsSource = new ObservableCollection<WorkshopDTO>();
                     Application.Current.MainPage = new LoginView();
                 }
@@ -257,14 +257,14 @@ namespace WorkshopScheduler.Views
 
             if (workshopsResponse.ResponseCode == null)
             {
-                await DisplayAlert("Error", workshopsResponse.ErrorMessage + "\nMake sure that you have internet connection", "Ok");
+                await DisplayAlert("Error", workshopsResponse.ErrorMessage + "\nControleer of u verbining heeft met het internet", "Ok");
                 WorkshopsListView.ItemsSource = new ObservableCollection<WorkshopDTO>();
             }
 
             if (workshopsResponse.ResponseCode == HttpStatusCode.Unauthorized)
             {
                 //Check token validation additionaly
-                await DisplayAlert("Error", "Your session has expired. You will be redirected to log in", "Ok");
+                await DisplayAlert("Error", "Uw sessie is verlopen, U wordt terug gestuurd naar de login pagina", "Ok");
                 WorkshopsListView.ItemsSource = new ObservableCollection<WorkshopDTO>();
                 Application.Current.MainPage = new LoginView();
             }
@@ -386,17 +386,16 @@ namespace WorkshopScheduler.Views
             if (emailMessenger.CanSendEmail)
             {
                 var email = new EmailMessageBuilder()
-                    .To("wyrzuc.maciej@gmail.com")
-                    .Cc("krymarys.jakub@gmail.com")
+                    .To("inspiratiepunt@politieacademie.nl")
                     .Subject("Ik heb een Idee")
-                    .BodyAsHtml("Below please discribe concisely the vision of workshop you have")
+                    .BodyAsHtml("Omschrijf hieronder het idee dat u heeft voor de workshop")
                     .Build();
                 Task.Delay(100);
                 emailMessenger.SendEmail(email);
             }
             else
             {
-                DisplayAlert("Whoops!", "This device cannot send the mails", "ok");
+                DisplayAlert("Whoops!", "Dit apparaad kan geen E-mails verzenden", "ok");
             }
         }
     }

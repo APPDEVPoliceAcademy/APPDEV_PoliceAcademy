@@ -20,7 +20,7 @@
             <Entry x:Name="FirstPassword" IsPassword="True" />
             <Label Text="Herhaal Wachtwoord" TextColor="{StaticResource primaryText}" FontSize="15"/>
             <Entry x:Name="RepeatPassword" IsPassword="True" />
-            <Button x:Name="RegisterButton" Text="Rigistreren" Clicked="RegisterButton_OnClicked" BackgroundColor="{StaticResource buttonBackground}" TextColor="White" />
+            <Button x:Name="RegisterButton" Text="Registreren" Clicked="RegisterButton_OnClicked" BackgroundColor="{StaticResource buttonBackground}" TextColor="White" />
         </StackLayout>
         <ActivityIndicator AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0.5, 0.5, 60, 60" x:Name="ActivityIndicator" IsVisible="False" IsRunning="False"/>
 

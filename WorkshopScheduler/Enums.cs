@@ -1,9 +1,9 @@
 ﻿using System;
 namespace WorkshopScheduler
 {
-    public enum SortingsEnum { ByDateAscending, ByDateDescending, ByTitleAscending, ByTitleDescending };
+    public enum SortingsEnum { DatumStijgend, DatumDalend, TitelStijgend, TitelDalend };
 
-    public enum Unit { None,Nord,Soud, Oost, Westen  };
+    public enum Unit { None,Noord,Zuid, Oost, West  };
 
     public enum CategoryEnum { Zwolle, Apeldoorn };
 

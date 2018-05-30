@@ -32,7 +32,7 @@ namespace WorkshopScheduler.Views.UserAccountViews
 
             if (NameCell.Text == null || SurnameCell.Text == null || SurnameCell.Text == null || UnitPicker.SelectedIndex == -1)
             {
-                await DisplayAlert("Error", "Please fill all fields", "Ok");
+                await DisplayAlert("Error", "Vul alle velden in A.u.b.", "Ok");
                 return;
             }
 
@@ -48,7 +48,7 @@ namespace WorkshopScheduler.Views.UserAccountViews
 
             if (response.ResponseCode == null)
             {
-                await DisplayAlert("Error", response.ErrorMessage + "\nMake sure that you have internet connection", "Ok");
+                await DisplayAlert("Error", response.ErrorMessage + "\nControleer of u verbining heeft met het internet", "Ok");
                 return;
             }
 
@@ -64,7 +64,7 @@ namespace WorkshopScheduler.Views.UserAccountViews
                 _currentApp.UserUnit = userInfo.Unit;
                 _currentApp.UserBirthday = userInfo.Birthday;
                 await _currentApp.SavePropertiesAsync();
-                await DisplayAlert("Done", "Succesfully saved new information", "Ok");
+                await DisplayAlert("Opslaan", "Uw informatie is opgeslagen", "Ok");
                 Application.Current.MainPage = new MainView();
 
             }

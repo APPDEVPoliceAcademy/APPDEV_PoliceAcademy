@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="SortingTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestData.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WorkshopScheduler\WorkshopScheduler.csproj">
