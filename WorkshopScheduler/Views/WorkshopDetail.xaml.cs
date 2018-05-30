@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -23,6 +24,7 @@ namespace WorkshopScheduler.Views
         private IRestService _restService = new RestService();
         private int _currentWorkshopID;
         private Workshop _currentWorkshop;
+
 
         public WorkshopDetail(int currentWorkshopID)
         {
@@ -53,7 +55,7 @@ namespace WorkshopScheduler.Views
                 {
                     await DisplayAlert("Error",
                         workshopsResponse.ErrorMessage + "\nMake sure that you have internet connection", "Ok");
-                    Navigation.PopAsync();
+                    await Navigation.PopAsync();
                 }
 
                 if (workshopsResponse.ResponseCode == HttpStatusCode.Unauthorized)
@@ -73,7 +75,6 @@ namespace WorkshopScheduler.Views
                 
 //            }
             BindingContext = _currentWorkshop;
-
             setButtons();
 
         }
@@ -88,14 +89,15 @@ namespace WorkshopScheduler.Views
         {
             if (_currentWorkshop.IsWithin12Weeks)
             {
-                await DisplayAlert("Alert", "You are about to sign for workshop within 12 weeks\n" +
-                                      "Do you want to send email to your scheduler?",
-                    "Yes take me to mail app",
-                    "Continue anyway");
+                var option = await DisplayAlert("Alert", "U schrijft zich in voor een workshop dichter bij dan 12 weken\n" +
+                                      "zorg ervoor dat de planner op de hoogte is gebracht!",
+                    "Inschijven",
+                    "Ga terug");
+                if (!option) return;
             }
             else
             {
-                await DisplayAlert("Sign in", "Signing in for workshop", "Ok");
+                await DisplayAlert("Inschrijven", "U wordt ingeschreven voor de workshop", "Ok");
             }
 
             var restResponse = await _restService.EnrollUser(_currentWorkshopID);
@@ -103,14 +105,14 @@ namespace WorkshopScheduler.Views
             if (restResponse.ResponseCode == null)
             {
                 await DisplayAlert("Error",
-                    restResponse.ErrorMessage + "\nMake sure that you have internet connection", "Ok");
+                    restResponse.ErrorMessage + "\nControleer of u verbining heeft met het internet", "Ok");
                 return;
             }
 
             if (restResponse.ResponseCode == HttpStatusCode.Unauthorized)
             {
                 //Check token validation additionaly
-                await DisplayAlert("Error", "Your session has expired. You will be redirected to log in", "Ok");
+                await DisplayAlert("Error", "Uw sessie is verlopen, U wordt terug gestuurd naar de login pagina", "Ok");
                 Application.Current.MainPage = new LoginView();
             }
 
@@ -130,14 +132,14 @@ namespace WorkshopScheduler.Views
             if (restResponse.ResponseCode == null)
             {
                 await DisplayAlert("Error",
-                    restResponse.ErrorMessage + "\nMake sure that you have internet connection", "Ok");
+                    restResponse.ErrorMessage + "\nControleer of u verbining heeft met het internet", "Ok");
                 return;
             }
 
             if (restResponse.ResponseCode == HttpStatusCode.Unauthorized)
             {
                 //Check token validation additionaly
-                await DisplayAlert("Error", "Your session has expired. You will be redirected to log in", "Ok");
+                await DisplayAlert("Error", "Uw sessie is verlopen, U wordt terug gestuurd naar de login pagina", "Ok");
                 Application.Current.MainPage = new LoginView();
             }
 
@@ -152,21 +154,21 @@ namespace WorkshopScheduler.Views
 
         private async void CloseWebView_OnClicked(object sender, EventArgs e)
         {
-            var decision = await DisplayAlert("Warning", "Have you fulfiled evaluation form?", "Yes", "No");
+            var decision = await DisplayAlert("Waarschuwing", "Heeft u het evaluatieformulier ingevuld?", "Ja", "Nee");
             if (decision)
             {
                 var restResponse = await _restService.EvaluateWorkshop(_currentWorkshopID);
                 if (restResponse.ResponseCode == null)
                 {
                     await DisplayAlert("Error",
-                        restResponse.ErrorMessage + "\nMake sure that you have internet connection", "Ok");
+                        restResponse.ErrorMessage + "\nControleer of u verbining heeft met het internet", "Ok");
                     return;
                 }
 
                 if (restResponse.ResponseCode == HttpStatusCode.Unauthorized)
                 {
                     //Check token validation additionaly
-                    await DisplayAlert("Error", "Your session has expired. You will be redirected to log in", "Ok");
+                    await DisplayAlert("Error", "Uw sessie is verlopen, U wordt terug gestuurd naar de login pagina", "Ok");
                     Application.Current.MainPage = new LoginView();
                 }
 

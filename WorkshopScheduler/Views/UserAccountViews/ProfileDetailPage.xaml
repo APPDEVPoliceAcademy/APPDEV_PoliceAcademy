@@ -4,7 +4,7 @@
              x:Class="WorkshopScheduler.Views.UserAccountViews.ProfileDetailPage">
     <StackLayout>
 
-        <Label Text="Please fill basic data" FontSize="20" TextColor="{StaticResource primaryText}" HorizontalOptions="Center"/>
+        <Label Text="Vul uw persoonlijke data in" FontSize="20" TextColor="{StaticResource primaryText}" HorizontalOptions="Center"/>
         <TableView Intent="Form">
             <TableRoot>
                 <TableSection Title="Persoonlijke Data">
@@ -41,7 +41,7 @@
                 <TableSection>
                     <ViewCell>
                         <StackLayout Orientation="Horizontal" Padding="20, 0, 20, 0">
-                            <Button BackgroundColor="{StaticResource buttonBackground}" Text="Done" Clicked="ConfirmInformation_OnClicked" TextColor="White"/>
+                            <Button BackgroundColor="{StaticResource buttonBackground}" Text="Opslaan" Clicked="ConfirmInformation_OnClicked" TextColor="White"/>
                         </StackLayout>
                     </ViewCell>
                 </TableSection>

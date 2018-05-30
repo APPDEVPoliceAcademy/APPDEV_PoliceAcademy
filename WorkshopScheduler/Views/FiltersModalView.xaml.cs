@@ -46,7 +46,7 @@ namespace WorkshopScheduler.Views
             sortingPicker.ItemsSource = sourceSortings;
             PlacesPicker.ItemsSource = placesSortings;
 
-            sortingPicker.SelectedIndex = sourceSortings.FindIndex(en => en == SortingsEnum.ByDateAscending);
+            sortingPicker.SelectedIndex = sourceSortings.FindIndex(en => en == SortingsEnum.DatumStijgend);
         }
 
         async void BackButton_OnClicked(object sender, System.EventArgs e)
@@ -109,7 +109,7 @@ namespace WorkshopScheduler.Views
             datePickerSwitch.IsToggled = true;
             weeksSwitch.IsToggled = false;
 
-            sortingPicker.SelectedIndex = sourceSortings.FindIndex(en => en == SortingsEnum.ByDateAscending);
+            sortingPicker.SelectedIndex = sourceSortings.FindIndex(en => en == SortingsEnum.DatumStijgend);
 
             IsFinished?.Invoke(this, true);
             await Navigation.PopModalAsync();

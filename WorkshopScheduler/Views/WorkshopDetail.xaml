@@ -52,24 +52,23 @@
                         <Label Text="{Binding Spots}" HorizontalOptions="Center"></Label>
                         <StackLayout  Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="End">
                             <Image Source="ic_calendar.png" Aspect="AspectFit"/>
-                            <Label Text="{Binding Date,
-                         StringFormat='{0:MMMM dd, yyyy}'}"/>
+                            <Label Text="{Binding Date, Converter={StaticResource cnvDateTimeConverter}}"/>
                             <Image Source="ic_warning.png" IsVisible="{Binding IsWithin12Weeks}"></Image>
                         </StackLayout>
                     </StackLayout>
                 </ContentView>
                 <ContentView BackgroundColor="#ebebeb" Grid.Row="2">
                     <StackLayout>
-                        <Button x:Name="ApplyButton" Text="Apply" BackgroundColor="{StaticResource buttonBackground}" TextColor="White"  Clicked="ApplyButton_OnClicked"/>
-                        <Button x:Name="DisenrollButton" Text="Disenroll" BackgroundColor="{StaticResource buttonBackground}" TextColor="White" Clicked="DisenrollButton_OnClicked"/>
-                        <Button x:Name="EvaluateButton" Text="Evaluate" BackgroundColor="{StaticResource buttonBackground}" TextColor="White" Clicked="EvaluateButton_OnClicked"/>
+                        <Button x:Name="ApplyButton" Text="Inschrijven" BackgroundColor="{StaticResource buttonBackground}" TextColor="White"  Clicked="ApplyButton_OnClicked"/>
+                        <Button x:Name="DisenrollButton" Text="Uitschrijven" BackgroundColor="{StaticResource buttonBackground}" TextColor="White" Clicked="DisenrollButton_OnClicked"/>
+                        <Button x:Name="EvaluateButton" Text="Evalueren" BackgroundColor="{StaticResource buttonBackground}" TextColor="White" Clicked="EvaluateButton_OnClicked"/>
                     </StackLayout>
 
                 </ContentView>
             </Grid>
             <StackLayout x:Name="WebStackLayout" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" IsVisible="False">
                 <RelativeLayout x:Name="WebViewLayout">
-                    <Button x:Name="CloseWebView" BackgroundColor="{StaticResource buttonBackground}" TextColor="White" Clicked="CloseWebView_OnClicked" Text="Finish" 
+                    <Button x:Name="CloseWebView" BackgroundColor="{StaticResource buttonBackground}" TextColor="White" Clicked="CloseWebView_OnClicked" Text="Klaar" 
                             RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
                             Property=Height, Factor=0.1}"
                             RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,

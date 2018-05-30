@@ -47,7 +47,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button x:Name="IdeaButton" Text="Ik heb een Idee"
+            <Button x:Name="IdeaButton" Text="Ik heb een Idee! :)"
                     BackgroundColor="{StaticResource buttonBackground}" TextColor="White"
                     Clicked="IdeaButton_OnClicked" HorizontalOptions="FillAndExpand" />
         </StackLayout>

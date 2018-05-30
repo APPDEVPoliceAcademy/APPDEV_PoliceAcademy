@@ -32,7 +32,7 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <Button x:Name="BackButton" BackgroundColor="{StaticResource buttonBackground}" TextColor="White" Clicked="BackButton_OnClick" AbsoluteLayout.LayoutBounds="0,0.95,1,0.1" AbsoluteLayout.LayoutFlags="All" Text="Back" />
+            <Button x:Name="BackButton" BackgroundColor="{StaticResource buttonBackground}" TextColor="White" Clicked="BackButton_OnClick" AbsoluteLayout.LayoutBounds="0,0.95,1,0.1" AbsoluteLayout.LayoutFlags="All" Text="Terug" />
            
         </AbsoluteLayout>
     </ContentPage.Content>

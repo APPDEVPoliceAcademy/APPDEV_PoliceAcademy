@@ -42,7 +42,7 @@ namespace WorkshopScheduler.Views.UserAccountViews
 	        {
 	            ActivityIndicator.IsRunning = false;
 	            ActivityIndicator.IsVisible = false;
-                await DisplayAlert("Error", tokenResponse.ErrorMessage + "\nMake sure that you have internet connection", "Ok");
+                await DisplayAlert("Error", tokenResponse.ErrorMessage + "\nControleer of u verbining heeft met het internet", "Ok");
 	            return;
 	        }
 

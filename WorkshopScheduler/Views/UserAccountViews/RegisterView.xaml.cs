@@ -28,32 +28,32 @@ namespace WorkshopScheduler.Views.UserAccountViews
 
 	        if (FirstPassword.Text == null || RepeatPassword.Text == null || Login.Text == null)
 	        {
-                await DisplayAlert("Error", "You must fill all fields", "Ok");
+                await DisplayAlert("Error", "Vul alle velden in A.u.b.", "Ok");
 	            return;
 	        }
 
 	        if (Login.Text.Length < 5)
 	        {
-	            await DisplayAlert("Error", "Login must be at least 5 signs", "Ok");
+	            await DisplayAlert("Error", "Uw login moet minimaal 5 karakters zijn", "Ok");
 	            return;
 	        }
 
             //Check if login is only letters and numbers
             if (!Regex.IsMatch(Login.Text, @"^[\p{L}\p{N}]+$"))
             {
-                await DisplayAlert("Error", "Login can contain only letters and numbers", "Ok");
+                await DisplayAlert("Error", "Uw login mag alleen bestaan uit letters en nummers", "Ok");
 	            return;
 	        }
 
 	        if (FirstPassword.Text != RepeatPassword.Text)
 	        {
-	            await DisplayAlert("Error", "Two passwords does not match", "Ok");
+	            await DisplayAlert("Error", "De wachtwoorden komen niet overeen", "Ok");
 	            return;
 	        }
 
 	        if (FirstPassword.Text.Length < 6)
 	        {
-	            await DisplayAlert("Error", "Password has to have at least 6 signs", "Ok");
+	            await DisplayAlert("Error", "Uw wachtwoord moet minimaal 6 karakters hebben", "Ok");
 	            return;
 	        }
 
@@ -69,7 +69,7 @@ namespace WorkshopScheduler.Views.UserAccountViews
 	        {
 	            ActivityIndicator.IsRunning = false;
 	            ActivityIndicator.IsVisible = false;
-                await DisplayAlert("Error", restResponse.ErrorMessage + "\nMake sure that you have internet connection", "Ok");
+                await DisplayAlert("Error", restResponse.ErrorMessage + "\nControleer of u verbining heeft met het internet", "Ok");
 	            return;
 	        }
 
@@ -88,7 +88,7 @@ namespace WorkshopScheduler.Views.UserAccountViews
 	            app.UserBirthday = DateTime.Now;
 	            app.UserName = "";
 	            app.UserSurname = "";
-	            app.UserUnit = Unit.Nord;
+	            app.UserUnit = Unit.Noord;
 	            ActivityIndicator.IsRunning = false;
 	            ActivityIndicator.IsVisible = false;
                 await Navigation.PushModalAsync(new ProfileDetailPage());

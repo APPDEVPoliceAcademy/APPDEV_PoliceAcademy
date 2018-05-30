@@ -54,13 +54,13 @@ namespace WorkshopScheduler.Views
 
 		    if (restRespone.ResponseCode == null)
 		    {
-		        await DisplayAlert("Error", restRespone.ErrorMessage + "\nMake sure that you have internet connection", "Ok");
+		        await DisplayAlert("Error", restRespone.ErrorMessage + "\nControleer of u verbining heeft met het internet", "Ok");
 		    }
 
 		    if (restRespone.ResponseCode == HttpStatusCode.Unauthorized)
 		    {
 		        //Check token validation additionaly
-		        await DisplayAlert("Error", "Your session has expired. You will be redirected to log in", "Ok");
+		        await DisplayAlert("Error", "Uw sessie is verlopen, U wordt terug gestuurd naar de login pagina", "Ok");
 		        WorkshopsListView.ItemsSource = new ObservableCollection<WorkshopDTO>();
 		        Application.Current.MainPage = new LoginView();
 		    }

@@ -60,8 +60,8 @@ namespace WorkshopScheduler
             if (!_isNotificationPlanned && UserEvaluated > 0)
             {
 
-                DateTime nextNotificationDate = DateTime.Now.AddMinutes(1);
-                /*
+                DateTime nextNotificationDate;
+                
                 if (DateTime.Now.Hour > 7 && DateTime.Now.Hour < 16)
                 {
                     nextNotificationDate = DateTime.Now.AddHours(5);
@@ -74,7 +74,7 @@ namespace WorkshopScheduler
                 {
                     nextNotificationDate = DateTime.Now.AddHours(16);
                 }
-                */
+                
                 UserNotifcationTime = nextNotificationDate;
 
                 CrossLocalNotifications.Current.Show("Remainder", String.Format("You have {0} not evaluated workshops", UserEvaluated), 101,  nextNotificationDate);
@@ -105,7 +105,7 @@ namespace WorkshopScheduler
 
         public Unit UserUnit
         {
-            get => Properties.ContainsKey(UserUnitKey) ? (Unit) Enum.Parse(typeof(Unit), Properties[UserUnitKey].ToString()) : Unit.Nord;
+            get => Properties.ContainsKey(UserUnitKey) ? (Unit) Enum.Parse(typeof(Unit), Properties[UserUnitKey].ToString()) : Unit.Noord;
             set => Properties[UserUnitKey] = value.ToString();
         }
 
