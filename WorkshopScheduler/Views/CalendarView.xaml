@@ -11,6 +11,13 @@
                 <Button x:Name="BackButton" BackgroundColor="Red" Clicked="BackButton_OnClicked" Text="Terug" TextColor="White"/>
                 <Button x:Name="ForwardButton" BackgroundColor="Red" Clicked="ForwardButton_OnClicked" Text="Volgende" TextColor="White"/>
             </StackLayout>
+            <StackLayout Padding="0, 20, 0, 0">
+                <Button x:Name="IdeaButton" Text="Ik heb een Idee!"
+                        BackgroundColor="{StaticResource buttonBackground}" TextColor="White"
+                        Clicked="IdeaButton_OnClicked" HorizontalOptions="FillAndExpand" 
+                />
+            </StackLayout>
+           
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
