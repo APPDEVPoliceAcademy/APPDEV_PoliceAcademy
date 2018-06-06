@@ -41,6 +41,7 @@ namespace WorkshopScheduler.RestLogic
         {
             _client = new HttpClient(new HttpClientHandler());
             _client.MaxResponseContentBufferSize = 256000;
+            _client.Timeout = TimeSpan.FromSeconds(20);
         }
 
         public async Task<RestResponse<List<WorkshopDTO>>> GetAllWorkshopsAsync()

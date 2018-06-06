@@ -56,7 +56,7 @@ namespace WorkshopScheduler.Views
 
             if (response.ResponseCode == null)
             {
-                await DisplayAlert("Error", response.ErrorMessage + "\nMake sure that you have internet connection", "Ok");
+                await DisplayAlert("Error", response.ErrorMessage + "\nUw sessie is verlopen, U wordt terug gestuurd naar de login pagina", "Ok");
                 return;
             }
 
@@ -72,7 +72,7 @@ namespace WorkshopScheduler.Views
                 _currentApp.UserUnit = userInfo.Unit;
                 _currentApp.UserBirthday = userInfo.Birthday;
                 await _currentApp.SavePropertiesAsync();
-                await DisplayAlert("Done", "Succesfully saved new information", "Ok");
+                await DisplayAlert("Opslaan", "Uw informatie is opgeslagen", "Ok");
             }
 
 
