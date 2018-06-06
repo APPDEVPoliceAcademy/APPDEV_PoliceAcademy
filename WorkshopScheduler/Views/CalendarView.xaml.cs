@@ -1,21 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
+using Plugin.Messaging;
 using WorkshopScheduler.Models;
 using WorkshopScheduler.RestLogic;
 using WorkshopScheduler.Views.UserAccountViews;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace WorkshopScheduler.Views
 {
     //[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class CalendarView : ContentPage
+    public partial class CalendarView : ContentPage
     {
         
         private int _currentYear = DateTime.Now.Year;
@@ -180,6 +178,25 @@ namespace WorkshopScheduler.Views
                 _currentMonth--;
             }
             await PopulateCalendar();
+        }
+        private void IdeaButton_OnClicked(object sender, EventArgs e)
+        {
+            var emailMessenger = CrossMessaging.Current.EmailMessenger;
+
+            if (emailMessenger.CanSendEmail)
+            {
+                var email = new EmailMessageBuilder()
+                    .To("inspiratiepunt@politieacademie.nl")
+                    .Subject("Ik heb een Idee")
+                    .BodyAsHtml("Omschrijf hieronder het idee dat u heeft voor de workshop")
+                    .Build();
+                Task.Delay(100);
+                emailMessenger.SendEmail(email);
+            }
+            else
+            {
+                DisplayAlert("Whoops!", "Dit apparaad kan geen E-mails verzenden", "ok");
+            }
         }
     }
     }
